@@ -1,0 +1,10 @@
+{
+    "configurations": [
+        {
+            "type": "msedge",
+            "name": "http://require(\"../models/DTO/UserCreateDTO\")",
+            "request": "launch",
+            "url": "http://require(\"../models/DTO/UserCreateDTO\")"
+        }
+    ]
+}

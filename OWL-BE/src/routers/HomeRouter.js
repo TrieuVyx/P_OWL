@@ -1,7 +1,5 @@
-const expess = require('express')
-const router = expess.Router()
-const HomeControllers = require('../controllers/homeControllers')
-
-router.use('/', HomeControllers.index)
-
+const express = require('express')
+const router = express.Router()
+const HomeController = require('../controllers/homeControllers')
+router.use('/', HomeController.index)
 module.exports = router

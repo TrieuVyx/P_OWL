@@ -1,14 +1,15 @@
 //cau hinh file env
 require('dotenv').config()
+const url = require('./url')
+
 //su dung router
-const HomeRouter = require('./routers/HomeRouter')
-const DashRouter = require('./routers/DashRouter')
-
+const HomeRouter = url.HomeRouter;
+const UserRouter = url.UserRouter;
+const AuthorRouter = url.AuthorRouter;
 //su dung handlebar
-const handlebar = require('express-handlebars')
-
+const handlebar = url.handlebar;
 //khai bao side can thiet
-const path = require('path')
+const path = url.path;
 // dieu huong page
 function routers(app) {
     uses(app)
@@ -17,8 +18,9 @@ function routers(app) {
 
 //su dung router 
 function uses(app) {
-    app.use('/dashboard', DashRouter)
-    app.use('/', HomeRouter)
+    app.use(process.env.AV1, AuthorRouter)
+    app.use(process.env.UV1, UserRouter)
+    app.use(process.env.V1, HomeRouter)
 }
 
 //su dung view page

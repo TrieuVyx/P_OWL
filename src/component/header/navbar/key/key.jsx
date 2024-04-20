@@ -2,7 +2,7 @@
 import {  useNavigate } from 'react-router-dom';
 import { linkRouter } from '../../../constants/constants';
 const router = useNavigate();
-
+//#region KEY
 export function keyPress (e){
 
     if(e.key === "0"){
@@ -22,3 +22,5 @@ export function keyPress (e){
         return true
     }
 }
+
+//#endregion
