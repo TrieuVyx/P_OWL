@@ -13,28 +13,21 @@ class LoginController {
             if (
                 data.UserName != null || data.UserName != undefined &&
                 data.Email != null || data.Email != undefined &&
-                data?.PassWord != null || data.PassWord != undefined
+                data.PassWord != null || data.PassWord != undefined
             ) {
-                const Users = new UserEntity({
+                const users = await UserEntity.create({
                     UserName: data.UserName,
                     Email: data.Email,
                     PassWord: hashPass
                 });
-                const result = new UserCreateDTO(Users);
-                res.status(200).json(result);
-
+                const result = new UserCreateDTO(users);
+                return res.status(200).json(result);
             }
-            res.status(404).json("Not Found")
+            return res.status(404).json("Not Found")
         }
         catch (err) {
-            res.status(500).json({ message: err.message })
-
+            return res.status(500).json({ message: err.message })
         }
-
-        {
-
-        }
-
     }
 }
 module.exports = new LoginController()
