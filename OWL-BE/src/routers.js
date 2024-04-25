@@ -7,7 +7,7 @@ const HomeRouter = url.HomeRouter;
 const UserRouter = url.UserRouter;
 const AuthorRouter = url.AuthorRouter;
 //su dung handlebar
-const handlebar = url.handlebar;
+// const handlebar = url.handlebar;
 //khai bao side can thiet
 
 const express = require("express")
@@ -16,7 +16,7 @@ const path = url.path;
 // dieu huong page
 function routers(app) {
     uses(app)
-    handlebars(app)
+    // handlebars(app)
 }
 
 //su dung router 
@@ -32,15 +32,15 @@ function uses(app) {
 }
 
 //su dung view page
-function handlebars(app) {
-    app.engine("hbs", handlebar.engine({
-        defaultLayout: "main",
-        extname: ".hbs"
-    }));
+// function handlebars(app) {
+//     app.engine("hbs", handlebar.engine({
+//         defaultLayout: "main",
+//         extname: ".hbs"
+//     }));
 
-    app.set('view engine', "hbs")
-    app.set('views', path.join(__dirname, "views"))
-    console.log(__dirname)
-}
+//     app.set('view engine', "hbs")
+//     app.set('views', path.join(__dirname, "views"))
+//     console.log(__dirname)
+// }
 
 module.exports = routers

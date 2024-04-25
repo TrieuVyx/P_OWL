@@ -1,6 +1,9 @@
-const UserCreateDTO = require("../models/DTO/UserCreateDTO")
 const bcrypt = require("bcrypt")
+const UserCreateDTO = require("../models/DTO/UserCreateDTO")
 const UserEntity = require("../models/Entity/UserEntity")
+const message = require("../constants/constansHttpStatus");
+
+
 class LoginController {
     AuthorLogin(req, res) {
         res.send('home');
@@ -21,9 +24,9 @@ class LoginController {
                     PassWord: hashPass
                 });
                 const result = new UserCreateDTO(users);
-                return res.status(200).json(result);
+                return res.status(message.OK).json(result);
             }
-            return res.status(404).json("Not Found")
+            return res.status(404).json(message.NOT_FOUND)
         }
         catch (err) {
             return res.status(500).json({ message: err.message })
