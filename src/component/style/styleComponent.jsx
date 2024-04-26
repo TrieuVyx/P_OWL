@@ -1,19 +1,30 @@
-export const headerStyle = {
-    background: "rgba(0, 0, 0, 0.88)"
+const headerStyle = {
+    background: "rgba(0, 0, 0, 0.88)",
+    // display:'none'
+
 }
-export const centerStyle = {
+const centerStyle = {
     alignItems: 'center',
-    display:"flex",
+    display: "flex",
     justifyContent: 'center'
 }
-export const betweenStyle = {
+const betweenStyle = {
     alignItems: 'center',
-    display:"flex",
+    display: "flex",
     justifyContent: 'space-between'
 }
-export const margin={
-    margin:"6px"
+const margin = {
+    margin: "6px"
 }
-export const gap={
-    gap:"24px"
+const gap = {
+    gap: "24px"
 }
+
+
+module.exports = {
+    headerStyle,
+    centerStyle,
+    betweenStyle,
+    margin,
+    gap
+};

@@ -9,7 +9,7 @@ import { Layout, Menu } from "antd";
 import React, { useState } from "react";
 // import {keyPress} from "./key/key"
 import { useNavigate } from 'react-router-dom';
-import { linkRouter } from '../../constants/constants';
+import { LinkRouter } from '../../../shortPath/path';
 
 const { Sider } = Layout;
 const getItem = (label, key, icon, children, collapsed) => {
@@ -29,23 +29,23 @@ export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
     const setSelectedMenuItem = (e) => {
         if (e.key === "0") {
-            e.key = router(linkRouter.HOME)
+            e.key = router(LinkRouter.HOME)
             return true
         }
         if (e.key === "2") {
-            e.key = router(linkRouter.COURSE)
+            e.key = router(LinkRouter.COURSE)
             return true
         }
         if (e.key === "4") {
-            e.key = router(linkRouter.HOME)
+            e.key = router(LinkRouter.HOME)
             return true
         }
         if (e.key === "7") {
-            e.key = router(linkRouter.LOGIN)
+            e.key = router(LinkRouter.LOGIN)
             return true
         }
         if (e.key === "8") {
-            e.key = router(linkRouter.LOGIN)
+            e.key = router(LinkRouter.LOGIN)
             return true
         }
     }

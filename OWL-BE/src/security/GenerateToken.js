@@ -5,11 +5,8 @@ const GenerationToken = async (payload) => {
     const token =  await jwt.sign(payload, secretKey, { expiresIn })
     return token
 }
-const ValidationToken = async (AccessToken)=>{
 
-}
 
 module.exports = {
-    GenerationToken,
-    ValidationToken
+    GenerationToken
 }
