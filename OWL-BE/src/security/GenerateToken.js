@@ -1,11 +1,15 @@
 const jwt = require('jsonwebtoken')
 const GenerationToken = async (payload) => {
     const expiresIn = '1h'
-    const token =  await jwt.sign(payload, process.env.SECRECKEY, { expiresIn })
+    const secretKey = process.env.SECRECKEY
+    const token =  await jwt.sign(payload, secretKey, { expiresIn })
     return token
 }
+const ValidationToken = async (AccessToken)=>{
 
+}
 
 module.exports = {
-    GenerationToken
+    GenerationToken,
+    ValidationToken
 }

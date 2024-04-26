@@ -6,6 +6,7 @@ const { GenerationToken } = require('../security/GenerateToken');
 const LoginDTO = require("../models/DTO/LoginDTO");
 
 class LoginController {
+
     async AuthorLogin(req, res) {
         try {
             const data = req.body;
@@ -46,6 +47,7 @@ class LoginController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message });
         }
     }
+
     async AuthorRegister(req, res) {
         try {
             const data = req.body;
@@ -70,5 +72,7 @@ class LoginController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
         }
     }
+
+    
 }
 module.exports = new LoginController()
