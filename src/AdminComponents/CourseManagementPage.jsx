@@ -3,17 +3,19 @@ import { Layout } from "antd"
 import { Navbar } from "../shortPath/path"
 const { Header, Footer, Content, Sider } = Layout;
 const { headerStyle } = styleComponent
-export default function homePages() {
+export default function CourseManagementPage(){
     return (
+
         <div className="w-100">
+        <Layout >
+            <Sider width="30%"><Navbar /></Sider>
             <Layout >
-                <Sider width="30%"><Navbar /></Sider>
-                <Layout >
-                    <Header style={headerStyle}></Header>
-                    <Content></Content>
-                    <Footer></Footer>
-                </Layout>
+                <Header ></Header>
+                <Content></Content>
+                <Footer></Footer>
             </Layout>
-        </div>
+        </Layout>
+
+    </div>
     )
 }

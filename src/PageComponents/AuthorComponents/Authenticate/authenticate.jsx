@@ -1,5 +1,4 @@
 import Axios from "axios"
-import { useNavigation } from 'react-router-dom';
 import CheckError from "./checkError";
 import { loginUrl } from "../../../shortPath/urlPath";
 import { LinkRouter } from '../../../shortPath/path';
@@ -14,12 +13,13 @@ export default async function Authenticate(Email, PassWord) {
             data: data
         })
             .then((response) => {
-                console.log(response)
                 const Token = response.data.AccessToken
                 const RefreshToken = response.data.FreshToken
+                const Hierachy = response.data.Hierachy
                 localStorage.setItem("AccessToken", Token)
                 localStorage.setItem("FreshToken", RefreshToken)
-                routerMap()
+                localStorage.setItem("Hierachy", Hierachy)
+                window.location = LinkRouter.HOME
             })
             .catch((error) => {
                 CheckError(Email, PassWord)
@@ -33,7 +33,3 @@ export default async function Authenticate(Email, PassWord) {
 
 }
 
-const routerMap = () => {
-    const router = useNavigation()
-    router(LinkRouter.HOME)
-}

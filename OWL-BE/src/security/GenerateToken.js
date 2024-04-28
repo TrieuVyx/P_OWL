@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken')
+const {jwtDecode} = require('jwt-decode')
 const secretKey = process.env.SECRECKEY
 const expiresIn = '5m'
 const refreshExpired = '5m';
@@ -17,7 +18,13 @@ const GetRefeshToken = async (Token) => {
     return freshToken;
 }
 
+const VerifyTokenPermision = async (Token) =>{
+    const decoded  = await jwtDecode(Token)
+    return decoded.Hierachy
+}
+
 module.exports = {
     GenerationToken,
-    GetRefeshToken
+    GetRefeshToken,
+    VerifyTokenPermision
 }

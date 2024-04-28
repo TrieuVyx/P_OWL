@@ -1,9 +1,11 @@
-class LoginDTO{
+class LoginDTO {
     AccessToken;
     FreshToken;
-    constructor(Token, FreshToken){
+    Hierachy;
+    constructor(Token, FreshToken, Hierachy) {
         this.AccessToken = Token
         this.FreshToken = FreshToken
+        this.Hierachy = Hierachy
     }
 }
 

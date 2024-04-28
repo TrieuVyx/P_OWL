@@ -1,7 +1,9 @@
 const LinkRouter = {
   HOME: "/",
   LOGIN: "login",
-  COURSE: "course"
+  COURSE: "course",
+  ADMIN:"admin",
+  COURSEMANA: "admin/course"
 };
 
 export default LinkRouter;

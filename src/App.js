@@ -5,54 +5,60 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  redirect
 }
   from 'react-router-dom';
-
-
 import './App.css';
 import {
   HomePage,
   Course,
   LinkRouter,
   LoginPage,
-  checkTokenExist
+  checkTokenExist,
+  checkPermission,
+  CourseManagementPage
 }
   from './shortPath/path';
 import { Toaster } from 'react-hot-toast'
-
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [permission, setPermission] = useState("STUDENT")
   useEffect(() => {
     const token = checkTokenExist();
-    if (token !== null) {
+    const checkPer = checkPermission();
+    if (token !== null && checkPer !== null) {
       setIsLoggedIn(true);
+      setPermission(checkPer)
     } else {
       setIsLoggedIn(false);
-      window.onbeforetoggle = LinkRouter.LOGIN;
+      setPermission(checkPer)
     }
-
   }, [])
   return (
     <div className="App">
-
       <Toaster position='top-right' reverseOrder={false}></Toaster>
       <header className="App-header">
         <Router>
           <Routes>
-            {isLoggedIn  ? (
-              <>
-                <Route path={LinkRouter.HOME} element={<HomePage />} />
-                <Route path={LinkRouter.COURSE} element={<Course />} />
-              </>
+            {isLoggedIn ? (
+              permission === "ADMIN" ? (
+                <>
+                  <Route path={LinkRouter.HOME} element={<HomePage />} />
+                  <Route path={LinkRouter.COURSE} element={<Course />} />
+                  <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+                  <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
+
+                </>
+              ) : (
+                <>
+                  <Route path={LinkRouter.HOME} element={<HomePage />} />
+                  <Route path={LinkRouter.COURSE} element={<Course />} />
+                  <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+                </>
+              )
             ) : (
               <>
-              
-                <Route path={LinkRouter.HOME} element={<HomePage />}> 
-                </Route>
+                <Route path={LinkRouter.HOME} element={<HomePage />} />
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
-
               </>
             )}
           </Routes>
@@ -61,5 +67,4 @@ function App() {
     </div>
   );
 }
-
 export default App;
