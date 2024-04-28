@@ -1,8 +1,10 @@
 class UserCreateDTO{
     UserName;
     Email;
-    constructor(data){
-        this.UserName = data.UserName,
-        this.Email = data.Email
+    constructor(users){
+        this.UserName = users.UserName,
+        this.Email = users.Email
     }
 }
+
+module.exports = UserCreateDTO

@@ -1,15 +1,14 @@
+import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
-import Navbar from "../component/header/navbar/navbar"
-import {headerStyle} from '../component/style/styleComponent'
+import { Navbar } from "../shortPath/path"
 const { Header, Footer, Content, Sider } = Layout;
-
+const { headerStyle } = styleComponent
 
 export default function homePages() {
-
     return (
         <div className="w-100">
             <Layout >
-                <Sider width="30%"><Navbar/></Sider>
+                <Sider width="30%"><Navbar /></Sider>
                 <Layout >
                     <Header style={headerStyle}></Header>
                     <Content></Content>
@@ -18,6 +17,6 @@ export default function homePages() {
             </Layout>
 
         </div>
-            
+
     )
 }

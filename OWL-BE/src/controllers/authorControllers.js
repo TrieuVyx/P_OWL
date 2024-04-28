@@ -1,10 +1,53 @@
-const UserCreateDTO = require("../models/DTO/UserCreateDTO")
 const bcrypt = require("bcrypt")
+const UserCreateDTO = require("../models/DTO/UserCreateDTO")
 const UserEntity = require("../models/Entity/UserEntity")
+const message = require("../constants/constansHttpStatus");
+const { GenerationToken, GetRefeshToken } = require('../security/GenerateToken');
+const LoginDTO = require("../models/DTO/LoginDTO");
+
 class LoginController {
-    AuthorLogin(req, res) {
-        res.send('home');
+
+    async AuthorLogin(req, res) {
+        try {
+            const data = req.body;
+            if (
+                data.Email != null || data.Email != undefined &&
+                data.PassWord != null || data.PassWord != undefined
+            ) {
+                const payload = await UserEntity.findOne({ Email: data.Email })
+                console.log(payload)
+
+                if (!payload) {
+                    return res.status(message.NOT_FOUND.CODE).json({ message: "EMAIL NOT FOUND" })
+                }
+                const validationPass = await bcrypt.compare(
+                    data.PassWord,
+                    payload.PassWord
+                )
+                if (!validationPass) {
+                    return res.status(message.NOT_FOUND.CODE).json({ message: "PASSWORD INCORRECT" })
+                }
+                if (payload && validationPass) {
+                    let userInfor = {
+                        UserName: payload.UserName,
+                        Email: payload.Email,
+                        PassWord: payload.PassWord,
+                        Hierachy: payload.Hierachy
+                    }
+                    const Token = await GenerationToken(userInfor);
+                    const RefeshToken = await GetRefeshToken(Token);
+                    const result = new LoginDTO(Token, RefeshToken);
+                    return res.status(message.OK.CODE).json(result);
+                }
+                return res.status(message.BAD_REQUEST.CODE).json(message.BAD_REQUEST.MESSAGE)
+            }
+            return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
+        }
+        catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message });
+        }
     }
+
     async AuthorRegister(req, res) {
         try {
             const data = req.body;
@@ -13,24 +56,23 @@ class LoginController {
             if (
                 data.UserName != null || data.UserName != undefined &&
                 data.Email != null || data.Email != undefined &&
-                data?.PassWord != null || data.PassWord != undefined
+                data.PassWord != null || data.PassWord != undefined
             ) {
-                const Users = new UserEntity({
+                const users = await UserEntity.create({
                     UserName: data.UserName,
                     Email: data.Email,
                     PassWord: hashPass
                 });
-                // const result = new UserCreateDTO(Users);
-                res.status(200).json(Users);
-
+                const result = new UserCreateDTO(users);
+                return res.status(message.OK.CODE).json(result);
             }
-            res.status(404).json("Not Found")
+            return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
         }
         catch (err) {
-            res.status(500).json({ message: err.message })
-
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
         }
-
     }
+
+
 }
 module.exports = new LoginController()

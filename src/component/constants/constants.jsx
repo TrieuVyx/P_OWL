@@ -1,7 +1,7 @@
-export const linkRouter = {
-    HOME:"/",
-    LOGIN: "login",
-    COURSE:"course"
-    
-  }
-  
+const LinkRouter = {
+  HOME: "/",
+  LOGIN: "login",
+  COURSE: "course"
+};
+
+export default LinkRouter;
