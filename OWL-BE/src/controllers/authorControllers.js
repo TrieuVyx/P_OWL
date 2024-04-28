@@ -2,7 +2,7 @@ const bcrypt = require("bcrypt")
 const UserCreateDTO = require("../models/DTO/UserCreateDTO")
 const UserEntity = require("../models/Entity/UserEntity")
 const message = require("../constants/constansHttpStatus");
-const { GenerationToken } = require('../security/GenerateToken');
+const { GenerationToken, GetRefeshToken } = require('../security/GenerateToken');
 const LoginDTO = require("../models/DTO/LoginDTO");
 
 class LoginController {
@@ -11,11 +11,11 @@ class LoginController {
         try {
             const data = req.body;
             if (
-                data.UserName != null || data.UserName != undefined &&
                 data.Email != null || data.Email != undefined &&
                 data.PassWord != null || data.PassWord != undefined
             ) {
                 const payload = await UserEntity.findOne({ Email: data.Email })
+                console.log(payload)
 
                 if (!payload) {
                     return res.status(message.NOT_FOUND.CODE).json({ message: "EMAIL NOT FOUND" })
@@ -35,8 +35,8 @@ class LoginController {
                         Hierachy: payload.Hierachy
                     }
                     const Token = await GenerationToken(userInfor);
-
-                    const result = new LoginDTO(Token);
+                    const RefeshToken = await GetRefeshToken(Token);
+                    const result = new LoginDTO(Token, RefeshToken);
                     return res.status(message.OK.CODE).json(result);
                 }
                 return res.status(message.BAD_REQUEST.CODE).json(message.BAD_REQUEST.MESSAGE)
@@ -73,6 +73,6 @@ class LoginController {
         }
     }
 
-    
+
 }
 module.exports = new LoginController()

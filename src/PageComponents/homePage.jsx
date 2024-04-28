@@ -1,4 +1,4 @@
-import styleComponent from '../component/style/styleComponent'
+import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
 import { Navbar } from "../shortPath/path"
 const { Header, Footer, Content, Sider } = Layout;

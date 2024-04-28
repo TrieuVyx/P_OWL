@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "antd": "^5.16.1",
+    "axios": "^1.6.8",
     "bcrypt": "^5.1.1",
     "concurrently": "^8.2.2",
     "cors": "^2.8.5",
@@ -22,6 +23,7 @@
     "node": "^18.20.2",
     "nodemon": "^3.1.0",
     "path": "^0.12.7",
+    "react-hot-toast": "^2.4.1",
     "react-router-dom": "^6.22.3",
     "react-scripts": "^5.0.1",
     "toaster": "^0.1.2"

@@ -29,30 +29,16 @@ export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
     const setSelectedMenuItem = (e) => {
         if (e.key === "0") {
-            e.key = router(LinkRouter.HOME)
-            return true
+            router(LinkRouter.HOME);
+        } else if (e.key === "2") {
+            router(LinkRouter.COURSE);
+        } else if (e.key === "5") {
+            router(LinkRouter.LOGIN);
         }
-        if (e.key === "2") {
-            e.key = router(LinkRouter.COURSE)
-            return true
-        }
-        if (e.key === "4") {
-            e.key = router(LinkRouter.HOME)
-            return true
-        }
-        if (e.key === "7") {
-            e.key = router(LinkRouter.LOGIN)
-            return true
-        }
-        if (e.key === "8") {
-            e.key = router(LinkRouter.LOGIN)
-            return true
-        }
-    }
+    };
 
     return (
-        <Layout
-            style={{ minHeight: "100vh" }}
+        <Layout style={{ minHeight: "100vh" }}
         >
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}  >
                 <div className="demo-logo-vertical"></div>
@@ -62,12 +48,12 @@ export default function Navbar() {
                     getItem("MyCourses", "2", <DesktopOutlined />),
                     getItem("Lessons", "3", <TeamOutlined />,
                         [
-                        //     getItem("Nhân Viên", "4"),
-                        //     getItem("Sản Phẩm", '5')
+                            //     getItem("Nhân Viên", "4"),
+                            //     getItem("Sản Phẩm", '5')
                         ]),
-                    getItem("Rewards", "6", <FileOutlined />),
-                    getItem("Login", "7", <UserOutlined />),
-                    getItem("Setting", "8", <UserOutlined />)
+                    getItem("Rewards", "4", <FileOutlined />),
+                    getItem("Login", "5", <UserOutlined />),
+                    getItem("Setting", "6", <UserOutlined />)
                 ]}
                     onClick={(e) => setSelectedMenuItem(e)}
                 ></Menu>

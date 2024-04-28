@@ -1,7 +1,9 @@
 class LoginDTO{
     AccessToken;
-    constructor(Token){
+    FreshToken;
+    constructor(Token, FreshToken){
         this.AccessToken = Token
+        this.FreshToken = FreshToken
     }
 }
 

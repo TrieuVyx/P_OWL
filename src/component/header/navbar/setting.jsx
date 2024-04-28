@@ -4,7 +4,7 @@ import {
     BellOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { centerStyle, betweenStyle ,margin,gap} from "../../style/styleComponent"
+import { centerStyle, betweenStyle ,margin,gap} from "../../../shortPath/styleComponent"
 const { Search } = Input;
 
 export default function Setting() {

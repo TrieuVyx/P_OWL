@@ -1,29 +1,60 @@
+import React,
+{ useEffect, useState }
+  from 'react'
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
+  redirect
 }
   from 'react-router-dom';
 
-// import Toaster npm from "toaster"
 
 import './App.css';
 import {
   HomePage,
   Course,
-  LinkRouter
+  LinkRouter,
+  LoginPage,
+  checkTokenExist
 }
   from './shortPath/path';
+import { Toaster } from 'react-hot-toast'
+
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  useEffect(() => {
+    const token = checkTokenExist();
+    if (token !== null) {
+      setIsLoggedIn(true);
+    } else {
+      setIsLoggedIn(false);
+      window.onbeforetoggle = LinkRouter.LOGIN;
+    }
+
+  }, [])
   return (
     <div className="App">
-      {/* <Toaster position='top-right' ></Toaster> */}
+
+      <Toaster position='top-right' reverseOrder={false}></Toaster>
       <header className="App-header">
         <Router>
           <Routes>
-            <Route path={LinkRouter.HOME} element={<HomePage />}></Route>
-            <Route path={LinkRouter.COURSE} element={<Course />}></Route>
+            {isLoggedIn  ? (
+              <>
+                <Route path={LinkRouter.HOME} element={<HomePage />} />
+                <Route path={LinkRouter.COURSE} element={<Course />} />
+              </>
+            ) : (
+              <>
+              
+                <Route path={LinkRouter.HOME} element={<HomePage />}> 
+                </Route>
+                <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+
+              </>
+            )}
           </Routes>
         </Router>
       </header>
