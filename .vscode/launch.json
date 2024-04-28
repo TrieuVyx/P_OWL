@@ -1,10 +1,13 @@
 {
     "configurations": [
-        {
-            "type": "msedge",
-            "name": "http://require(\"../models/DTO/UserCreateDTO\")",
-            "request": "launch",
-            "url": "http://require(\"../models/DTO/UserCreateDTO\")"
-        }
+    {
+        "name": "Launch Program",
+        "program": "${workspaceFolder}/OWL-BE/src/index.js",
+        "request": "launch",
+        "skipFiles": [
+            "<node_internals>/**"
+        ],
+        "type": "node"
+    }
     ]
 }

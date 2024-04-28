@@ -20,18 +20,14 @@ class LoginController {
                     Email: data.Email,
                     PassWord: hashPass
                 });
-                const result = new UserCreateDTO(Users);
-                res.status(200).json(result);
+                // const result = new UserCreateDTO(Users);
+                res.status(200).json(Users);
 
             }
             res.status(404).json("Not Found")
         }
         catch (err) {
             res.status(500).json({ message: err.message })
-
-        }
-
-        {
 
         }
 
