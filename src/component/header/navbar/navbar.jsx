@@ -1,9 +1,11 @@
 import {
     DesktopOutlined,
+    BookOutlined,
     FileOutlined,
     PieChartOutlined,
     TeamOutlined,
     UserOutlined,
+    SettingOutlined
 } from '@ant-design/icons';
 import { Layout, Menu } from "antd";
 import React, { useState, useEffect } from "react";
@@ -70,7 +72,7 @@ export default function Navbar() {
                     ) : (
                         getItem("Dashboard", "1", <PieChartOutlined />)
                     ),
-                    getItem("Lessons", "3", <TeamOutlined />,
+                    getItem("Lessons", "3", <BookOutlined />,
                         [
                             //     getItem("Nhân Viên", "4"),
                             //     getItem("Sản Phẩm", '5')
@@ -81,7 +83,7 @@ export default function Navbar() {
                     ) : (
                         getItem("Login", "5", <UserOutlined />)
                     ),
-                    getItem("Setting", "6", <UserOutlined />)
+                    getItem("Setting", "6", <SettingOutlined />)
                 ]}
                     onClick={(e) => setSelectedMenuItem(e)}
                 ></Menu>

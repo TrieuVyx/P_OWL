@@ -23,7 +23,7 @@ function routers(app) {
 function router(app) {
 
     app.use(Authenticate)
-    app.use(express.urlencoded({ extended: true }));
+    app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
     app.use(cors({ origin: "*" }));
 
