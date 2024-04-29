@@ -1,7 +1,17 @@
 const headerStyle = {
-    background: "rgba(0, 0, 0, 0.88)",
+    // background: "rgba(0, 0, 0, 0.88)",
+    borderRadius:"5px 0 0 5px"
     // display:'none'
 
+}
+const heightStyle= {
+    height:"100vh"
+}
+const menutabstyle= {
+    alignItems: 'center',
+    display: "flex",
+    justifyContent: 'space-between',
+    float:"right"
 }
 const centerStyle = {
     alignItems: 'center',
@@ -11,7 +21,8 @@ const centerStyle = {
 const betweenStyle = {
     alignItems: 'center',
     display: "flex",
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+
 }
 const margin = {
     margin: "6px"
@@ -31,6 +42,7 @@ const formCenterStyle ={
     justifyContent:"center"
 }
 
+
 module.exports = {
     headerStyle,
     centerStyle,
@@ -38,5 +50,7 @@ module.exports = {
     margin,
     gap,
     formStyle,
-    formCenterStyle
+    formCenterStyle,
+    heightStyle,
+    menutabstyle
 };

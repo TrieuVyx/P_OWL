@@ -27,7 +27,7 @@ export default async function Authenticate(Email, PassWord) {
             });
     }
     catch (err) {
-        console.log("ERR")
+        console.log({message:err.message})
     }
 
 

@@ -7,7 +7,7 @@ export default function coursePages() {
     return (
         <div className="w-100">
             <Layout >
-                <Sider width="30%"><Navbar /></Sider>
+                <Sider width="20%"><Navbar /></Sider>
                 <Layout >
                     <Header>
                         <Settingbar />

@@ -9,7 +9,8 @@ import { Layout, Menu } from "antd";
 import React, { useState, useEffect } from "react";
 // import {keyPress} from "./key/key"
 import { useNavigate } from 'react-router-dom';
-import { LinkRouter, checkTokenExist, checkPermission } from '../../../shortPath/path';
+import { LinkRouter, checkTokenExist, checkPermission ,heightStyle} from '../../../shortPath/path';
+
 const { Sider } = Layout;
 const getItem = (label, key, icon, children, collapsed) => {
     return {
@@ -18,6 +19,7 @@ const getItem = (label, key, icon, children, collapsed) => {
         icon,
         children,
         collapsed
+        
     }
 }
 export default function Navbar() {
@@ -51,8 +53,7 @@ export default function Navbar() {
         }
     };
     return (
-        <Layout style={{ minHeight: "100vh" }} >
-            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}  >
+            <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}  style={heightStyle} >
                 <div className="demo-logo-vertical"></div>
                 <Menu theme='dark' defaultSelectedKeys={[1]} mode="inline" items={[
                     getItem("ANT-ETL", "0"),
@@ -65,8 +66,7 @@ export default function Navbar() {
                         )
                     ) : (
                         getItem("Dashboard", "1", <PieChartOutlined />)
-                    )
-                    ,
+                    ),
                     getItem("Lessons", "3", <TeamOutlined />,
                         [
                             //     getItem("Nhân Viên", "4"),
@@ -83,6 +83,5 @@ export default function Navbar() {
                     onClick={(e) => setSelectedMenuItem(e)}
                 ></Menu>
             </Sider>
-        </Layout>
     )
 }

@@ -1,0 +1,45 @@
+@import '__variable';
+@import '__size';
+.parent_course{
+    background-color: $background;
+
+    .child_course:first-child{
+        // background-color: $brown;
+        margin: "0 5px 0 0";
+        color: $white;
+        #userappear{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: $gray;
+            // flex-wrap: wrap-reverse;
+            min-width:$width100 ;
+
+            .user_child{
+                width: $width100/2;
+            }
+            .user_child:first-child{
+                width: $width100;
+            }
+            .user_child:last-child{
+                width: $width100;
+                
+                .user_image{
+                   width: 200px;
+                   height: 200px;
+
+                }
+
+            }
+        }
+    }
+    .child_course:last-child{
+        color: $white;
+    }
+}
+
+.table__parent{
+    background-color: blue;
+    height: 50vh;
+    
+}

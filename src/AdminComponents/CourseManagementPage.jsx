@@ -1,21 +1,23 @@
 import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
-import { Navbar } from "../shortPath/path"
+import { Navbar, Menutab, CourseAdmin } from "../shortPath/path"
 const { Header, Footer, Content, Sider } = Layout;
 const { headerStyle } = styleComponent
-export default function CourseManagementPage(){
+export default function CourseManagementPage() {
     return (
-
         <div className="w-100">
-        <Layout >
-            <Sider width="30%"><Navbar /></Sider>
             <Layout >
-                <Header ></Header>
-                <Content></Content>
-                <Footer></Footer>
+                <Sider width="20%"><Navbar /></Sider>
+                <Layout >
+                    <Header>
+                        <Menutab />
+                    </Header>
+                    <Content>
+                        <CourseAdmin />
+                    </Content>
+                    <Footer></Footer>
+                </Layout>
             </Layout>
-        </Layout>
-
-    </div>
+        </div>
     )
 }
