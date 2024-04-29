@@ -33,13 +33,16 @@
             }
         }
     }
-    .child_course:last-child{
+    .child_course:last-child{ 
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: $white;
     }
 }
 
 .table__parent{
-    background-color: blue;
+    // background-color: blue;
     height: 50vh;
     
 }

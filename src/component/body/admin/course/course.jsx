@@ -1,5 +1,6 @@
-import "../../../shortPath/scss/admin.course.scss"
-import { IMAGE_ADMIN_COURSE } from "../../../shortPath/path"
+import "../../../../shortPath/scss/admin.course.scss"
+import { IMAGE_ADMIN_COURSE } from "../../../../shortPath/path"
+import CourseTable from "./courseTable"
 export default function Course() {
     return (
         <>
@@ -16,10 +17,10 @@ export default function Course() {
 
                     </div>
                 </div>
-                <div className="col child_course">hi</div>
+                <div className="col child_course">OPP!</div>
             </div>
             <div className=" m-4 table__parent">
-
+                <CourseTable/>
             </div>
         </>
     )

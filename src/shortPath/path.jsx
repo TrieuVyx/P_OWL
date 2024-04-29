@@ -6,19 +6,22 @@ import CourseBody from "../component/body/course/course";
 import LinkRouter from "../component/constants/constants";
 import LoginPage from "../PageComponents/AuthorComponents/Login.component";
 import CourseManagementPage from "../AdminComponents/CourseManagementPage";
-import {checkTokenExist,checkPermission} from "../PageComponents/AuthorComponents/Authenticate/checkTokenExperienced";
+import UserManagementPage from "../AdminComponents/UserManagement";
+import { checkTokenExist, checkPermission } from "../PageComponents/AuthorComponents/Authenticate/checkTokenExperienced";
 import { heightStyle } from "./styleComponent";
-import Menutab from  "../component/header/navbar/menutab"
-import CourseAdmin from "../component/body/admin/course";
-import { IMAGE_ADMIN_COURSE } from "./imageUrl/imageUrl";
-
+import { IMAGE_ADMIN_COURSE, IMAGE_USER_ } from "./imageUrl/imageUrl";
+import Menutab from "../component/header/navbar/menutab"
+import CourseAdmin from "../component/body/admin/course/course";
+import User from "../component/body/admin/user/user"
 
 export {
     HomePage,
     Course,
     LoginPage,
     CourseManagementPage,
+    UserManagementPage,
     CourseAdmin,
+    User,
     Navbar,
     Settingbar,
     Menutab,
@@ -31,6 +34,6 @@ export {
     heightStyle,
 
 
-    
+    IMAGE_USER_,
     IMAGE_ADMIN_COURSE
 };

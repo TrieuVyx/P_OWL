@@ -15,7 +15,8 @@ import {
   LoginPage,
   checkTokenExist,
   checkPermission,
-  CourseManagementPage
+  CourseManagementPage,
+  UserManagementPage
 }
   from './shortPath/path';
 import { Toaster } from 'react-hot-toast'
@@ -46,6 +47,7 @@ function App() {
                   <Route path={LinkRouter.COURSE} element={<Course />} />
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
+                  <Route path={LinkRouter.USERMANA} element={<UserManagementPage />} />
 
                 </>
               ) : (

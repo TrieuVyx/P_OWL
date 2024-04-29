@@ -51,6 +51,9 @@ export default function Navbar() {
         } else if (e.key === "8") {
             router(LinkRouter.COURSEMANA)
         }
+        else if (e.key === "9") {
+            router(LinkRouter.USERMANA)
+        }
     };
     return (
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}  style={heightStyle} >

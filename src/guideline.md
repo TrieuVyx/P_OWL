@@ -4,6 +4,7 @@ dùng để cài đặt package của node
 # npm install react react-dom antd
 
 # npm i react-scripts
+# npm i sass
 
 # rm -rf node_modules 
 gỡ cài đặt
