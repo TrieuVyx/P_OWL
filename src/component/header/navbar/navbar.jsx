@@ -42,7 +42,6 @@ export default function Navbar() {
 
     }, [])
     const setSelectedMenuItem = (e) => {
-        console.log(e.key)
         if (e.key === "0") {
             router(LinkRouter.HOME);
         } else if (e.key === "2") {

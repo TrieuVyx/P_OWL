@@ -6,7 +6,7 @@ class ListUserDTO {
     Address
     Hierachy
     Image
-    constructor(UserName, FullName, Email, Phone, Address, Hierachy, Image) {
+    constructor(UserName, FullName, Email, Phone, Address, Hierachy, Image ) {
         this.UserName = UserName;
         this.FullName = FullName;
         this.Email = Email;
