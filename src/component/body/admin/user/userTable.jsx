@@ -10,21 +10,20 @@ export default function UserTable() {
     useEffect(() => {
         getListUser(currentPage, sizePage)
             .then((data) => {
-                console.log(data)
                 setUser(data)
             })
             .catch((error) => console.error(error));
     }, [])
     const handleChangePage = (page) => {
         setSizePage(pageSize)
-        const current = page -1
+        const current = page - 1
         setCurrentPage(current);
     };
     const getData = () => {
         const list = []
         user.map((each, index) => {
             list.push({
-                key: (index + 1).toString(),
+                key: each.Id,
                 UserName: each.UserName,
                 Address: each.Address,
                 FullName: each.FullName

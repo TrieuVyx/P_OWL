@@ -4,7 +4,8 @@ const LinkRouter = {
   COURSE: "course",
   ADMIN:"admin",
   COURSEMANA: "admin/course",
-  USERMANA: "admin/user"
+  USERMANA: "admin/user",
+  DETAIL:"admin/user/:id"
 };
 
 export default LinkRouter;

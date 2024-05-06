@@ -1,5 +1,5 @@
-class ListUserDTO {
-    Id
+class DetailUserDTO {
+    
     UserName
     FullName
     Email
@@ -7,8 +7,7 @@ class ListUserDTO {
     Address
     Hierachy
     Image
-    constructor(Id,UserName, FullName, Email, Phone, Address, Hierachy, Image ) {
-        this.Id = Id
+    constructor(UserName, FullName, Email, Phone, Address, Hierachy, Image ) {
         this.UserName = UserName;
         this.FullName = FullName;
         this.Email = Email;
@@ -19,4 +18,4 @@ class ListUserDTO {
     }
 }
 
-module.exports = ListUserDTO
+module.exports = DetailUserDTO

@@ -19,6 +19,11 @@ import {
   UserManagementPage
 }
   from './shortPath/path';
+
+import {
+  DetailUser
+}
+from './shortPath/adminTabUrl/adminTabUrl'
 import { Toaster } from 'react-hot-toast'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,6 +53,7 @@ function App() {
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
                   <Route path={LinkRouter.USERMANA} element={<UserManagementPage />} />
+                  <Route path={LinkRouter.DETAIL} element={<DetailUser />} />
 
                 </>
               ) : (
@@ -55,12 +61,14 @@ function App() {
                   <Route path={LinkRouter.HOME} element={<HomePage />} />
                   <Route path={LinkRouter.COURSE} element={<Course />} />
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+
                 </>
               )
             ) : (
               <>
                 <Route path={LinkRouter.HOME} element={<HomePage />} />
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+
               </>
             )}
           </Routes>
