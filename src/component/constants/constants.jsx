@@ -5,7 +5,10 @@ const LinkRouter = {
   ADMIN:"admin",
   COURSEMANA: "admin/course",
   USERMANA: "admin/user",
-  DETAIL:"admin/user/:id"
+  DETAIL:"admin/user/detail/:id",
+  UPDATE:"admin/user/update/:id",
+  DELETE:"admin/user/delete/:id",
+  CREATE:"admin/user/create"
 };
 
 export default LinkRouter;

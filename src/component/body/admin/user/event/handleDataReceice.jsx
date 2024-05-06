@@ -1,17 +1,24 @@
+const handleCreate = ()=>{
+    window.location.href = `user/create`
+}
 const handleDelete = (key)=>{
-    console.log(key)
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/delete/${key}`
 }
 
 const handleUpdate = (key)=>{
-    console.log(key)
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/update/${key}`
 }
 
 const handleDetail = (key)=>{
-    window.location.href = `user/${key}`
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/detail/${key}`
 }
 
 export {
     handleDelete,
     handleUpdate,
-    handleDetail
+    handleDetail,
+    handleCreate
 }

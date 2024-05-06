@@ -21,7 +21,10 @@ import {
   from './shortPath/path';
 
 import {
-  DetailUser
+  DetailUser,
+  UpdateUser,
+  DeleteUser,
+  CreateUser
 }
 from './shortPath/adminTabUrl/adminTabUrl'
 import { Toaster } from 'react-hot-toast'
@@ -54,6 +57,9 @@ function App() {
                   <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
                   <Route path={LinkRouter.USERMANA} element={<UserManagementPage />} />
                   <Route path={LinkRouter.DETAIL} element={<DetailUser />} />
+                  <Route path={LinkRouter.UPDATE} element={<UpdateUser />} />
+                  <Route path={LinkRouter.DELETE} element={<DeleteUser />} />
+                  <Route path={LinkRouter.CREATE} element={<CreateUser />} />
 
                 </>
               ) : (

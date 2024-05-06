@@ -1,8 +1,8 @@
 import styleComponent from '../../shortPath/styleComponent';
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input } from "antd";
-import Authenticate from './Authenticate/authenticate';
 import { Toaster } from 'react-hot-toast'
+import Authenticate from './Authenticate/authenticate';
 
 const {
     formStyle,

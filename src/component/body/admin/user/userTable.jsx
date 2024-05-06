@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Space, Table, Tag } from 'antd';
+import { Button, Checkbox, Form, Input, Popconfirm, Space, Table, Tag } from "antd";
+
 import { columns } from './userColumn';
 import getListUser from '../../../data/user/getListUser';
+import { handleCreate } from './event/handleDataReceice';
 export default function UserTable() {
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
@@ -32,16 +34,24 @@ export default function UserTable() {
         return list
     }
     return (
-        <Table
-            columns={columns}
-            dataSource={getData()}
-            rowKey="key"
-            pagination={{
-                currentPage: currentPage,
-                pageSize: pageSize,
-                total: getData().length,
-                onChange: handleChangePage
-            }}
-        />
+        <>
+            <div >
+                <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>
+                    <Button primary>Create </Button>
+                </Popconfirm>
+            </div>
+            <Table
+                columns={columns}
+                dataSource={getData()}
+                rowKey="key"
+                pagination={{
+                    currentPage: currentPage,
+                    pageSize: pageSize,
+                    total: getData().length,
+                    onChange: handleChangePage
+                }}
+            />
+        </>
+
     )
 }
