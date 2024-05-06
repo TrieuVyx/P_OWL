@@ -44,7 +44,7 @@ class LoginController {
             return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
         }
         catch (err) {
-            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message });
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
         }
     }
 
@@ -70,7 +70,7 @@ class LoginController {
             return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
         }
         catch (err) {
-            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
 
