@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Checkbox, Form, Input, Popconfirm, Space, Table, Tag } from "antd";
-
+import { style ,floatLeft} from "../../../../shortPath/styleComponent"
 import { columns } from './userColumn';
 import getListUser from '../../../data/user/getListUser';
 import { handleCreate } from './event/handleDataReceice';
@@ -35,11 +35,11 @@ export default function UserTable() {
     }
     return (
         <>
-            <div >
-                <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>
-                    <Button primary>Create </Button>
-                </Popconfirm>
-            </div>
+            <Popconfirm title="Sure to create?" style={floatLeft}
+            // onConfirm={() => handleCreate()}
+            >
+                <Button primary>Create </Button>
+            </Popconfirm>
             <Table
                 columns={columns}
                 dataSource={getData()}

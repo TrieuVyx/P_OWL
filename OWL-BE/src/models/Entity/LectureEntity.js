@@ -1,5 +1,5 @@
 const url = require('../../url')
-const mongoose = url.mongoose;
+const mongoose = require("mongoose")
 
 const LectureSchema = new mongoose.Schema({
     LectureName:{
@@ -41,7 +41,8 @@ const LectureSchema = new mongoose.Schema({
         type:String,
         default:"",
         unique:""
-    }
+    },
+    Course: { type: mongoose.Schema.Types.ObjectId, ref: 'CourseEntity' },
 
 })
 

@@ -1,14 +1,8 @@
 const url = require('../../url')
-const mongoose = url.mongoose;
-
+const mongoose = require("mongoose")
 const CommentSchema = new mongoose.Schema({
-    UserName:{
-        type:String,
-        default:"",
-        unique:""
-
-    }
-    
+    User: { type: mongoose.Schema.Types.ObjectId, ref: 'UserEntity' },
+    Course: { type: mongoose.Schema.Types.ObjectId, ref: 'CourseEntity' },
 
 })
 

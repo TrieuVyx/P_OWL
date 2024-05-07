@@ -42,6 +42,10 @@ const formCenterStyle ={
     justifyContent:"center"
 }
 
+const floatLeft = {
+    float:"left",
+    display:"block"
+}
 
 module.exports = {
     headerStyle,
@@ -52,5 +56,6 @@ module.exports = {
     formStyle,
     formCenterStyle,
     heightStyle,
-    menutabstyle
+    menutabstyle,
+    floatLeft
 };
