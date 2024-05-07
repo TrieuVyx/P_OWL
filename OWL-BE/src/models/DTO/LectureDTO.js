@@ -2,6 +2,7 @@ class LectureDTO{
     LectureName;
     Description;
     Tittle;
+    Industry;
     Content;
     Ex;
     // Picture;
@@ -12,6 +13,7 @@ class LectureDTO{
         this.Tittle = lecture.Tittle;
         this.Content = lecture.Content;
         this.Ex = lecture.Ex;
+        this.Industry = lecture.Industry;
     }
 }
 

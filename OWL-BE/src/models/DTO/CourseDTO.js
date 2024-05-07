@@ -3,11 +3,11 @@ class CourseDTO {
     Description;
     Content;
     Tittle;
-    constructor(course) {
-        this.Tittle = course.Tittle
-        this.CourseName = course.CourseName
-        this.Description = course.Description
-        this.Content = course.Content
+    constructor(CourseName,Tittle,Description,Content) {
+        this.CourseName =CourseName
+        this.Tittle =Tittle
+        this.Description =Description
+        this.Content =Content
     }
 }
 
