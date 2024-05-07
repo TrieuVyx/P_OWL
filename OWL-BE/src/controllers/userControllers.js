@@ -3,7 +3,8 @@ const UserEntity = require("../models/Entity/UserEntity")
 const ListUserDTO = require("../models/DTO/ListUserDTO");
 const DetailUserDTO = require("../models/DTO/DetailUserDTO");
 const bcrypt = require("bcrypt")
-const UserCreateDTO = require("../models/DTO/UserCreateDTO")
+const UserCreateDTO = require("../models/DTO/UserCreateDTO");
+const CourseAndUserDTO = require("../models/DTO/CourseAndUserDTO");
 class UserController {
     index(req, res) {
         res.send('THIS IS PAGE USER')
@@ -86,6 +87,34 @@ class UserController {
                 return res.status(message.OK.CODE).json(new DetailUserDTO(user.UserName, user.FullName, user.Email, user.Phone, user.Address, user.Hierachy, user.Image));
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+        }
+        catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
+        }
+    }
+
+    async RegisterCoureUser(req, res) {
+        try {
+            const { id } = req.params;
+            //tìm user -> user thêm mới id khóa học 
+            // lưu lại id khóa học
+            // kiểm tra id tồn tại thì học tiếp
+            if (id != null || id != "") {
+                const IDCourse  = req.body.IDCourse;
+                if (IDCourse == null || IDCourse == "") {
+                    return res.status(message.NOT_FOUND.CODE).json({ message: "ID Not Exists!"});
+                }
+                const user = await UserEntity.findByIdAndUpdate(id, req.body);
+                if (user) {
+                    let CourseList = user.Course
+                    CourseList.push(IDCourse);
+                    await user.save();
+                    const result = new CourseAndUserDTO(user);
+                    return res.status(message.OK.CODE).json(result);
+                }
+                return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+            }
+            return res.status(message.BAD_REQUEST.CODE).json({ message: message.BAD_REQUEST.MESSAGE });
         }
         catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
