@@ -1,6 +1,6 @@
 class CourseAndLecureDTO{
     constructor(){
-        
+
     }
 }
-module.exports = CourseAndLecureDTO{}
+module.exports = CourseAndLecureDTO
