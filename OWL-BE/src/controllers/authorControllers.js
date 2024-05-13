@@ -73,7 +73,5 @@ class LoginController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
         }
     }
-
-
 }
 module.exports = new LoginController()

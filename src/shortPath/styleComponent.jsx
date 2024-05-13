@@ -42,6 +42,10 @@ const formCenterStyle ={
     justifyContent:"center"
 }
 
+ const backgroundStyle = {
+    "background": "url('https://ik.imagekit.io/alejk5lwty/P_OWL/703b83d13160aa9904093328e8a6639c.jpg?updatedAt=1715610316048')"
+}
+
 
 module.exports = {
     headerStyle,
@@ -52,5 +56,6 @@ module.exports = {
     formStyle,
     formCenterStyle,
     heightStyle,
-    menutabstyle
+    menutabstyle,
+    backgroundStyle
 };
