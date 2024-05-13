@@ -19,6 +19,18 @@ import {
   UserManagementPage
 }
   from './shortPath/path';
+
+import {
+  DetailUser,
+  UpdateUser,
+  DeleteUser,
+  CreateUser,
+  DetailCourse,
+  UpdateCourse,
+  DeleteCourse,
+  CreateCourse
+}
+from './shortPath/adminTabUrl/adminTabUrl'
 import { Toaster } from 'react-hot-toast'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -48,6 +60,14 @@ function App() {
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
                   <Route path={LinkRouter.USERMANA} element={<UserManagementPage />} />
+                  <Route path={LinkRouter.DETAILUSER} element={<DetailUser />} />
+                  <Route path={LinkRouter.UPDATEUSER} element={<UpdateUser />} />
+                  <Route path={LinkRouter.DELETEUSER} element={<DeleteUser />} />
+                  <Route path={LinkRouter.CREATEUSER} element={<CreateUser />} />
+                  <Route path={LinkRouter.DETAILCOURSE} element={<DetailCourse />} />
+                  <Route path={LinkRouter.UPDATECOURSE} element={<UpdateCourse />} />
+                  <Route path={LinkRouter.DELETECOURSE} element={<DeleteCourse />} />
+                  <Route path={LinkRouter.CREATECOURSE} element={<CreateCourse />} />
 
                 </>
               ) : (
@@ -55,12 +75,14 @@ function App() {
                   <Route path={LinkRouter.HOME} element={<HomePage />} />
                   <Route path={LinkRouter.COURSE} element={<Course />} />
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+
                 </>
               )
             ) : (
               <>
                 <Route path={LinkRouter.HOME} element={<HomePage />} />
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+
               </>
             )}
           </Routes>

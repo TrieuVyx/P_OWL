@@ -1,8 +1,13 @@
 const url = require('../../url')
-const mongoose = url.mongoose;
+const mongoose = require("mongoose")
 
 const TrackSchema = new mongoose.Schema({
-    User: { type: mongoose.Schema.Types.ObjectId, ref: 'UserEntity' }
+    Status:{
+        type:String,
+        default:"Not Yet"
+    },
+    User: { type: mongoose.Schema.Types.ObjectId, ref: 'UserEntity' },
+    Lecture: { type: mongoose.Schema.Types.ObjectId, ref: 'LectureEntity' }
 
 })
 

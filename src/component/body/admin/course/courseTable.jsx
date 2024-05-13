@@ -1,80 +1,58 @@
-import React from 'react';
-import { Space, Table, Tag } from 'antd';
+import React, { useState, useEffect } from 'react';
+import { Space, Table, Tag, Button, Popconfirm } from 'antd';
+import { columns } from './courseColumn';
+import { floatLeft } from '../../../../shortPath/styleComponent';
+import { handleCreate } from './event/handleEvent'
+import getListCourse from '../../../data/course/getListCourse';
+
 export default function CourseTable() {
-    const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-            render: (text) => <a>{text}</a>,
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
-        },
-        {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
-        },
-        {
-            title: 'Tags',
-            key: 'tags',
-            dataIndex: 'tags',
-            render: (_, { tags }) => (
-                <>
-                    {tags.map((tag) => {
-                        let color = tag.length > 5 ? 'geekblue' : 'green';
-                        if (tag === 'loser') {
-                            color = 'volcano';
-                        }
-                        return (
-                            <Tag color={color} key={tag}>
-                                {tag.toUpperCase()}
-                            </Tag>
-                        );
-                    })}
-                </>
-            ),
-        },
-        {
-            title: 'Action',
-            key: 'action',
-            render: (_, record) => (
-                <Space size="middle">
-                    <a>Invite {record.name}</a>
-                    <a>Delete</a>
-                </Space>
-            ),
-        },
-    ];
-    const data = [
-        {
-            key: '1',
-            name: 'John Brown',
-            age: 32,
-            address: 'New York No. 1 Lake Park',
-            tags: ['nice', 'developer'],
-        },
-        {
-            key: '2',
-            name: 'Jim Green',
-            age: 42,
-            address: 'London No. 1 Lake Park',
-            tags: ['loser'],
-        },
-        {
-            key: '3',
-            name: 'Joe Black',
-            age: 32,
-            address: 'Sydney No. 1 Lake Park',
-            tags: ['cool', 'teacher'],
-        },
-    ];
+
+
+    const [currentPage, setCurrentPage] = useState(0);
+    const [sizePage, setSizePage] = useState(10);
+    const [course, setCourse] = useState([])
+    const pageSize = 3;
+    useEffect(() => {
+        getListCourse(currentPage, sizePage)
+            .then((data) => {
+                setCourse(data)
+            })
+            .catch((error) => console.error(error));
+    }, [])
+    const handleChangePage = (page) => {
+        setSizePage(pageSize)
+        const current = page - 1
+        setCurrentPage(current);
+    };
+    const getData = () => {
+        const list = []
+        course.map((each, index) => {
+            list.push({
+                key: each.Id,
+                CourseName: each.CourseName,
+                Description: each.Description,
+                Description: each.Description,
+                Tittle: each.Tittle
+            })
+        })
+        return list
+    }
     return (
         <>
-            <Table columns={columns} dataSource={data} />
+            <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>
+                <Button primary style={floatLeft} >Create </Button>
+            </Popconfirm>
+            <Table
+                columns={columns}
+                dataSource={getData()}
+                rowKey="key"
+                pagination={{
+                    currentPage: currentPage,
+                    pageSize: pageSize,
+                    total: getData().length,
+                    onChange: handleChangePage
+                }}
+            />
         </>
     )
 }

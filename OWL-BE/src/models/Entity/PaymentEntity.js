@@ -1,14 +1,9 @@
 const url = require('../../url')
-const mongoose = url.mongoose;
+const mongoose = require("mongoose")
 
 const PaymentSchema = new mongoose.Schema({
-    UserName:{
-        type:String,
-        default:"",
-        unique:""
-
-    }
-    
+    User: { type: mongoose.Schema.Types.ObjectId, ref: 'UserEntity' }
+  
 
 })
 

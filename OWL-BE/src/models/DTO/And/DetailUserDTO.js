@@ -1,4 +1,5 @@
-class ListUserDTO {
+class DetailUserDTO {
+    
     UserName
     FullName
     Email
@@ -17,4 +18,4 @@ class ListUserDTO {
     }
 }
 
-module.exports = ListUserDTO
+module.exports = DetailUserDTO

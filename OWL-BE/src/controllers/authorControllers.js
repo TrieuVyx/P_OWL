@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt")
-const UserCreateDTO = require("../models/DTO/UserCreateDTO")
+const UserCreateDTO = require("../models/DTO/User/UserCreateDTO")
 const UserEntity = require("../models/Entity/UserEntity")
 const message = require("../constants/constansHttpStatus");
 const { GenerationToken, GetRefeshToken, VerifyTokenPermision } = require('../security/GenerateToken');
-const LoginDTO = require("../models/DTO/LoginDTO");
+const LoginDTO = require("../models/DTO/Author/LoginDTO");
 
 class LoginController {
 
@@ -44,7 +44,7 @@ class LoginController {
             return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
         }
         catch (err) {
-            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message });
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
         }
     }
 
@@ -70,7 +70,7 @@ class LoginController {
             return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE)
         }
         catch (err) {
-            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
 }

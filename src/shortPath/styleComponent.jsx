@@ -42,11 +42,13 @@ const formCenterStyle ={
     justifyContent:"center"
 }
 
- const backgroundStyle = {
-    "background": "url('https://ik.imagekit.io/alejk5lwty/P_OWL/703b83d13160aa9904093328e8a6639c.jpg?updatedAt=1715610316048')"
+const floatLeft = {
+    float:"left",
+    display:"block"
 }
-
-
+const InputStyle = {
+    padding: "0 70px"
+}
 module.exports = {
     headerStyle,
     centerStyle,
@@ -57,5 +59,6 @@ module.exports = {
     formCenterStyle,
     heightStyle,
     menutabstyle,
-    backgroundStyle
+    floatLeft,
+    InputStyle
 };

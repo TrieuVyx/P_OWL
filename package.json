@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"react-scripts start\" \"nodemon OWL-BE/src/index.js\" "
+    "start": "concurrently \"nodemon OWL-BE/src/index.js\" \"react-scripts start\""
   },
   "keywords": [],
   "author": "",
