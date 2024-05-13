@@ -1,12 +1,24 @@
-import { useNavigate } from "react-router-dom"
-import LinkRouter from "../../../../constants/constants"
-const router = useNavigate()
-const handleCreate =  () => {
-    // window.location.href = router(LinkRouter.CREATECOURSE)
-    window.location.href = `admin/course/create`
+const handleCreate = ()=>{
+    window.location.href = `course/create`
+}
+const handleDelete = (key)=>{
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/delete/${key}`
 }
 
+const handleUpdate = (key)=>{
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/update/${key}`
+}
+
+const handleDetail = (key)=>{
+    localStorage.setItem('AccountId', key)
+    window.location.href = `user/detail/${key}`
+}
 
 export {
+    handleDelete,
+    handleUpdate,
+    handleDetail,
     handleCreate
 }

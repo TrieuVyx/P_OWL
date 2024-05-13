@@ -3,7 +3,7 @@ import { Button, Checkbox, Form, Input, Popconfirm, Space, Table, Tag } from "an
 import { style ,floatLeft} from "../../../../shortPath/styleComponent"
 import { columns } from './userColumn';
 import getListUser from '../../../data/user/getListUser';
-import { handleCreate } from './event/handleDataReceice';
+import { handleCreate } from './event/handleEvent';
 export default function UserTable() {
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
@@ -35,10 +35,10 @@ export default function UserTable() {
     }
     return (
         <>
-            <Popconfirm title="Sure to create?" style={floatLeft}
-            // onConfirm={() => handleCreate()}
+            <Popconfirm title="Sure to create?"
+            onConfirm={() => handleCreate()}
             >
-                <Button primary>Create </Button>
+                <Button primary style={floatLeft} >Create </Button>
             </Popconfirm>
             <Table
                 columns={columns}

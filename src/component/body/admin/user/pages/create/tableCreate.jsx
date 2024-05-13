@@ -6,7 +6,7 @@ import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
-import { handleDelete, handleUpdate } from "../../event/handleDataReceice";
+import { handleDelete, handleUpdate } from "../../event/handleEvent";
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function TableCreate() {

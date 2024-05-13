@@ -1,5 +1,5 @@
 import { Space, Table, Tag, Button,Popconfirm } from 'antd';
-import {handleDelete, handleDetail,handleUpdate} from "./event/handleDataReceice"
+import {handleDelete, handleDetail,handleUpdate} from "./event/handleEvent"
 export const columns = [
     {
         title: 'UserName',

@@ -1,10 +1,10 @@
 const message = require("../constants/constansHttpStatus");
 const UserEntity = require("../models/Entity/UserEntity")
-const ListUserDTO = require("../models/DTO/ListUserDTO");
-const DetailUserDTO = require("../models/DTO/DetailUserDTO");
+const ListUserDTO = require("../models/DTO/User/ListUserDTO");
+const DetailUserDTO = require("../models/DTO/And/DetailUserDTO");
 const bcrypt = require("bcrypt")
-const UserCreateDTO = require("../models/DTO/UserCreateDTO");
-const CourseAndUserDTO = require("../models/DTO/CourseAndUserDTO");
+const UserCreateDTO = require("../models/DTO/User/UserCreateDTO");
+const CourseAndUserDTO = require("../models/DTO/And/CourseAndUserDTO");
 class UserController {
     index(req, res) {
         res.send('THIS IS PAGE USER')
@@ -93,6 +93,8 @@ class UserController {
         }
     }
 
+
+    
     async RegisterCoureUser(req, res) {
         try {
             const { id } = req.params;

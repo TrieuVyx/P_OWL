@@ -5,6 +5,7 @@ const LinkRouter = {
   ADMIN:"admin",
   COURSEMANA: "admin/course",
   USERMANA: "admin/user",
+  LECMANA: "admin/lecture",
   DETAILUSER:"admin/user/detail/:id",
   UPDATEUSER:"admin/user/update/:id",
   DELETEUSER:"admin/user/delete/:id",

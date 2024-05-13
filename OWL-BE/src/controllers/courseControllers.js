@@ -1,6 +1,7 @@
 const message = require("../constants/constansHttpStatus");
-const CourseAndLetureDTO = require("../models/DTO/CourseAndLectureDTO");
-const CourseDTO = require("../models/DTO/CourseDTO")
+const CourseAndLetureDTO = require("../models/DTO/And/CourseAndLectureDTO");
+const CourseDTO = require("../models/DTO/Course/CourseDTO");
+const ListCourseDTO = require("../models/DTO/Course/ListCourseDTO");
 const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
 class CourseController {
@@ -76,18 +77,18 @@ class CourseController {
             const IDCourse = req.body.IDCourse;
             const IDLecture = req.body.IDLecture;
             // const data = req.body;
-            if (IDCourse == null || IDCourse == "" && IDLecture == null || IDLecture == "" ) {
+            if (IDCourse == null || IDCourse == "" && IDLecture == null || IDLecture == "") {
                 return res.status(message.NOT_FOUND.CODE).json({ message: "ID Not Exists!" });
             }
-                const Course = await CourseEntity.findByIdAndUpdate(IDCourse)
-                if (Course) {
-                    let LectureList = Course.Lectures
-                  
-                    LectureList.push(IDLecture);
-                    await Course.save();
-                    const result = new CourseAndLecureDTO(Course)
-                    return res.status(message.OK.CODE).json(result)
-                }
+            const Course = await CourseEntity.findByIdAndUpdate(IDCourse)
+            if (Course) {
+                let LectureList = Course.Lectures
+
+                LectureList.push(IDLecture);
+                await Course.save();
+                const result = new CourseAndLecureDTO(Course)
+                return res.status(message.OK.CODE).json(result)
+            }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
         }
         catch (err) {
@@ -97,10 +98,9 @@ class CourseController {
     // tạo khóa học chưa có bài học 
     async GenerateNonLecture(req, res) {
         try {
-
             const IDCourse = req.body.IDCourse;
             const data = req.body;
-            if (IDCourse == null || IDCourse == ""  ) {
+            if (IDCourse == null || IDCourse == "") {
                 return res.status(message.NOT_FOUND.CODE).json({ message: "ID Not Exists!" });
             }
 
@@ -138,14 +138,35 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    async GenerateList(req,res){
+    async GenerateList(req, res) {
         try {
             const course = await CourseEntity.find();
-            if(course){
-                const result = new CourseDTO(course.CourseName, course.Tittle, course.Description, course.Content);
+            if (course) {
+                // const result = new CourseDTO(course.CourseName, course.Tittle, course.Description, course.Content);
+                const result = course.map((each) => {
+                    return new ListCourseDTO(each.CourseName, each.Tittle, each.Description, each.Content);
+                })
                 return res.status(message.OK.CODE).json(result);
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+        }
+        catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
+        }
+    }
+    async GetListCourse(req, res) {
+        try {
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+            if (!isNaN(page) && !isNaN(size)) {
+                const ListCourse = await CourseEntity.find().skip(page * size).limit(size);
+                const courseListDTO = ListCourse.map((each) => {
+                    return new ListCourseDTO(each.id,each.CourseName, each.Tittle, each.Description, each.Content);
+                });
+                return res.status(message.OK.CODE).json(courseListDTO);
+            } else {
+                return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+            }
         }
         catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })

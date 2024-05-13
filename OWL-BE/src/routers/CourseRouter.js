@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const CourseController = require('../controllers/courseControllers')
 
+router.get('/getListCourse', CourseController.GetListCourse)
 router.get('/list', CourseController.GenerateList)
 router.post('/addLecture', CourseController.GenerateLecture)
 router.post('/nonLecture', CourseController.GenerateNonLecture)

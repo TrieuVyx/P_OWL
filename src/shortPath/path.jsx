@@ -2,7 +2,7 @@ import HomePage from "../PageComponents/homePage";
 import Course from "../PageComponents/coursePage";
 import Navbar from "../component/header/navbar/navbar";
 import Settingbar from "../component/header/navbar/setting";
-import CourseBody from "../component/body/user/course";
+import CourseBody from "../component/body/client/course";
 import LinkRouter from "../component/constants/constants";
 import LoginPage from "../PageComponents/AuthorComponents/Login.component";
 import CourseManagementPage from "../AdminComponents/CourseManagementPage";

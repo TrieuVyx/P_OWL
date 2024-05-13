@@ -1,9 +1,9 @@
 const bcrypt = require("bcrypt")
-const UserCreateDTO = require("../models/DTO/UserCreateDTO")
+const UserCreateDTO = require("../models/DTO/User/UserCreateDTO")
 const UserEntity = require("../models/Entity/UserEntity")
 const message = require("../constants/constansHttpStatus");
 const { GenerationToken, GetRefeshToken, VerifyTokenPermision } = require('../security/GenerateToken');
-const LoginDTO = require("../models/DTO/LoginDTO");
+const LoginDTO = require("../models/DTO/Author/LoginDTO");
 
 class LoginController {
 

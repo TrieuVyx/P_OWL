@@ -1,5 +1,5 @@
 const message = require("../constants/constansHttpStatus");
-const LectureDTO = require("../models/DTO/LectureDTO")
+const LectureDTO = require("../models/DTO/Lecture/LectureDTO")
 const LectureEntity = require("../models/Entity/LectureEntity")
 class LectureControllers {
     async CreateLecture(req, res) {
@@ -71,6 +71,18 @@ class LectureControllers {
                 await LectureEntity.findByIdAndDelete(id)
                 return res.status(message.OK.CODE).json({message:message.OK.MESSAGE});
             }
+            return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+
+        }
+
+        catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
+        }
+    }
+    async GenerateList(req,res){
+        try {
+            const IDCourse  = req.body
+            
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
 
         }
