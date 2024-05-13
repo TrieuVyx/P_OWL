@@ -4,17 +4,17 @@ const handleCreate = ()=>{
     window.location.href = `course/create`
 }
 const handleDelete = (key)=>{
-    localStorage.setItem('AccountId', key)
+    localStorage.setItem('CourseID', key)
     window.location.href = `course/delete/${key}`
 }
 
 const handleUpdate = (key)=>{
-    localStorage.setItem('AccountId', key)
+    localStorage.setItem('CourseID', key)
     window.location.href = `course/update/${key}`
 }
 
 const handleDetail = (key)=>{
-    localStorage.setItem('AccountId', key);
+    localStorage.setItem('CourseID', key);
     window.location.href = `course/detail/${key}`;
     // GetUser(key);
 }
