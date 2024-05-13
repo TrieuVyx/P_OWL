@@ -6,23 +6,7 @@ import { detailUser } from "../../../../../constants/axiosconstants";
 import TableCreate from "./tableCreate";
 const { Header, Footer, Content, Sider } = Layout;
 export default function Create() {
-    const [datasource, setDatasource] = useState({
-        UserName: undefined,
-        FullName: undefined,
-        Email: undefined,
-        Phone: undefined,
-        Address: undefined,
-        Hierachy: undefined,
-        Image: undefined
-    })
-
-    useEffect(()=>{
-        detailUser()
-            .then((data) => {
-                setDatasource(data)
-            })
-            .catch((error) => console.error(error));
-    }, [])
+   
     return (
         <>
             <div className="w-100">

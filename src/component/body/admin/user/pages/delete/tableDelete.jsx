@@ -1,25 +1,13 @@
-import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
-import { handleDelete, handleUpdate } from "../../event/handleEvent";
+import DeleteUser from "../../event/CRUD/delete";
+import GetUser from "../../event/CRUD/get";
+import { Toaster } from "react-hot-toast"
 const { Header, Footer, Content, Sider } = Layout;
-
 export default function TableDelete() {
-    const AccountId = localStorage.getItem("AccountId")
-    const [datasource, setDatasource] = useState({
-        UserName: undefined,
-        FullName: undefined,
-        Email: undefined,
-        Phone: undefined,
-        Address: undefined,
-        Hierachy: undefined,
-        Image: undefined
-    })
+
     const [UserName, setUserName] = useState("")
     const [Email, setEmail] = useState("")
     const [FullName, setFullName] = useState("")
@@ -28,12 +16,18 @@ export default function TableDelete() {
     const [Hierachy, setHierachy] = useState("")
 
     useEffect(() => {
-        detailUser()
+        GetUser()
             .then((data) => {
-                setDatasource(data.data)
+                setUserName(data.data.UserName)
+                setEmail(data.data.Email)
+                setFullName(data.data.FullName)
+                setAddress(data.data.Address)
+                setPhone(data.data.Phone)
+                setHierachy(data.data.Hierachy)
             })
             .catch((error) => console.error(error));
     }, [])
+    
     return (
         <>
             <Layout>
@@ -56,6 +50,8 @@ export default function TableDelete() {
                 // onFinishFailed={onFinishFailed}
                 >
                     <h1>Delete User</h1>
+                    <Toaster position='top-right' reverseOrder={false}></Toaster>
+
                     <Form.Item
                         label="UserName"
                         name="UserName"
@@ -66,9 +62,9 @@ export default function TableDelete() {
                             },
                         ]}
                     >
-                        <Input  value={datasource.UserName} onChange={(e) => {
-                            setUserName(e.target.value)
-                        }} />
+                        <Input name="UserName" readOnly value={UserName} onChange={(e) => setUserName(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="FullName"
@@ -80,9 +76,9 @@ export default function TableDelete() {
                             }
                         ]}
                     >
-                        <Input name="FullName"  value={datasource.FullName} onChange={(e) => {
-                            setFullName(e.target.value)
-                        }} />
+                        <Input name="FullName" readOnly value={FullName} onChange={(e) => setFullName(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Email"
@@ -94,9 +90,9 @@ export default function TableDelete() {
                             }
                         ]}
                     >
-                        <Input name="Email"  value={datasource.Email} onChange={(e) => {
-                            setEmail(e.target.value)
-                        }} />
+                        <Input name="Email" readOnly value={Email} onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Phone"
@@ -108,9 +104,9 @@ export default function TableDelete() {
                             }
                         ]}
                     >
-                        <Input name="Phone"  value={datasource.Phone} onChange={(e) => {
-                            setPhone(e.target.value)
-                        }} />
+                        <Input name="Phone"  readOnly value={Phone} onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Address"
@@ -122,9 +118,10 @@ export default function TableDelete() {
                             }
                         ]}
                     >
-                        <Input name="Address"  value={datasource.Address} onChange={(e) => {
-                            setAddress(e.target.value)
-                        }} />
+                        <Input name="Address"   readOnly value={Address} onChange={(e) => setAddress(e.target.value)}
+                        />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                         label="Hierachy"
@@ -136,17 +133,20 @@ export default function TableDelete() {
                             }
                         ]}
                     >
-                        <Input name="Hierachy"  value={datasource.Hierachy} onChange={(e) => {
-                            setHierachy(e.target.value)
-                        }} />
+                        <Input name="Hierachy" value={Hierachy} readOnly onChange={(e) => setHierachy(e.target.value)}
+                        />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                     >
                         <div style={formCenterStyle}>
-                            <Popconfirm title="Sure to delete?"  onConfirm={() => handleDelete(AccountId)}>
+                            <Popconfirm title="Sure to delete?" onConfirm={() => DeleteUser()}>
                                 <Button danger>Delete </Button>
                             </Popconfirm>
-                           
+                            {/* <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
+                                <Button warn>Update </Button>
+                            </Popconfirm> */}
                         </div>
 
                     </Form.Item>

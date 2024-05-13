@@ -1,39 +1,31 @@
-import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
-import { handleDelete, handleUpdate } from "../../event/handleEvent";
+import CreateUser from "../../event/CRUD/create";
+import { Toaster } from "react-hot-toast"
 const { Header, Footer, Content, Sider } = Layout;
-
 export default function TableCreate() {
-    const AccountId = localStorage.getItem("AccountId")
-    const [datasource, setDatasource] = useState({
-        UserName: undefined,
-        FullName: undefined,
-        Email: undefined,
-        Phone: undefined,
-        Address: undefined,
-        Hierachy: undefined,
-        Image: undefined
-    })
+
     const [UserName, setUserName] = useState("")
     const [Email, setEmail] = useState("")
     const [FullName, setFullName] = useState("")
+    const [PassWords, setPassWords] = useState("")
     const [Address, setAddress] = useState("")
     const [Phone, setPhone] = useState("")
     const [Hierachy, setHierachy] = useState("")
 
     useEffect(() => {
-        detailUser()
-            .then((data) => {
-                setDatasource(data.data)
-            })
-            .catch((error) => console.error(error));
     }, [])
+    const Data = {
+        UserName: UserName,
+        PassWord:PassWords,
+        FullName: FullName,
+        Email: Email,
+        Address: Address,
+        Phone: Phone,
+        Hierachy: Hierachy
+    }
     return (
         <>
             <Layout>
@@ -56,6 +48,8 @@ export default function TableCreate() {
                 // onFinishFailed={onFinishFailed}
                 >
                     <h1>Create User</h1>
+                    <Toaster position='top-right' reverseOrder={false}></Toaster>
+
                     <Form.Item
                         label="UserName"
                         name="UserName"
@@ -66,9 +60,23 @@ export default function TableCreate() {
                             },
                         ]}
                     >
-                        <Input  value={datasource.UserName} onChange={(e) => {
-                            setUserName(e.target.value)
-                        }} />
+                        <Input name="UserName" value={UserName} onChange={(e) => setUserName(e.target.value)}
+                        />
+                        <span></span>
+                    </Form.Item>
+                    <Form.Item
+                        label="PassWord"
+                        name="PassWord"
+                        rules={[
+                            {
+                                required: true,
+                                message: 'Please input your PassWord!',
+                            },
+                        ]}
+                    >
+                        <Input name="PassWord" value={PassWords} onChange={(e) => setPassWords(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="FullName"
@@ -80,9 +88,9 @@ export default function TableCreate() {
                             }
                         ]}
                     >
-                        <Input name="FullName"  value={datasource.FullName} onChange={(e) => {
-                            setFullName(e.target.value)
-                        }} />
+                        <Input name="FullName" value={FullName} onChange={(e) => setFullName(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Email"
@@ -94,9 +102,9 @@ export default function TableCreate() {
                             }
                         ]}
                     >
-                        <Input name="Email"  value={datasource.Email} onChange={(e) => {
-                            setEmail(e.target.value)
-                        }} />
+                        <Input name="Email" value={Email} onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Phone"
@@ -108,9 +116,9 @@ export default function TableCreate() {
                             }
                         ]}
                     >
-                        <Input name="Phone"  value={datasource.Phone} onChange={(e) => {
-                            setPhone(e.target.value)
-                        }} />
+                        <Input name="Phone" value={Phone} onChange={(e) => setPhone(e.target.value)}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Address"
@@ -122,9 +130,10 @@ export default function TableCreate() {
                             }
                         ]}
                     >
-                        <Input name="Address"  value={datasource.Address} onChange={(e) => {
-                            setAddress(e.target.value)
-                        }} />
+                        <Input name="Address" value={Address} onChange={(e) => setAddress(e.target.value)}
+                        />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                         label="Hierachy"
@@ -136,17 +145,20 @@ export default function TableCreate() {
                             }
                         ]}
                     >
-                        <Input name="Hierachy"  value={datasource.Hierachy} onChange={(e) => {
-                            setHierachy(e.target.value)
-                        }} />
+                        <Input name="Hierachy" value={Hierachy} onChange={(e) => setHierachy(e.target.value)}
+                        />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                     >
                         <div style={formCenterStyle}>
-                            <Popconfirm title="Sure to delete?"  >
+                            <Popconfirm title="Sure to create?" onConfirm={() => CreateUser(Data)}>
                                 <Button danger>Create </Button>
                             </Popconfirm>
-                           
+                            {/* <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
+                                <Button warn>Update </Button>
+                            </Popconfirm> */}
                         </div>
 
                     </Form.Item>

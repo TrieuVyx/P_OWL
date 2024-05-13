@@ -1,25 +1,13 @@
-import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
-import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
+import { formStyle, formCenterStyle,InputStyle } from "../../../../../../shortPath/styleComponent";
 import { handleDelete, handleUpdate } from "../../event/handleEvent";
 const { Header, Footer, Content, Sider } = Layout;
-
+import GetUser from "../../event/CRUD/get";
 export default function TableDetail() {
     const AccountId = localStorage.getItem("AccountId")
-    const [datasource, setDatasource] = useState({
-        UserName: undefined,
-        FullName: undefined,
-        Email: undefined,
-        Phone: undefined,
-        Address: undefined,
-        Hierachy: undefined,
-        Image: undefined
-    })
+   
     const [UserName, setUserName] = useState("")
     const [Email, setEmail] = useState("")
     const [FullName, setFullName] = useState("")
@@ -28,9 +16,14 @@ export default function TableDetail() {
     const [Hierachy, setHierachy] = useState("")
 
     useEffect(() => {
-        detailUser()
+        GetUser()
             .then((data) => {
-                setDatasource(data.data)
+                setUserName(data.data.UserName)
+                setEmail(data.data.Email)
+                setFullName(data.data.FullName)
+                setAddress(data.data.Address)
+                setPhone(data.data.Phone)
+                setHierachy(data.data.Hierachy)
             })
             .catch((error) => console.error(error));
     }, [])
@@ -66,9 +59,9 @@ export default function TableDetail() {
                             },
                         ]}
                     >
-                        <Input readOnly value={datasource.UserName} onChange={(e) => {
-                            setUserName(e.target.value)
-                        }} />
+                        <Input name="UserName" readOnly value={UserName}  defaultValue={UserName}
+                        />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="FullName"
@@ -80,9 +73,8 @@ export default function TableDetail() {
                             }
                         ]}
                     >
-                        <Input name="FullName" readOnly value={datasource.FullName} onChange={(e) => {
-                            setFullName(e.target.value)
-                        }} />
+                        <Input name="FullName" readOnly value={FullName}  />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Email"
@@ -94,9 +86,9 @@ export default function TableDetail() {
                             }
                         ]}
                     >
-                        <Input name="Email" readOnly value={datasource.Email} onChange={(e) => {
-                            setEmail(e.target.value)
-                        }} />
+                        <Input name="Email" readOnly value={Email}  />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                         label="Phone"
@@ -108,9 +100,8 @@ export default function TableDetail() {
                             }
                         ]}
                     >
-                        <Input name="Phone" readOnly value={datasource.Phone} onChange={(e) => {
-                            setPhone(e.target.value)
-                        }} />
+                        <Input name="Phone" readOnly value={Phone} defaultValue={Phone}  />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
                         label="Address"
@@ -122,9 +113,9 @@ export default function TableDetail() {
                             }
                         ]}
                     >
-                        <Input name="Address" readOnly value={datasource.Address} onChange={(e) => {
-                            setAddress(e.target.value)
-                        }} />
+                        <Input name="Address" readOnly value={Address} />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                         label="Hierachy"
@@ -136,9 +127,9 @@ export default function TableDetail() {
                             }
                         ]}
                     >
-                        <Input name="Hierachy" readOnly value={datasource.Hierachy} onChange={(e) => {
-                            setHierachy(e.target.value)
-                        }} />
+                        <Input name="Hierachy" readOnly value={Hierachy}/>
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
                     >

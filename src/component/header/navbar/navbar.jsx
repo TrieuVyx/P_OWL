@@ -72,9 +72,9 @@ export default function Navbar() {
                             ]
                         )
                     ) : (
-                        getItem("Dashboard", "1", <PieChartOutlined />),
-                        getItem("Setting", "2", <SettingOutlined />),
-                        getItem("Rewards", "3", <FileOutlined />)
+                        getItem("Dashboard", "6", <PieChartOutlined />),
+                        getItem("Setting", "7", <SettingOutlined />),
+                        getItem("Rewards", "8", <FileOutlined />)
                     ),
                     getItem("Lessons", "10", <BookOutlined />),
                     isAuthen ? (

@@ -4,6 +4,7 @@ import { style ,floatLeft} from "../../../../shortPath/styleComponent"
 import { columns } from './userColumn';
 import getListUser from '../../../data/user/getListUser';
 import { handleCreate } from './event/handleEvent';
+import { Toaster } from 'react-hot-toast';
 export default function UserTable() {
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
@@ -40,6 +41,7 @@ export default function UserTable() {
             >
                 <Button primary style={floatLeft} >Create </Button>
             </Popconfirm>
+            <Toaster position='top-right' reverseOrder={false}></Toaster>
             <Table
                 columns={columns}
                 dataSource={getData()}

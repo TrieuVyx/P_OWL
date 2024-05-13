@@ -1,8 +1,6 @@
 import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, {useState, useEffect} from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import TableUpdate from "./tableUpdate";
 const { Header, Footer, Content, Sider } = Layout;
 export default function Update() {

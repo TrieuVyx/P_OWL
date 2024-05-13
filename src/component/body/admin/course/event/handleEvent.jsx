@@ -1,19 +1,22 @@
+// import GetUser from "../../user/event/CRUD/get"
+
 const handleCreate = ()=>{
     window.location.href = `course/create`
 }
 const handleDelete = (key)=>{
     localStorage.setItem('AccountId', key)
-    window.location.href = `user/delete/${key}`
+    window.location.href = `course/delete/${key}`
 }
 
 const handleUpdate = (key)=>{
     localStorage.setItem('AccountId', key)
-    window.location.href = `user/update/${key}`
+    window.location.href = `course/update/${key}`
 }
 
 const handleDetail = (key)=>{
-    localStorage.setItem('AccountId', key)
-    window.location.href = `user/detail/${key}`
+    localStorage.setItem('AccountId', key);
+    window.location.href = `course/detail/${key}`;
+    // GetUser(key);
 }
 
 export {

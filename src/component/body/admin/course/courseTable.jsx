@@ -4,6 +4,7 @@ import { columns } from './courseColumn';
 import { floatLeft } from '../../../../shortPath/styleComponent';
 import { handleCreate } from './event/handleEvent'
 import getListCourse from '../../../data/course/getListCourse';
+
 export default function CourseTable() {
 
 
@@ -14,7 +15,6 @@ export default function CourseTable() {
     useEffect(() => {
         getListCourse(currentPage, sizePage)
             .then((data) => {
-                console.log(data)
                 setCourse(data)
             })
             .catch((error) => console.error(error));

@@ -7,6 +7,7 @@ export default function homePages() {
     return (
         <div className="w-100">
             <Layout >
+                
                 <Sider width="20%"><Navbar /></Sider>
                 <Layout >
                     <Header style={headerStyle}></Header>

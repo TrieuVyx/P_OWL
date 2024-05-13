@@ -46,7 +46,9 @@ const floatLeft = {
     float:"left",
     display:"block"
 }
-
+const InputStyle = {
+    padding: "0 70px"
+}
 module.exports = {
     headerStyle,
     centerStyle,
@@ -57,5 +59,6 @@ module.exports = {
     formCenterStyle,
     heightStyle,
     menutabstyle,
-    floatLeft
+    floatLeft,
+    InputStyle
 };

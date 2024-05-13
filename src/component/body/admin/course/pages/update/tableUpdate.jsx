@@ -25,11 +25,11 @@ export default function TableUpdate() {
     const [Hierachy, setHierachy] = useState("")
 
     useEffect(() => {
-        detailUser()
-            .then((data) => {
-                setDatasource(data.data)
-            })
-            .catch((error) => console.error(error));
+        // detailUser()
+        //     .then((data) => {
+        //         setDatasource(data.data)
+        //     })
+        //     .catch((error) => console.error(error));
     }, [])
     return (
         <>
