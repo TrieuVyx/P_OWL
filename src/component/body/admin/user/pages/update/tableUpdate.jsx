@@ -151,7 +151,7 @@ export default function TableUpdate() {
                     >
                         <div style={formCenterStyle}>
                             <Popconfirm title="Sure to update?" onConfirm={() => UpdateUser(Data)}>
-                                <Button danger>Update </Button>
+                                <Button danger="true">Update </Button>
                             </Popconfirm>
                             {/* <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
                                 <Button warn>Update </Button>

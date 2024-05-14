@@ -15,8 +15,6 @@ export default function TableCreate() {
     const [Phone, setPhone] = useState("")
     const [Hierachy, setHierachy] = useState("")
 
-    useEffect(() => {
-    }, [])
     const Data = {
         UserName: UserName,
         PassWord:PassWords,
@@ -154,7 +152,7 @@ export default function TableCreate() {
                     >
                         <div style={formCenterStyle}>
                             <Popconfirm title="Sure to create?" onConfirm={() => CreateUser(Data)}>
-                                <Button danger>Create </Button>
+                                <Button danger="true">Create </Button>
                             </Popconfirm>
                             {/* <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
                                 <Button warn>Update </Button>

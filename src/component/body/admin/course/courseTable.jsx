@@ -31,7 +31,7 @@ export default function CourseTable() {
                 key: each.Id,
                 CourseName: each.CourseName,
                 Description: each.Description,
-                Description: each.Description,
+                Content: each.Content,
                 Tittle: each.Tittle
             })
         })

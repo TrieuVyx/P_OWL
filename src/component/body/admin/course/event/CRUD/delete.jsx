@@ -1,7 +1,7 @@
 import Axios from "axios"
 import { deleteCourseUrl } from "../../../../../../shortPath/urlPath"
 import {toast} from "react-hot-toast"
-export default async function DeleteUser(){
+export default async function DeleteCourse(){
     try {
         const tokenAccess = localStorage.getItem("AccessToken")
         const CourseID = localStorage.getItem("CourseID")

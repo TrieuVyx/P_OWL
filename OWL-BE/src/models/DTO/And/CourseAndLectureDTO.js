@@ -2,7 +2,7 @@ class CourseAndLetureDTO {
     CourseName;
     constructor(Course) {
         this.CourseName = Course.CourseName
-        this.Course = Course.Lectures;
+        this.Lectures = Course.Lectures;
     }
 }
 module.exports = CourseAndLetureDTO

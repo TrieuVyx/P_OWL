@@ -1,6 +1,6 @@
 import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
-import { Navbar, Menutab, User } from "../shortPath/path"
+import { Navbar, Menutab, UserAdmin } from "../shortPath/path"
 const { Header, Footer, Content, Sider } = Layout;
 const { headerStyle } = styleComponent
 export default function UserManagementPage() {
@@ -13,7 +13,7 @@ export default function UserManagementPage() {
                         <Menutab />
                     </Header>
                     <Content>
-                        <User />
+                        <UserAdmin />
                     </Content>
                     <Footer></Footer>
                 </Layout>

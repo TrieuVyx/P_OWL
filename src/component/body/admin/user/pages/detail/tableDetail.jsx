@@ -135,10 +135,10 @@ export default function TableDetail() {
                     >
                         <div style={formCenterStyle}>
                             <Popconfirm title="Sure to delete?"  onConfirm={() => handleDelete(AccountId)}>
-                                <Button danger>Delete </Button>
+                                <Button danger="true">Delete </Button>
                             </Popconfirm>
                             <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
-                                <Button warn>Update </Button>
+                                <Button warn="true">Update </Button>
                             </Popconfirm>
                         </div>
 

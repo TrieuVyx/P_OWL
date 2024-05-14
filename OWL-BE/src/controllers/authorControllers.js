@@ -33,10 +33,12 @@ class LoginController {
                         PassWord: payload.PassWord,
                         Hierachy: payload.Hierachy
                     }
+
                     const Token = await GenerationToken(userInfor);
                     const RefeshToken = await GetRefeshToken(Token);
                     const Hierachy = await VerifyTokenPermision(Token);
-                    const result = new LoginDTO(Token, RefeshToken, Hierachy);
+                    const UserName = payload.UserName;
+                    const result = new LoginDTO(Token, RefeshToken, Hierachy,UserName);
                     return res.status(message.OK.CODE).json(result);
                 }
                 return res.status(message.BAD_REQUEST.CODE).json(message.BAD_REQUEST.MESSAGE)

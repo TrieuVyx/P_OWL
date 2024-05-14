@@ -5,6 +5,7 @@ const DetailUserDTO = require("../models/DTO/And/DetailUserDTO");
 const bcrypt = require("bcrypt")
 const UserCreateDTO = require("../models/DTO/User/UserCreateDTO");
 const CourseAndUserDTO = require("../models/DTO/And/CourseAndUserDTO");
+const UserDTO =require("../models/DTO/User/UserDTO")
 class UserController {
     index(req, res) {
         res.send('THIS IS PAGE USER')
@@ -121,6 +122,20 @@ class UserController {
         catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
+    }
+    async GetUserByUserName(req,res){
+        try {
+            const { UserName } = req.params;
+            if (UserName != null || UserName != "") {
+                const user = await UserEntity.findOne({UserName: UserName})
+                return res.status(message.OK.CODE).json(new UserDTO(user.UserName));
+            }
+            return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+        }
+        catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
+        }
+
     }
 }
 module.exports = new UserController()

@@ -14,7 +14,6 @@ export default function UserTable() {
     useEffect(() => {
         getListUser(currentPage, sizePage)
             .then((data) => {
-                console.log(data)
                 setUser(data)
             })
             .catch((error) => console.error(error));

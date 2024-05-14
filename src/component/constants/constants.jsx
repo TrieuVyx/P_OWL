@@ -14,7 +14,10 @@ const LinkRouter = {
   UPDATECOURSE:"admin/course/update/:id",
   DELETECOURSE:"admin/course/delete/:id",
   CREATECOURSE:"admin/course/create",
-  CREATECOURSEPAGE:"admin/course/create"
+  DETAILLECTURE:"admin/lecture/detail/:id",
+  UPDATELECTURE:"admin/lecture/update/:id",
+  DELETELECTURE:"admin/lecture/delete/:id",
+  CREATELECTURE:"admin/lecture/create",
 };
 
 export default LinkRouter;

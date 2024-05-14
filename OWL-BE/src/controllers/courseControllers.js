@@ -4,6 +4,7 @@ const CourseDTO = require("../models/DTO/Course/CourseDTO");
 const ListCourseDTO = require("../models/DTO/Course/ListCourseDTO");
 const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
+const ListLectureInCourseDTO = require("../models/DTO/Course/ListLectureInCourse");
 class CourseController {
     async CreateCourse(req, res) {
         try {
@@ -86,7 +87,7 @@ class CourseController {
 
                 LectureList.push(IDLecture);
                 await Course.save();
-                const result = new CourseAndLecureDTO(Course)
+                const result = new CourseAndLetureDTO(Course)
                 return res.status(message.OK.CODE).json(result)
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
@@ -138,15 +139,16 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    // chỗ này
     async GenerateList(req, res) {
         try {
-            const course = await CourseEntity.find();
-            if (course) {
-                // const result = new CourseDTO(course.CourseName, course.Tittle, course.Description, course.Content);
-                const result = course.map((each) => {
-                    return new ListCourseDTO(each.CourseName, each.Tittle, each.Description, each.Content);
-                })
+            const CourseID = req.body.CourseID;
+            if (CourseID != null || CourseID != "") {
+                const Course = await CourseEntity.findById(CourseID)
+                const ListCourse = new ListLectureInCourseDTO(Course)
+                const result = ListCourse.Lectures
                 return res.status(message.OK.CODE).json(result);
+
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
         }
@@ -161,7 +163,7 @@ class CourseController {
             if (!isNaN(page) && !isNaN(size)) {
                 const ListCourse = await CourseEntity.find().skip(page * size).limit(size);
                 const courseListDTO = ListCourse.map((each) => {
-                    return new ListCourseDTO(each.id,each.CourseName, each.Tittle, each.Description, each.Content);
+                    return new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content);
                 });
                 return res.status(message.OK.CODE).json(courseListDTO);
             } else {

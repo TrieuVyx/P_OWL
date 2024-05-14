@@ -16,9 +16,13 @@ export default async function Authenticate(Email, PassWord) {
                 const Token = response.data.AccessToken
                 const RefreshToken = response.data.FreshToken
                 const Hierachy = response.data.Hierachy
+                const UserName = response.data.UserName
+            
                 localStorage.setItem("AccessToken", Token)
                 localStorage.setItem("FreshToken", RefreshToken)
                 localStorage.setItem("Hierachy", Hierachy)
+                localStorage.setItem("UserName", UserName)
+
                 window.location = LinkRouter.HOME
             })
             .catch((error) => {

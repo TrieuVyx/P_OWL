@@ -16,7 +16,8 @@ import {
   checkTokenExist,
   checkPermission,
   CourseManagementPage,
-  UserManagementPage
+  UserManagementPage,
+  LectureManagementPage
 }
   from './shortPath/path';
 
@@ -28,7 +29,11 @@ import {
   DetailCourse,
   UpdateCourse,
   DeleteCourse,
-  CreateCourse
+  CreateCourse,
+  DetailLecture,
+  UpdateLecture,
+  DeleteLecture,
+  CreateLecture
 }
 from './shortPath/adminTabUrl/adminTabUrl'
 import { Toaster } from 'react-hot-toast'
@@ -60,6 +65,7 @@ function App() {
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSEMANA} element={<CourseManagementPage />} />
                   <Route path={LinkRouter.USERMANA} element={<UserManagementPage />} />
+                  <Route path={LinkRouter.LECMANA} element={<LectureManagementPage />} />
                   <Route path={LinkRouter.DETAILUSER} element={<DetailUser />} />
                   <Route path={LinkRouter.UPDATEUSER} element={<UpdateUser />} />
                   <Route path={LinkRouter.DELETEUSER} element={<DeleteUser />} />
@@ -68,7 +74,10 @@ function App() {
                   <Route path={LinkRouter.UPDATECOURSE} element={<UpdateCourse />} />
                   <Route path={LinkRouter.DELETECOURSE} element={<DeleteCourse />} />
                   <Route path={LinkRouter.CREATECOURSE} element={<CreateCourse />} />
-
+                  <Route path={LinkRouter.DETAILLECTURE} element={<DetailLecture />} />
+                  <Route path={LinkRouter.UPDATELECTURE} element={<UpdateLecture />} />
+                  <Route path={LinkRouter.DELETELECTURE} element={<DeleteLecture />} />
+                  <Route path={LinkRouter.CREATELECTURE} element={<CreateLecture />} />
                 </>
               ) : (
                 <>

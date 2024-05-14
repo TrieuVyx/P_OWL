@@ -1,7 +1,7 @@
 import Axios from "axios"
 import { detailCourseUrl } from "../../../../../../shortPath/urlPath"
 
-export default async function GetUser(key){
+export default async function GetCourse(key){
     try {
         const tokenAccess = localStorage.getItem("AccessToken")
         const CourseID = localStorage.getItem("CourseID")

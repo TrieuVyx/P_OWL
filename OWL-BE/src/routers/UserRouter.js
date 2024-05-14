@@ -11,6 +11,7 @@ router.post('/updateUser/:id', UserController.UpdateUser)
 router.post('/deleteUser/:id', UserController.DeleteUser)
 router.get('/getDetailUser/:id', UserController.GetUserDetail)
 router.get('/getListUser', UserController.GetListUser)
+router.get('/getUser/:UserName', UserController.GetUserByUserName)
 router.use('/', UserController.index)
 module.exports = router
 

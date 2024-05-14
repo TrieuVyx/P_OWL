@@ -1,7 +1,7 @@
 import Axios from "axios"
 import { createCourseUrl } from "../../../../../../shortPath/urlPath"
 import {toast} from "react-hot-toast"
-export default async function CreateUser(CourseData){
+export default async function CreateCourse(CourseData){
     try {
         const tokenAccess = localStorage.getItem("AccessToken")
         await Axios({

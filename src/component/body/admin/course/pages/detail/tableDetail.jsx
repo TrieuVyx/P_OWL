@@ -1,37 +1,30 @@
-import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
+import GetCourse from "../../event/CRUD/get";
+
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function TableDetail() {
     const AccountId = localStorage.getItem("AccountId")
-    const [datasource, setDatasource] = useState({
-        UserName: undefined,
-        FullName: undefined,
-        Email: undefined,
-        Phone: undefined,
-        Address: undefined,
-        Hierachy: undefined,
-        Image: undefined
-    })
-    const [UserName, setUserName] = useState("")
-    const [Email, setEmail] = useState("")
-    const [FullName, setFullName] = useState("")
-    const [Address, setAddress] = useState("")
-    const [Phone, setPhone] = useState("")
-    const [Hierachy, setHierachy] = useState("")
+  
+    const [CourseName, setCourseName] = useState("")
+    const [Description, setDescription] = useState("")
+    const [Content, setContent] = useState("")
+    const [Tittle, setTittle] = useState("")
 
     useEffect(() => {
-        // detailUser()
-        //     .then((data) => {
-        //         setDatasource(data.data)
-        //     })
-        //     .catch((error) => console.error(error));
+        GetCourse()
+            .then((data) => {
+                console.log(data)
+                setCourseName(data.data.CourseName)
+                setDescription(data.data.Description)
+                setContent(data.data.Content)
+                setTittle(data.data.Tittle)
+            })
+            .catch((error) => console.error(error));
     }, [])
     return (
         <>
@@ -56,97 +49,74 @@ export default function TableDetail() {
                 >
                     <h1>Detail Course</h1>
                     <Form.Item
-                        label="UserName"
-                        name="UserName"
+                        label="CourseName"
+                        name="CourseName"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your UserName!',
+                                message: 'Please input your CourseName!',
                             },
                         ]}
                     >
-                        <Input readOnly value={datasource.UserName} onChange={(e) => {
-                            setUserName(e.target.value)
-                        }} />
+                        <Input readOnly value={CourseName} />
+                        <span></span>
                     </Form.Item>
                     <Form.Item
-                        label="FullName"
-                        name="FullName"
+                        label="Description"
+                        name="Description"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your FullName!',
+                                message: 'Please input your Description!',
                             }
                         ]}
                     >
-                        <Input name="FullName" readOnly value={datasource.FullName} onChange={(e) => {
-                            setFullName(e.target.value)
-                        }} />
+                        <Input name="Description" readOnly value={Description}  />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
-                        label="Email"
-                        name="Email"
+                        label="Content"
+                        name="Content"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your Email!',
+                                message: 'Please input your Content!',
                             }
                         ]}
                     >
-                        <Input name="Email" readOnly value={datasource.Email} onChange={(e) => {
-                            setEmail(e.target.value)
-                        }} />
+                        <Input name="Content" readOnly value={Content} 
+                         />
+                        <span></span>
+
                     </Form.Item>
                     <Form.Item
-                        label="Phone"
-                        name="Phone"
+                        label="Tittle"
+                        name="Tittle"
                         rules={[
                             {
                                 required: true,
-                                message: 'Please input your Phone!',
+                                message: 'Please input your Tittle!',
                             }
                         ]}
                     >
-                        <Input name="Phone" readOnly value={datasource.Phone} onChange={(e) => {
-                            setPhone(e.target.value)
-                        }} />
+                        <Input name="Tittle" readOnly value={Tittle} />
+                        <span></span>
+
                     </Form.Item>
-                    <Form.Item
-                        label="Address"
-                        name="Address"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Address!',
-                            }
-                        ]}
-                    >
-                        <Input name="Address" readOnly value={datasource.Address} onChange={(e) => {
-                            setAddress(e.target.value)
-                        }} />
-                    </Form.Item>
-                    <Form.Item
-                        label="Hierachy"
-                        name="Hierachy"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Hierachy!',
-                            }
-                        ]}
-                    >
-                        <Input name="Hierachy" readOnly value={datasource.Hierachy} onChange={(e) => {
-                            setHierachy(e.target.value)
-                        }} />
-                    </Form.Item>
+                    
                     <Form.Item
                     >
                         <div style={formCenterStyle}>
-                            <Popconfirm title="Sure to delete?"  onConfirm={() => handleDelete(AccountId)}>
-                                <Button danger>Delete </Button>
+                            <Popconfirm title="Sure to delete?"  
+                            // onConfirm={() => handleDelete(AccountId)}
+                            >
+                                <Button danger = "true">Delete </Button>
                             </Popconfirm>
-                            <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
-                                <Button warn>Update </Button>
+                            <Popconfirm title="Sure to update?" className="m-2" 
+                            // onConfirm={() => handleUpdate(AccountId)}
+                            >
+                                <Button warn="true">Update </Button>
                             </Popconfirm>
                         </div>
 

@@ -142,7 +142,7 @@ export default function TableDelete() {
                     >
                         <div style={formCenterStyle}>
                             <Popconfirm title="Sure to delete?" onConfirm={() => DeleteUser()}>
-                                <Button danger>Delete </Button>
+                                <Button danger = "true">Delete </Button>
                             </Popconfirm>
                             {/* <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => handleUpdate(AccountId)}>
                                 <Button warn>Update </Button>

@@ -1,39 +1,26 @@
-import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
-import { PlusOutlined } from '@ant-design/icons';
-import { Image, Upload } from 'antd';
+import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
+import { Image, Upload, Flex, message, } from 'antd';
+import TextArea from "antd/es/input/TextArea";
+import CreateCourse from "../../event/CRUD/create";
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function TableCreate() {
-    // const AccountId = localStorage.getItem("AccountId")
-    // const [datasource, setDatasource] = useState({
-    //     UserName: undefined,
-    //     FullName: undefined,
-    //     Email: undefined,
-    //     Phone: undefined,
-    //     Address: undefined,
-    //     Hierachy: undefined,
-    //     Image: undefined
-    // })
+  
     const [CourseName, setCourseName] = useState("")
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
-    const [Picture, setPicture] = useState("")
-
-    useEffect(() => {
-        // detailUser()
-        //     .then((data) => {
-        //         setDatasource(data.data)
-        //     })
-        //     .catch((error) => console.error(error));
-    }, [])
+    const Data = {
+        CourseName:CourseName,
+        Description:Description,
+        Content:Content,
+        Tittle:Tittle
+    }
     return (
         <>
             <Layout>
@@ -97,7 +84,7 @@ export default function TableCreate() {
                                         }
                                     ]}
                                 >
-                                    <Input name="Content" value={Content} onChange={(e) => {
+                                    <TextArea name="Content" value={Content} onChange={(e) => {
                                         setContent(e.target.value)
                                     }} />
                                 </Form.Item>
@@ -115,12 +102,12 @@ export default function TableCreate() {
                                         setTittle(e.target.value)
                                     }} />
                                 </Form.Item>
-                                
+
                                 <Form.Item
                                 >
                                     <div style={formCenterStyle}>
-                                        <Popconfirm title="Sure to delete?"  >
-                                            <Button danger>Create </Button>
+                                        <Popconfirm title="Sure to create?"   onConfirm={() => CreateCourse(Data)}>
+                                            <Button danger = "true">Create </Button>
                                         </Popconfirm>
 
                                     </div>
@@ -129,7 +116,18 @@ export default function TableCreate() {
                             </Form>
                         </div>
                         <div className="col">
-                            <h1>show</h1>
+                            <h1 style={{margin:"20px 0 0 0 "}}>Upload Image</h1>
+                            {/* <Upload
+                                name="avatar"
+                                listType="picture-card"
+                                className="avatar-uploader"
+                                showUploadList={false}
+                                action=""
+                                beforeUpload={beforeUpload}
+                                onChange={handleChange}
+                            >
+                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
+                            </Upload> */}
                         </div>
                     </div>
 

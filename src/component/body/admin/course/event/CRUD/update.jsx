@@ -1,7 +1,7 @@
 import Axios from "axios"
 import { updateCourseUrl } from "../../../../../../shortPath/urlPath"
 import {toast} from "react-hot-toast"
-export default async function UpdateUser(CourseData){
+export default async function UpdateCourse(CourseData){
     try {
         const tokenAccess = localStorage.getItem("AccessToken")
         await Axios({

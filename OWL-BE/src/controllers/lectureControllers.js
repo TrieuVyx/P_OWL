@@ -1,6 +1,7 @@
 const message = require("../constants/constansHttpStatus");
 const LectureDTO = require("../models/DTO/Lecture/LectureDTO")
 const LectureEntity = require("../models/Entity/LectureEntity")
+const ListLectureDTO = require("../models/DTO/Lecture/ListLectureDTO")
 class LectureControllers {
     async CreateLecture(req, res) {
         try {
@@ -69,7 +70,7 @@ class LectureControllers {
             const { id } = req.params;
             if (id != null || id != "") {
                 await LectureEntity.findByIdAndDelete(id)
-                return res.status(message.OK.CODE).json({message:message.OK.MESSAGE});
+                return res.status(message.OK.CODE).json({ message: message.OK.MESSAGE });
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
 
@@ -79,18 +80,38 @@ class LectureControllers {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    async GenerateList(req,res){
-        try {
-            const IDCourse  = req.body
-            
-            return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+    // async GenerateList(req,res){
+    //     try {
+    //         const IDCourse  = req.body
 
+    //         return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+
+    //     }
+
+    //     catch (err) {
+    //         return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
+    //     }
+    // }
+    async GetListLecture(req, res) {
+        try {
+            const page = parseInt(req.query.page);
+            const size = parseInt(req.query.size);
+            if (!isNaN(page) && !isNaN(size)) {
+                const ListLecture = await LectureEntity.find().skip(page * size).limit(size);
+                const lectureListDTO = ListLecture.map((each) => {
+                    return new ListLectureDTO(each.id, each.LectureName, each.Tittle, each.Description, each.Content,each.Ex,each.Industry);
+                });
+                return res.status(message.OK.CODE).json(lectureListDTO);
+            } else {
+                return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+            }
         }
 
         catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+
 
 }
 module.exports = new LectureControllers();
