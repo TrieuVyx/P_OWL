@@ -40,7 +40,7 @@ export default function CourseTable() {
     return (
         <>
             <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>
-                <Button primary style={floatLeft} >Create </Button>
+                <Button primary="true" style={floatLeft} >Create </Button>
             </Popconfirm>
             <Table
                 columns={columns}

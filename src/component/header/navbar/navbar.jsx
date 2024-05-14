@@ -28,6 +28,8 @@ export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
     const [isAuthen, setIsauthen] = useState(false);
     const [permission, setPermission] = useState("STUDENT")
+   
+
     useEffect(() => {
         const token = checkTokenExist();
         const checkPer = checkPermission();
@@ -45,15 +47,19 @@ export default function Navbar() {
             router(LinkRouter.HOME);
         } 
         else if (e.key === "2") {
+           
             router(LinkRouter.COURSEMANA)
         }
         else if (e.key === "3") {
+            
             router(LinkRouter.USERMANA)
         } 
         else if (e.key === "4") {
+           
             router(LinkRouter.LECMANA)
         } 
         else if (e.key === "5") {
+         
             localStorage.clear()
             router(LinkRouter.LOGIN);
         } 
@@ -62,7 +68,7 @@ export default function Navbar() {
             <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}  style={heightStyle} >
                 <div className="demo-logo-vertical"></div>
                 <Menu theme='dark' defaultSelectedKeys={[1]} mode="inline" style={{textAlign:"left"}} items={[
-                    getItem("ANT-ETL", "0"),
+                    getItem("Online Website Learning", "0"),
                     permission === "ADMIN" ? (
                         getItem("AdminBoard", "1", <TeamOutlined />,
                             [

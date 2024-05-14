@@ -25,13 +25,13 @@ export const columns = [
             <Space size="middle">
 
                 <Popconfirm title="Sure to update?" onConfirm={() => handleUpdate(record.key)}>
-                    <Button primary>Update </Button>
+                    <Button primary="true">Update </Button>
                 </Popconfirm>
                 <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
-                    <Button danger >Delete </Button>
+                    <Button danger ="true">Delete </Button>
                 </Popconfirm>
                 <Popconfirm title="Sure to watch?" onConfirm={() => handleDetail(record.key)}>
-                    <Button primary>Detail </Button>
+                    <Button primary="true">Detail </Button>
                 </Popconfirm>
             </Space>
         ),

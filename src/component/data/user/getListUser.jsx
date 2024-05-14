@@ -5,6 +5,7 @@ export default async function getListUser(currentPage, pageSize) {
     try {
         const tokenAccess = localStorage.getItem('AccessToken')
         const URL_USER = `${getListUserUrl}?page=${currentPage}&size=${pageSize}`;
+        
         const HEADERS = {
             tokenAccess
         };

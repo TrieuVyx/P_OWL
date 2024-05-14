@@ -5,6 +5,7 @@ import { columns } from './userColumn';
 import getListUser from '../../../data/user/getListUser';
 import { handleCreate } from './event/handleEvent';
 import { Toaster } from 'react-hot-toast';
+import { Value } from 'sass';
 export default function UserTable() {
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
@@ -13,6 +14,7 @@ export default function UserTable() {
     useEffect(() => {
         getListUser(currentPage, sizePage)
             .then((data) => {
+                console.log(data)
                 setUser(data)
             })
             .catch((error) => console.error(error));
@@ -39,7 +41,7 @@ export default function UserTable() {
             <Popconfirm title="Sure to create?"
             onConfirm={() => handleCreate()}
             >
-                <Button primary style={floatLeft} >Create </Button>
+                <Button primary="true" style={floatLeft} >Create </Button>
             </Popconfirm>
             <Toaster position='top-right' reverseOrder={false}></Toaster>
             <Table

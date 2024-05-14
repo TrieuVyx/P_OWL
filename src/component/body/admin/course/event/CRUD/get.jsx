@@ -7,7 +7,7 @@ export default async function GetUser(key){
         const CourseID = localStorage.getItem("CourseID")
         const data = await Axios({
             method: "GET",
-            url: `${detailCourseUrl}${AccountId}`,
+            url: `${detailCourseUrl}${CourseID}`,
             headers: {
                tokenAccess
             }
