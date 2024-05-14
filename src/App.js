@@ -82,8 +82,8 @@ function App() {
               ) : (
                 <>
                   <Route path={LinkRouter.HOME} element={<HomePage />} />
-                  <Route path={LinkRouter.COURSE} element={<Course />} />
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+                  <Route path={LinkRouter.COURSE} element={<Course />} />
 
                 </>
               )

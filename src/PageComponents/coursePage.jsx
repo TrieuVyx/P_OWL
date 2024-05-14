@@ -1,5 +1,6 @@
 import { Layout } from "antd"
-import {CourseBody, Navbar, Settingbar} from "../shortPath/path"
+import { Navbar, Settingbar } from "../shortPath/path"
+import ShowCourse from "../component/body/Client/course/course";
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function coursePages() {
@@ -13,7 +14,7 @@ export default function coursePages() {
                         <Settingbar />
                     </Header>
                     <Content>
-                        <CourseBody />
+                        <ShowCourse/>
                     </Content>
                     <Footer></Footer>
                 </Layout>
