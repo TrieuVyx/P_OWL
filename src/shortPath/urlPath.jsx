@@ -18,6 +18,7 @@ export const createCourseUrl = `http://localhost:3002/api/course/createCourse`
 export const detailCourseUrl = `http://localhost:3002/api/course/getDetailCourse/` // có ID
 export const deleteCourseUrl = `http://localhost:3002/api/course/deleteCourse/` // có ID
 export const updateCourseUrl = `http://localhost:3002/api/course/updateCourse/` // có ID
+export const updateCourseImageUrl = `http://localhost:3002/api/course/UpdateCourseImage` 
 
 
 //endregion

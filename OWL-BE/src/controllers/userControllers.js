@@ -10,6 +10,8 @@ class UserController {
     index(req, res) {
         res.send('THIS IS PAGE USER')
     }
+    //#region LẤY DANH SÁCH NGƯỜI DÙNG
+
     async GetListUser(req, res) {
         try {
             const page = parseInt(req.query.page);
@@ -28,6 +30,8 @@ class UserController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region TẠO MỚI NGƯỜI DÙNG
+ 
     async CreateUser(req, res) {
         try {
             const data = req.body;
@@ -53,6 +57,8 @@ class UserController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: err.message })
         }
     }
+    //#region CHI TIẾT NGƯỜI DÙNG
+
     async GetUserDetail(req, res) {
         try {
             const { id } = req.params
@@ -66,6 +72,8 @@ class UserController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region XOÁ NGƯỜI DÙNG
+
     async DeleteUser(req, res) {
         try {
             const { id } = req.params;
@@ -79,6 +87,7 @@ class UserController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region CẬP NHẬT NGƯỜI DÙNG
 
     async UpdateUser(req, res) {
         try {
@@ -95,6 +104,7 @@ class UserController {
     }
 
 
+    //#region ĐĂNG KÝ KHOÁ HỌC
     
     async RegisterCoureUser(req, res) {
         try {
@@ -123,6 +133,8 @@ class UserController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region LẤY NGƯỜI DÙNG BẰG TÊN 
+
     async GetUserByUserName(req,res){
         try {
             const { UserName } = req.params;
