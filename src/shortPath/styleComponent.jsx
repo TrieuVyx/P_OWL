@@ -2,10 +2,9 @@ const headerStyle = {
     // background: "rgba(0, 0, 0, 0.88)",
     borderRadius:"5px 0 0 5px"
     // display:'none'
-
 }
 const heightStyle= {
-    height:"100vh"
+    // height:"100vh"
 }
 const menutabstyle= {
     alignItems: 'center',

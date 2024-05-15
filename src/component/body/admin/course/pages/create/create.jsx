@@ -2,6 +2,7 @@ import Navbar from "../../../../../header/navbar/navbar";
 import { Layout } from "antd"
 import React, {useState, useEffect} from "react"
 import TableCreate from "./tableCreate";
+import SiderNavbar from "../../../../../../PageComponents/Sider/SiderNavbar";
 const { Header, Footer, Content, Sider } = Layout;
 export default function Create() {
    
@@ -9,7 +10,7 @@ export default function Create() {
         <>
             <div className="w-100">
                 <Layout >
-                    <Sider width="20%"><Navbar /></Sider>
+                    <SiderNavbar/>
                     <Layout >
                         {/* <Header><Setting/></Header> */}
                         <Content><TableCreate/></Content>

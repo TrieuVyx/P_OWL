@@ -144,11 +144,16 @@ class CourseController {
         try {
             const CourseID = req.body.CourseID;
             if (CourseID != null || CourseID != "") {
-                const Course = await CourseEntity.findById(CourseID)
-                const ListCourse = new ListLectureInCourseDTO(Course)
-                const result = ListCourse.Lectures
-                return res.status(message.OK.CODE).json(result);
-
+                try {
+                    const Course = await CourseEntity.findById(CourseID);
+                    const ListCourse = new ListLectureInCourseDTO(Course);
+                    const lectureIDs = ListCourse.Lectures;
+                    const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } }).select('LectureName');
+                    const result = lectures.map(lecture => lecture.LectureName);
+                    return res.status(message.OK.CODE).json(result);
+                } catch (err) {
+                    return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+                }
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
         }
