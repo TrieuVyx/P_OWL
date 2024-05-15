@@ -3,7 +3,7 @@ import { Space, Table, Tag, Button, Popconfirm } from 'antd';
 import { columns } from './courseColumn';
 import { floatLeft } from '../../../../shortPath/styleComponent';
 import { handleCreate } from './event/handleEvent'
-import getListCourse from '../../../data/course/getListCourse';
+import getListCourse from './event/CRUD/getListCourse';
 
 export default function CourseTable() {
 
@@ -39,7 +39,7 @@ export default function CourseTable() {
     }
     return (
         <>
-            <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>
+            <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()} >
                 <Button primary="true" style={floatLeft} >Create </Button>
             </Popconfirm>
             <Table

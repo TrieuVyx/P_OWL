@@ -1,7 +1,7 @@
 import "../../../../shortPath/scss/admin.course.scss"
 
 import UserTable from "./userTable"
-import Author from "../../showAuthor/Author"
+import Author from "../../Client/Author"
 export default function User() {
     return (
         <>

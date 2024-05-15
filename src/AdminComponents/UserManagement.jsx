@@ -1,6 +1,6 @@
 import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
-import { Navbar, Menutab, UserAdmin } from "../shortPath/path"
+import { Navbar, Menutab, UserAdmin, Settingbar } from "../shortPath/path"
 import SiderNavbar from '../PageComponents/Sider/SiderNavbar';
 const { Header, Footer, Content, Sider } = Layout;
 const { headerStyle } = styleComponent
@@ -12,7 +12,7 @@ export default function UserManagementPage() {
                 <SiderNavbar/>
                 <Layout >
                     <Header>
-                        <Menutab />
+                        <Settingbar />
                     </Header>
                     <Content>
                         <UserAdmin />

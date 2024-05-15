@@ -27,7 +27,7 @@ export default function Navbar() {
     const [collapsed, setCollapsed] = useState(false);
     const [isAuthen, setIsauthen] = useState(false);
     const [permission, setPermission] = useState("STUDENT")
-
+    let hasClicked = false;
 
     useEffect(() => {
         const token = checkTokenExist();
@@ -42,30 +42,26 @@ export default function Navbar() {
 
     }, [])
     const setSelectedMenuItem = (e) => {
-        if (e.key === "0") {
-            router(LinkRouter.HOME);
-        }
-        else if (e.key === "2") {
-            router(LinkRouter.COURSEMANA)
-        }
-        else if (e.key === "3") {
-            router(LinkRouter.USERMANA)
-            return true;
-
-        }
-        else if (e.key === "4") {
-            router(LinkRouter.LECMANA)
-            return true;
-        }
-        else if (e.key === "5") {
-            localStorage.clear()
-            router(LinkRouter.LOGIN);
-        }
+        if (!hasClicked) {
+            hasClicked = true;
+            if (e.key === "0") {
+              router(LinkRouter.HOME);
+            } else if (e.key === "2") {
+              router(LinkRouter.COURSEMANA);
+            } else if (e.key === "3") {
+              router(LinkRouter.USERMANA);
+            } else if (e.key === "4") {
+              router(LinkRouter.LECMANA);
+            } else if (e.key === "5") {
+              localStorage.clear();
+              router(LinkRouter.LOGIN);
+            }
+          }
     };
     return (
         <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}   >
             <div className="demo-logo-vertical p-4">
-                <Link to={"/"}>Online Website Learning</Link>
+                <Link to={"/"} style={{color:"white", fontWeight:"bold",  textDecorationLine: 'unset',textUnderlineOffset:"unset"}}>Online Website Learning</Link>
             </div>
             <Menu theme='dark' defaultSelectedKeys={[1]} mode="inline" style={{ textAlign: "left", height: "100vh", width: "100%" }} items={[
                 // getItem("Online Website Learning", "0"),

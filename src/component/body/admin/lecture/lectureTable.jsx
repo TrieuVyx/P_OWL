@@ -3,7 +3,7 @@ import { Space, Table, Tag, Button, Popconfirm } from 'antd';
 import { columns } from './lectureColumn';
 import { floatLeft } from '../../../../shortPath/styleComponent';
 import { handleCreate } from './event/handleEvent'
-import getListLecture from '../../../data/lecture/getListLecture';
+import getListLecture from './event/CRUD/getListLecture';
 
 export default function LectureTable() {
 

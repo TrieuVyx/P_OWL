@@ -1,7 +1,7 @@
 import "../../../../shortPath/scss/admin.course.scss"
 import { IMAGE_USER_ } from "../../../../shortPath/path"
 import LectureTable from "./lectureTable"
-import Author from "../../showAuthor/Author"
+import Author from "../../Client/Author"
 export default function Lecture() {
     return (
         <>

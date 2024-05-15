@@ -1,7 +1,6 @@
 import "../../../../shortPath/scss/admin.course.scss"
-import { IMAGE_ADMIN_COURSE } from "../../../../shortPath/path"
 import CourseTable from "./courseTable"
-import Author from "../../showAuthor/Author"
+import Author from "../../Client/Author"
 export default function Course() {
     return (
         <>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Checkbox, Form, Input, Popconfirm, Space, Table, Tag } from "antd";
 import { style ,floatLeft} from "../../../../shortPath/styleComponent"
 import { columns } from './userColumn';
-import getListUser from '../../../data/user/getListUser';
+import getListUser from './event/CRUD/getListUser';
 import { handleCreate } from './event/handleEvent';
 import { Toaster } from 'react-hot-toast';
 import { Value } from 'sass';

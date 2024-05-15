@@ -43,11 +43,17 @@ const formCenterStyle ={
 
 const floatLeft = {
     float:"left",
-    display:"block"
+    display:"block",
+    margin:"0 0 10px 0"
 }
 const InputStyle = {
     padding: "0 70px"
 }
+
+const MoveUp = {
+    animation: "moveUpDown 2s infinite"
+}
+
 module.exports = {
     headerStyle,
     centerStyle,
@@ -59,5 +65,6 @@ module.exports = {
     heightStyle,
     menutabstyle,
     floatLeft,
-    InputStyle
+    InputStyle,
+    MoveUp
 };

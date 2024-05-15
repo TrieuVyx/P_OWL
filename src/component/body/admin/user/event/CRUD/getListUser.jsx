@@ -1,6 +1,6 @@
 import Axios from "axios"
 import { toast } from 'react-hot-toast'
-import { getListUserUrl } from "../../../shortPath/urlPath";
+import { getListUserUrl } from "../../../../../../shortPath/urlPath";
 export default async function getListUser(currentPage, pageSize) {
     try {
         const tokenAccess = localStorage.getItem('AccessToken')
