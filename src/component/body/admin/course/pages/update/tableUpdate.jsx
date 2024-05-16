@@ -17,8 +17,8 @@ export default function TableUpdate() {
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
-    const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
     const [Picture1, setPicture1] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
     useEffect(() => {
         GetCourse()
             .then((data) => {
@@ -26,7 +26,7 @@ export default function TableUpdate() {
                 setDescription(data.data.Description)
                 setContent(data.data.Content)
                 setTittle(data.data.Tittle)
-                
+                Base64ToImage(data.data.Picture)
             })
             .catch((error) => console.error(error));
 
@@ -45,18 +45,28 @@ export default function TableUpdate() {
         Picture: Picture1
 
     }
-    
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
 
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setPicture1(newSrc);
-        };
-        UploadImage(ImageUpdate)
-        reader.readAsDataURL(file);
+    const handleImageChange = (event) => {
+        const selectedFile = event.target.files[0];
+                if (selectedFile) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        const imageData = e.target.result;
+                        const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
+                        setPicture1(dataURL);
+                    };
+                    reader.readAsBinaryString(selectedFile);
+                }
+                UploadImage(ImageUpdate)
+
     };
+
+    const Base64ToImage =  (base64String) => {
+        const Image = `data:image/jpeg;base64,${btoa(base64String)}`;
+        console.log(Image)
+        // setPicture(Image);
+      };
+      
     //#region GIAO DIỆN
     return (
         <>

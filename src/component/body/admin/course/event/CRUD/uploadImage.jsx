@@ -4,8 +4,9 @@ import { updateCourseImageUrl } from "../../../../../../shortPath/urlPath"
 import Axios from "axios"
 export default async function UploadImage(ImageUpdate) {
     try {
+      
+        console.log(ImageUpdate)
         const tokenAccess = localStorage.getItem("AccessToken")
-        console.log(updateCourseImageUrl)
         await Axios({
             method: "POST",
             url: `${updateCourseImageUrl}`,
