@@ -26,10 +26,9 @@ export default function TableUpdate() {
                 setDescription(data.data.Description)
                 setContent(data.data.Content)
                 setTittle(data.data.Tittle)
-                Base64ToImage(data.data.Picture)
+                setPicture(data.data.Picture)
             })
             .catch((error) => console.error(error));
-
     }, [])
     // #region REQUEST CẬP NHẬT KHOÁ HỌC
     const Data = {
@@ -43,30 +42,23 @@ export default function TableUpdate() {
     const ImageUpdate = {
         CourseID: CourseID,
         Picture: Picture1
-
     }
-
+    //#region THAY ĐỔI HÌNH ẢNH
     const handleImageChange = (event) => {
-        const selectedFile = event.target.files[0];
-                if (selectedFile) {
-                    const reader = new FileReader();
-                    reader.onload = (e) => {
-                        const imageData = e.target.result;
-                        const dataURL = `data:image/jpeg;base64,${btoa(imageData)}`;
-                        setPicture1(dataURL);
-                    };
-                    reader.readAsBinaryString(selectedFile);
-                }
-                UploadImage(ImageUpdate)
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newSrc = e.target.result;
+            setPicture1(newSrc);
+        };
+        reader.readAsDataURL(file);
 
     };
+    const handleOnUpdate = () =>{
+        UpdateCourse(Data)
+        UploadImage(ImageUpdate);
 
-    const Base64ToImage =  (base64String) => {
-        const Image = `data:image/jpeg;base64,${btoa(base64String)}`;
-        console.log(Image)
-        // setPicture(Image);
-      };
-      
+    }
     //#region GIAO DIỆN
     return (
         <>
@@ -140,6 +132,7 @@ export default function TableUpdate() {
                                         <TextArea name="Content" value={Content} onChange={(e) => {
                                             setContent(e.target.value)
                                         }} />
+                                        <span></span>
                                     </Form.Item>
                                     <Form.Item
                                         label="Tittle"
@@ -159,7 +152,7 @@ export default function TableUpdate() {
                                     <Form.Item
                                     >
                                         <div style={formCenterStyle}>
-                                            <Popconfirm title="Sure to update?" className="m-2" onConfirm={() => UpdateCourse(Data)}  >
+                                            <Popconfirm title="Sure to update?" className="m-2" onConfirm={handleOnUpdate}  >
                                                 <Button warn="true">Update </Button>
                                             </Popconfirm>
                                         </div>

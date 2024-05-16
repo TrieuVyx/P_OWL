@@ -4,8 +4,7 @@ class CourseDTO {
     Description;
     Content;
     Tittle;
-    Picture;
-   
+    Picture
     constructor(course) {
         this.CourseName = course.CourseName
         this.Tittle = course.Tittle

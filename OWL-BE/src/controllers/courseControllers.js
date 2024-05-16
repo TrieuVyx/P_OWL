@@ -6,7 +6,6 @@ const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
 const ListLectureInCourseDTO = require("../models/DTO/Course/ListLectureInCourse");
 const fs = require('fs');
-const { buffer } = require("stream/consumers");
 
 class CourseController {
     //#region TẠO KHOÁ HỌC
@@ -198,44 +197,41 @@ class CourseController {
         try {
             const courseID = req.body.CourseID;
             if (!courseID) {
-              return res.status(400).json({ message: 'ID khóa học không hợp lệ.' });
+                return res.status(400).json({ message: 'ID khóa học không hợp lệ.' });
             }
             const picture = req.body.Picture;
             if (!picture) {
-              return res.status(400).json({ message: 'Hình ảnh không hợp lệ.' });
+                return res.status(400).json({ message: 'Hình ảnh không hợp lệ.' });
             }
-          
-            // const base64Image = await convertFileToBase64(picture);
-            const base64Image = Buffer.from(picture).toString('base64');
 
             const updatedCourse = await CourseEntity.findByIdAndUpdate(
-              courseID,
-              { Picture: base64Image },
-              { new: true }
+                courseID,
+                { Picture: picture },
+                { new: true }
             );
-          
-            if (!updatedCourse) {
-              return res.status(404).json({ message: 'Không tìm thấy khóa học.' });
+            const result = new CourseDTO(updatedCourse)
+            if (!result) {
+                return res.status(404).json({ message: 'Không tìm thấy khóa học.' });
             }
-          
-            return res.status(200).json(updatedCourse);
-          } catch (err) {
-            return res.status(500).json({ message: 'Lỗi máy chủ.' });
-          }
-        }
 
-        convertFileToBase64(filePath) {
+            return res.status(200).json(result);
+        } catch (err) {
+            return res.status(500).json({ message: 'Lỗi máy chủ.' });
+        }
+    }
+
+    convertFileToBase64(filePath) {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
-            if (err) {
-                reject(err);
-            } else {
-                const base64Image = data.toString('base64');
-                resolve(base64Image);
-            }
+                if (err) {
+                    reject(err);
+                } else {
+                    const base64Image = data.toString('base64');
+                    resolve(base64Image);
+                }
             });
         });
-        }
+    }
 
 }
 

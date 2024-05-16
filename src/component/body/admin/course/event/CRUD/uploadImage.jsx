@@ -5,7 +5,6 @@ import Axios from "axios"
 export default async function UploadImage(ImageUpdate) {
     try {
       
-        console.log(ImageUpdate)
         const tokenAccess = localStorage.getItem("AccessToken")
         await Axios({
             method: "POST",
