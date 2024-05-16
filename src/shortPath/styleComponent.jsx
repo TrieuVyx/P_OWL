@@ -2,10 +2,9 @@ const headerStyle = {
     // background: "rgba(0, 0, 0, 0.88)",
     borderRadius:"5px 0 0 5px"
     // display:'none'
-
 }
 const heightStyle= {
-    height:"100vh"
+    // height:"100vh"
 }
 const menutabstyle= {
     alignItems: 'center',
@@ -44,11 +43,17 @@ const formCenterStyle ={
 
 const floatLeft = {
     float:"left",
-    display:"block"
+    display:"block",
+    margin:"0 0 10px 0"
 }
 const InputStyle = {
     padding: "0 70px"
 }
+
+const MoveUp = {
+    animation: "moveUpDown 2s infinite"
+}
+
 module.exports = {
     headerStyle,
     centerStyle,
@@ -60,5 +65,6 @@ module.exports = {
     heightStyle,
     menutabstyle,
     floatLeft,
-    InputStyle
+    InputStyle,
+    MoveUp
 };

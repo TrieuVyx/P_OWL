@@ -17,7 +17,6 @@ const CourseSchema = new mongoose.Schema({
     Picture:{
         type:String,
         default:"",
-        unique:""
 
     },
     Tittle:{

@@ -6,6 +6,7 @@ const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
 const ListLectureInCourseDTO = require("../models/DTO/Course/ListLectureInCourse");
 class CourseController {
+    //#region TẠO KHOÁ HỌC
     async CreateCourse(req, res) {
         try {
             const data = req.body;
@@ -30,6 +31,8 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region CHI TIÊT KHOÁ HỌC
+
     async GetCourse(req, res) {
         try {
             const { id } = req.params
@@ -45,6 +48,8 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region CẬP NHẬT KHOÁ HỌC
+
     async UpdateCourse(req, res) {
         try {
             const { id } = req.params;
@@ -59,6 +64,8 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region XOÁ KHOÁ HỌC
+
     async DeleteCourse(req, res) {
         try {
             const { id } = req.params;
@@ -72,7 +79,8 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    // tạo khóa học khi có bài học
+    //#region THÊM MỚI BÀI HỌC VÀO KHOÁ HỌC
+
     async GenerateLecture(req, res) {
         try {
             const IDCourse = req.body.IDCourse;
@@ -96,7 +104,7 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    // tạo khóa học chưa có bài học 
+    // #region TẠO KHOÁ HỌC KHI CHƯA CÓ BÀI HỌC
     async GenerateNonLecture(req, res) {
         try {
             const IDCourse = req.body.IDCourse;
@@ -139,16 +147,22 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    // chỗ này
+    //#region LẤY DANH SÁCH BÀI HỌC NẰM TRONG KHOÁ HỌC
+
     async GenerateList(req, res) {
         try {
             const CourseID = req.body.CourseID;
             if (CourseID != null || CourseID != "") {
-                const Course = await CourseEntity.findById(CourseID)
-                const ListCourse = new ListLectureInCourseDTO(Course)
-                const result = ListCourse.Lectures
-                return res.status(message.OK.CODE).json(result);
-
+                try {
+                    const Course = await CourseEntity.findById(CourseID);
+                    const ListCourse = new ListLectureInCourseDTO(Course);
+                    const lectureIDs = ListCourse.Lectures;
+                    const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } }).select('LectureName');
+                    const result = lectures.map(lecture => lecture.LectureName);
+                    return res.status(message.OK.CODE).json(result);
+                } catch (err) {
+                    return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+                }
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
         }
@@ -156,6 +170,8 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region LẤY DANH SÁCH KHOÁ HỌC
+
     async GetListCourse(req, res) {
         try {
             const page = parseInt(req.query.page);
@@ -174,6 +190,34 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region CẬP NHẬT HÌNH ẢNH KHOÁ HỌC
+    async UpdateCourseImage(req, res) {
+        try {
+            const courseID = req.body.CourseID;
+            if (!courseID) {
+              return res.status(400).json({ message: 'ID khóa học không hợp lệ.' });
+            }
+          
+            const picture = req.body.Picture;
+            if (!picture) {
+              return res.status(400).json({ message: 'Hình ảnh không hợp lệ.' });
+            }
+          
+            const updatedCourse = await CourseEntity.findByIdAndUpdate(
+              courseID,
+              { Picture: picture },
+              { new: true }
+            );
+            const result = new CourseDTO (updatedCourse)
+            if (!result) {
+              return res.status(404).json({ message: 'Không tìm thấy khóa học.' });
+            }
+            
+            return res.status(200).json(result);
+          } catch (err) {
+            return res.status(500).json({ message: 'Lỗi máy chủ.' });
+          }
+        }
 }
 
 module.exports = new CourseController()

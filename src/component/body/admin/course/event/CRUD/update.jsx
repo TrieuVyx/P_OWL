@@ -15,7 +15,7 @@ export default async function UpdateCourse(CourseData){
             toast.success("Update Success")
         })
         .catch(err => {
-            console.log("Error")
+            console.log("Error" )
         })
     }
     catch (err) {

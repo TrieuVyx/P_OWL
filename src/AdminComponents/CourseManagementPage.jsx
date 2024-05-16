@@ -1,16 +1,18 @@
 import styleComponent from '../shortPath/styleComponent'
 import { Layout } from "antd"
-import { Navbar, Menutab, CourseAdmin } from "../shortPath/path"
+import { Navbar, Menutab, CourseAdmin , Settingbar } from "../shortPath/path"
+import SiderNavbar from '../PageComponents/Sider/SiderNavbar';
+
 const { Header, Footer, Content, Sider } = Layout;
 const { headerStyle } = styleComponent
 export default function CourseManagementPage() {
     return (
         <div className="w-100">
             <Layout >
-                <Sider width="20%"><Navbar /></Sider>
+                <SiderNavbar/>
                 <Layout >
                     <Header>
-                        <Menutab />
+                        <Settingbar />
                     </Header>
                     <Content>
                         <CourseAdmin />

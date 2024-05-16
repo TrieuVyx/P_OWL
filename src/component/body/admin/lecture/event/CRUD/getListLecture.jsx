@@ -1,6 +1,6 @@
 import Axios from "axios"
 import { toast } from 'react-hot-toast'
-import { getListLectureUrl } from "../../../shortPath/urlPath";
+import { getListLectureUrl } from "../../../../../../shortPath/urlPath";
 export default async function getListLecture(currentPage, pageSize) {
     try {
         const tokenAccess = localStorage.getItem('AccessToken')

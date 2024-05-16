@@ -3,6 +3,7 @@ const LectureDTO = require("../models/DTO/Lecture/LectureDTO")
 const LectureEntity = require("../models/Entity/LectureEntity")
 const ListLectureDTO = require("../models/DTO/Lecture/ListLectureDTO")
 class LectureControllers {
+    // #region TẠO MỚI BÀI HỌC
     async CreateLecture(req, res) {
         try {
             const data = req.body;
@@ -31,6 +32,8 @@ class LectureControllers {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    // #region CHI TIẾT BÀI HỌC
+
     async GetLecture(req, res) {
         try {
             const { id } = req.params
@@ -48,7 +51,8 @@ class LectureControllers {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-
+    // #region CẬP NHẬT BÀI HỌC
+//
     async UpdateLecture(req, res) {
         try {
             const { id } = req.params;
@@ -64,6 +68,7 @@ class LectureControllers {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    // #region XOÁ BÀI HỌC
 
     async DeleteLecture(req, res) {
         try {
@@ -80,18 +85,8 @@ class LectureControllers {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    // async GenerateList(req,res){
-    //     try {
-    //         const IDCourse  = req.body
+       // #region LẤY DANH SAHCS BÀI HỌC
 
-    //         return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
-
-    //     }
-
-    //     catch (err) {
-    //         return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
-    //     }
-    // }
     async GetListLecture(req, res) {
         try {
             const page = parseInt(req.query.page);

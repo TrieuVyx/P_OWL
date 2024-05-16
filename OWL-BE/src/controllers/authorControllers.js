@@ -6,7 +6,8 @@ const { GenerationToken, GetRefeshToken, VerifyTokenPermision } = require('../se
 const LoginDTO = require("../models/DTO/Author/LoginDTO");
 
 class LoginController {
-
+    // #region XÁC THỰC NGƯỜI DÙNG
+//
     async AuthorLogin(req, res) {
         try {
             const data = req.body;
@@ -49,6 +50,7 @@ class LoginController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
         }
     }
+    // #region ĐĂNG KÍ NGƯỜI DÙNG
 
     async AuthorRegister(req, res) {
         try {

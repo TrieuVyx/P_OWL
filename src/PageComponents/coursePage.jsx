@@ -1,14 +1,13 @@
 import { Layout } from "antd"
+import SiderNavbar from "./Sider/SiderNavbar";
 import { Navbar, Settingbar } from "../shortPath/path"
 import ShowCourse from "../component/body/Client/course/course";
 const { Header, Footer, Content, Sider } = Layout;
-
 export default function coursePages() {
-
     return (
         <div className="w-100">
             <Layout >
-                <Sider width="20%"><Navbar /></Sider>
+                <SiderNavbar/>
                 <Layout >
                     <Header>
                         <Settingbar />
@@ -19,8 +18,6 @@ export default function coursePages() {
                     <Footer></Footer>
                 </Layout>
             </Layout>
-
         </div>
-
     )
 }

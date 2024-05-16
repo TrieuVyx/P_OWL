@@ -1,9 +1,8 @@
 import Navbar from "../../../../../header/navbar/navbar";
-import Setting from "../../../../../header/navbar/setting";
 import { Layout } from "antd"
 import React, {useState, useEffect} from "react"
-import { detailUser } from "../../../../../constants/axiosconstants";
 import TableUpdate from "./tableUpdate";
+import SiderNavbar from "../../../../../../PageComponents/Sider/SiderNavbar";
 const { Header, Footer, Content, Sider } = Layout;
 export default function Update() {
     return (
@@ -11,7 +10,7 @@ export default function Update() {
         <>
             <div className="w-100">
                 <Layout >
-                    <Sider width="20%"><Navbar /></Sider>
+                    <SiderNavbar/>
                     <Layout >
                         {/* <Header><Setting/></Header> */}
                         <Content><TableUpdate/></Content>

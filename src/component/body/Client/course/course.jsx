@@ -1,5 +1,6 @@
 import "../../../../shortPath/scss/admin.course.scss"
-import Author from "../../showAuthor/Author"
+import { IMAGE_ADMIN_COURSE } from "../../../../shortPath/path"
+import Author from "../Author"
 import ShowContent from "./show"
 export default function ShowCourse() {
     return (
