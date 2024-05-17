@@ -18,11 +18,11 @@ export const columns = [
         dataIndex: 'Content',
         key: 'Content',
     },
-    {
-        title: 'CourseName',
-        dataIndex: 'CourseName',
-        key: 'CourseName',
-    },
+    // {
+    //     title: 'CourseName',
+    //     dataIndex: 'CourseName',
+    //     key: 'CourseName',
+    // },
 
     {
         title: 'Action',

@@ -5,123 +5,155 @@ import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
 import GetCourse from "../../event/CRUD/get";
 import DeleteCourse from "../../event/CRUD/delete";
+import DeleteLecture from "../../event/CRUD/delete";
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function TableUpdate() {
     const CourseID = localStorage.getItem("CourseID")
-    const [CourseName, setCourseName] = useState("")
+    const [LectureName, setLectureName] = useState("")
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
-
+    const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
     useEffect(() => {
         GetCourse()
             .then((data) => {
-                setCourseName(data.data.CourseName)
+                setLectureName(data.data.LectureName)
                 setDescription(data.data.Description)
                 setContent(data.data.Content)
                 setTittle(data.data.Tittle)
+                setPicture(data.data.Picture)
+
             })
             .catch((error) => console.error(error));
     }, [])
-    const Data = {
-        CourseID: CourseID,
-        CourseName: CourseName,
-        Description: Description,
-        Content: Content,
-        Tittle: Tittle
-    }
+
     return (
         <>
             <Layout>
-                <Form
-                    name="basic"
-                    labelCol={{
-                        span: 8,
-                    }}
-                    wrapperCol={{
-                        span: 16,
-                    }}
-                    style={formStyle}
-                    initialValues={{
-                        remember: true,
-                    }}
-                    method='POST'
-                    onFinish={() => {
-                        // Authenticate(Email, PassWord)
-                    }}
-                // onFinishFailed={onFinishFailed}
-                >
-                    <h1>Delete Lecture</h1>
-                    <Toaster position='top-right' reverseOrder={false}></Toaster>
+                <div className="container">
+                    <div className="row">
+                        <div className="col">
+                            <Form
+                                name="basic"
+                                labelCol={{
+                                    span: 8,
+                                }}
+                                wrapperCol={{
+                                    span: 16,
+                                }}
+                                style={formStyle}
+                                initialValues={{
+                                    remember: true,
+                                }}
+                                method='POST'
+                                onFinish={() => {
+                                    // Authenticate(Email, PassWord)
+                                }}
+                            // onFinishFailed={onFinishFailed}
+                            >
+                                <h1>Delete Lecture</h1>
+                                <Toaster position='top-right' reverseOrder={false}></Toaster>
 
-                    <Form.Item
-                        label="CourseName"
-                        name="CourseName"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your CourseName!',
-                            },
-                        ]}
-                    >
-                        <Input value={CourseName}  readOnly/>
-                        <span></span>
+                                <Form.Item
+                                    label="LectureName"
+                                    name="LectureName"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your LectureName!',
+                                        },
+                                    ]}
+                                >
+                                    <Input value={LectureName} readOnly />
+                                    <span></span>
 
-                    </Form.Item>
-                    <Form.Item
-                        label="Description"
-                        name="Description"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Description!',
-                            }
-                        ]}
-                    >
-                        <Input name="Description" value={Description} readOnly/>
-                        <span></span>
-                    </Form.Item>
-                    <Form.Item
-                        label="Content"
-                        name="Content"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Content!',
-                            }
-                        ]}
-                    >
-                        <Input name="Content" value={Content} readOnly />
-                        <span></span>
+                                </Form.Item>
+                                <Form.Item
+                                    label="Description"
+                                    name="Description"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Description!',
+                                        }
+                                    ]}
+                                >
+                                    <Input name="Description" value={Description} readOnly />
+                                    <span></span>
+                                </Form.Item>
+                                <Form.Item
+                                    label="Content"
+                                    name="Content"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Content!',
+                                        }
+                                    ]}
+                                >
+                                    <Input name="Content" value={Content} readOnly />
+                                    <span></span>
 
-                    </Form.Item>
-                    <Form.Item
-                        label="Tittle"
-                        name="Tittle"
-                        rules={[
-                            {
-                                required: true,
-                                message: 'Please input your Tittle!',
-                            }
-                        ]}
-                    >
-                        <Input name="Tittle" readOnly value={Tittle}  />
-                        <span></span>
+                                </Form.Item>
+                                <Form.Item
+                                    label="Tittle"
+                                    name="Tittle"
+                                    rules={[
+                                        {
+                                            required: true,
+                                            message: 'Please input your Tittle!',
+                                        }
+                                    ]}
+                                >
+                                    <Input name="Tittle" readOnly value={Tittle} />
+                                    <span></span>
 
-                    </Form.Item>
+                                </Form.Item>
 
-                    <Form.Item
-                    >
-                        <div style={formCenterStyle}>
+                                <Form.Item
+                                >
+                                    <div style={formCenterStyle}>
 
-                            <Popconfirm title="Sure to delete?" className="m-2" onConfirm={() => DeleteCourse()}>
-                                <Button warn="true">Delete </Button>
-                            </Popconfirm>
+                                        <Popconfirm title="Sure to delete?" className="m-2" onConfirm={() => DeleteLecture()}>
+                                            <Button warn="true">Delete </Button>
+                                        </Popconfirm>
+                                    </div>
+
+                                </Form.Item>
+                            </Form>
                         </div>
+                        <div className="col">
+                            <div className="row " >
+                                <div style={{
+                                    width: "200px",
+                                    // background: "gray",
+                                    height: "200px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center",
+                                    margin: "120px 0 0 0"
+                                }}>
+                                    <label htmlFor="pictureInput" >
 
-                    </Form.Item>
-                </Form>
+                                        <img src={Picture} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }} />
+                                    </label>
+
+                                    <input type="text" id="pictureInput" style={{ display: "none" }} />
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 
             </Layout>
         </>

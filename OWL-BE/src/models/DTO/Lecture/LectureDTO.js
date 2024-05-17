@@ -5,7 +5,7 @@ class LectureDTO{
     Industry;
     Content;
     Ex;
-    // Picture;
+    Picture;
     // Video;
     constructor(lecture){
         this.LectureName = lecture.LectureName;
@@ -14,6 +14,7 @@ class LectureDTO{
         this.Content = lecture.Content;
         this.Ex = lecture.Ex;
         this.Industry = lecture.Industry;
+        this.Picture = lecture.Picture;
     }
 }
 

@@ -1,4 +1,3 @@
-import GetUser from "./CRUD/get"
 const handleCreate = ()=>{
     window.location.href = `user/create`
 }

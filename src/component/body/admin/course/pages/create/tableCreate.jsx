@@ -3,24 +3,35 @@ import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
-import { PlusOutlined, LoadingOutlined } from '@ant-design/icons';
-import { Image, Upload, Flex, message, } from 'antd';
 import TextArea from "antd/es/input/TextArea";
 import CreateCourse from "../../event/CRUD/create";
 const { Header, Footer, Content, Sider } = Layout;
 
 export default function TableCreate() {
-  
+
     const [CourseName, setCourseName] = useState("")
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
+    const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+
     const Data = {
-        CourseName:CourseName,
-        Description:Description,
-        Content:Content,
-        Tittle:Tittle
+        CourseName: CourseName,
+        Description: Description,
+        Content: Content,
+        Tittle: Tittle,
+        Picture:Picture
     }
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newSrc = e.target.result;
+            setPicture(newSrc);
+        };
+        reader.readAsDataURL(file);
+
+    };
     return (
         <>
             <Layout>
@@ -106,8 +117,8 @@ export default function TableCreate() {
                                 <Form.Item
                                 >
                                     <div style={formCenterStyle}>
-                                        <Popconfirm title="Sure to create?"   onConfirm={() => CreateCourse(Data)}>
-                                            <Button danger = "true">Create </Button>
+                                        <Popconfirm title="Sure to create?" onConfirm={() => CreateCourse(Data)}>
+                                            <Button danger="true">Create </Button>
                                         </Popconfirm>
 
                                     </div>
@@ -116,18 +127,30 @@ export default function TableCreate() {
                             </Form>
                         </div>
                         <div className="col">
-                            <h1 style={{margin:"20px 0 0 0 "}}>Upload Image</h1>
-                            {/* <Upload
-                                name="avatar"
-                                listType="picture-card"
-                                className="avatar-uploader"
-                                showUploadList={false}
-                                action=""
-                                beforeUpload={beforeUpload}
-                                onChange={handleChange}
-                            >
-                                {imageUrl ? <img src={imageUrl} alt="avatar" style={{ width: '100%' }} /> : uploadButton}
-                            </Upload> */}
+                            <h1 style={{ margin: "40px 0 0 0 " }}>Upload Image</h1>
+                            <div style={{
+                                width: "100%",
+                                // background: "gray",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                                <label htmlFor="pictureInput" >
+
+                                    <img src={Picture} alt="Err"
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            background: "white",
+                                            border: "gray 2px solid",
+                                            display: "block"
+                                        }} />
+                                </label>
+
+                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+
+                            </div>
                         </div>
                     </div>
 

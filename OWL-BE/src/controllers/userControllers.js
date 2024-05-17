@@ -46,7 +46,8 @@ class UserController {
                     UserName: data.UserName,
                     Email: data.Email,
                     PassWord: hashPass,
-                    Hierachy: data.Hierachy
+                    Hierachy: data.Hierachy,
+                    Image: data.Image,
                 });
                 const result = new UserCreateDTO(users);
                 return res.status(message.OK.CODE).json(result);
@@ -78,12 +79,12 @@ class UserController {
         try {
             const { id } = req.params;
             if (id != null || id != "") {
-                await UserEntity.findOneAndDelete(id);
+                await UserEntity.findByIdAndDelete(id)
                 return res.status(message.OK.CODE).json({ message: message.OK.MESSAGE });
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
-
-        } catch (err) {
+        }
+        catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }

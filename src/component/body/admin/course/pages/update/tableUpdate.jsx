@@ -9,7 +9,7 @@ import UploadImage from "../../event/CRUD/uploadImage";
 import TextArea from "antd/es/input/TextArea";
 import { ArrowDownOutlined } from '@ant-design/icons';
 import '../../../../../../shortPath/scss/action.scss'
-const { Header, Footer, Content, Sider } = Layout;
+import LectureInCourseTable from "./table/lectures";
 
 export default function TableUpdate() {
     const CourseID = localStorage.getItem("CourseID")
@@ -29,6 +29,8 @@ export default function TableUpdate() {
                 setPicture(data.data.Picture)
             })
             .catch((error) => console.error(error));
+        
+
     }, [])
     // #region REQUEST CẬP NHẬT KHOÁ HỌC
     const Data = {
@@ -54,7 +56,7 @@ export default function TableUpdate() {
         reader.readAsDataURL(file);
 
     };
-    const handleOnUpdate = () =>{
+    const handleOnUpdate = () => {
         UpdateCourse(Data)
         UploadImage(ImageUpdate);
 
@@ -102,7 +104,6 @@ export default function TableUpdate() {
                                             setCourseName(e.target.value)
                                         }} />
                                         <span></span>
-
                                     </Form.Item>
                                     <Form.Item
                                         label="Description"
@@ -218,24 +219,17 @@ export default function TableUpdate() {
 
                                 </div>
                             </div>
-
                         </Form>
                     </div>
                     <div className="col" >
                         <div style={{ margin: "40px 0 0 0" }}>
                             <h1>Lectures</h1>
-
-
+                            <LectureInCourseTable />
                         </div>
                     </div>
 
                 </div >
-                <div className="row" >
-                    <div className="col">
-                        <h1 >List of Lecture</h1>
-                    </div>
-
-                </div>
+               
 
             </Layout >
         </>

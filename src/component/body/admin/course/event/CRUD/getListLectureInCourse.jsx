@@ -1,23 +1,24 @@
 import Axios from "axios"
-import { detailCourseUrl } from "../../../../../../shortPath/urlPath"
+import { toast } from 'react-hot-toast'
 
-export default async function GetListLectureInCourse(key){
+import { getListLectureInCourseUrl } from "../../../../../../shortPath/urlPath"
+
+export default async function GetListLectureInCourse(currentPage, sizePage) {
+    const tokenAccess = localStorage.getItem('AccessToken');
+    const CourseID = localStorage.getItem('CourseID');
+    const URL_LECTUREINCOURSE = `${getListLectureInCourseUrl}/${CourseID}?page=${currentPage}&size=${sizePage}`;
     try {
-        const tokenAccess = localStorage.getItem("AccessToken")
-        const CourseID = localStorage.getItem("CourseID")
-        const data = await Axios({
+     
+        const response = await Axios({
             method: "GET",
-            url: `${detailCourseUrl}${CourseID}`,
+            url: `${URL_LECTUREINCOURSE}`,
             headers: {
                tokenAccess
             }
-        }).catch(err => {
-            console.log("ERR")
-        })
-        const dataPromise = await data
-        return dataPromise
-    }
-    catch (err) {
-        console.log("ERR")
+        });
+        return response.data;
+    } catch (error) {
+        toast.error(error.message);
+        throw error;
     }
 }

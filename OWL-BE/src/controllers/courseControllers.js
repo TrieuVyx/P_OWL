@@ -5,7 +5,7 @@ const ListCourseDTO = require("../models/DTO/Course/ListCourseDTO");
 const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
 const ListLectureInCourseDTO = require("../models/DTO/Course/ListLectureInCourse");
-const fs = require('fs');
+const LectureInCourseDTO = require("../models/DTO/Course/LectureInCourseDTO")
 
 class CourseController {
     //#region TẠO KHOÁ HỌC
@@ -23,6 +23,7 @@ class CourseController {
                     Tittle: data.Tittle,
                     Content: data.Content,
                     Description: data.Description,
+                    Picture:data.Picture
                 });
                 const result = new CourseDTO(course);
                 return res.status(message.OK.CODE).json(result);
@@ -153,17 +154,25 @@ class CourseController {
 
     async GenerateList(req, res) {
         try {
-            const CourseID = req.body.CourseID;
-            if (CourseID != null || CourseID != "") {
+            // const CourseID = req.body.CourseID;
+            const {id} = req.params;
+            if (id != null || id != "") {
                 try {
-                    const Course = await CourseEntity.findById(CourseID);
-                    const ListCourse = new ListLectureInCourseDTO(Course);
-                    const lectureIDs = ListCourse.Lectures;
-                    const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } }).select('LectureName');
-                    const result = lectures.map(lecture => lecture.LectureName);
-                    return res.status(message.OK.CODE).json(result);
+                    const page = parseInt(req.query.page);
+                    const size = parseInt(req.query.size);
+                    if (!isNaN(page) && !isNaN(size)) {
+                        const Course = await CourseEntity.findById(id);
+                        const ListCourse = new ListLectureInCourseDTO(Course);
+                        const lectureIDs = ListCourse.Lectures;
+                        const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } }).skip(page * size).limit(size);
+                        const ListLectureInCourse = lectures.map(lecture => {
+                            return new LectureInCourseDTO(lecture.id,lecture.LectureName,lecture.Tittle)
+                        });
+                        return res.status(message.OK.CODE).json(ListLectureInCourse);
+                    }
+                    return res.status(message.FORBIDDEN.CODE).json({ message: message.FORBIDDEN.MESSAGE });
                 } catch (err) {
-                    return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+                    return res.status(message.BAD_REQUEST.CODE).json({ message: message.BAD_REQUEST.MESSAGE });
                 }
             }
             return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
@@ -220,18 +229,7 @@ class CourseController {
         }
     }
 
-    convertFileToBase64(filePath) {
-        return new Promise((resolve, reject) => {
-            fs.readFile(filePath, (err, data) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    const base64Image = data.toString('base64');
-                    resolve(base64Image);
-                }
-            });
-        });
-    }
+   
 
 }
 

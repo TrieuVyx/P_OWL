@@ -13,7 +13,6 @@ export default async function DeleteUser(){
             }
         }).then((res)=>{
             toast.success("Delete Success")
-            // #region XEM CHỖ NÀY CHUYỂN KHÔNG LOAD
         })
         .catch(err => {
             console.log("Error")

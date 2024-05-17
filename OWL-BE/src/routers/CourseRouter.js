@@ -4,7 +4,7 @@ const CourseController = require('../controllers/courseControllers')
 
 router.post('/UpdateCourseImage', CourseController.UpdateCourseImage)
 router.get('/getListCourse', CourseController.GetListCourse)
-router.get('/GetListLectureInCourse', CourseController.GenerateList)
+router.get('/GetListLectureInCourse/:id', CourseController.GenerateList)
 router.post('/addLecture', CourseController.GenerateLecture)
 router.post('/nonLecture', CourseController.GenerateNonLecture)
 router.post('/deleteCourse/:id', CourseController.DeleteCourse)
