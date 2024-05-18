@@ -190,7 +190,7 @@ class CourseController {
             if (!isNaN(page) && !isNaN(size)) {
                 const ListCourse = await CourseEntity.find().skip(page * size).limit(size);
                 const courseListDTO = ListCourse.map((each) => {
-                    return new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content);
+                    return new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content,each.Picture);
                 });
                 return res.status(message.OK.CODE).json(courseListDTO);
             } else {

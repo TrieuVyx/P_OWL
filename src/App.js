@@ -17,7 +17,13 @@ import {
   checkPermission,
   CourseManagementPage,
   UserManagementPage,
-  LectureManagementPage
+  LectureManagementPage,
+  InitState,
+  InitStateF,
+  InitStateFi,
+  InitStateTw,
+  InitStateThr,
+  EndState
 }
   from './shortPath/path';
 
@@ -35,7 +41,7 @@ import {
   DeleteLecture,
   CreateLecture
 }
-from './shortPath/adminTabUrl/adminTabUrl'
+  from './shortPath/adminTabUrl/adminTabUrl'
 import { Toaster } from 'react-hot-toast'
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -84,6 +90,7 @@ function App() {
                   <Route path={LinkRouter.HOME} element={<HomePage />} />
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSE} element={<Course />} />
+                  <Route path={LinkRouter.INITSTATE} element={<InitState />} />
 
                 </>
               )
@@ -91,7 +98,8 @@ function App() {
               <>
                 <Route path={LinkRouter.HOME} element={<HomePage />} />
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
-
+                <Route path={LinkRouter.COURSE} element={<Course />} />
+                <Route path={LinkRouter.INITSTATE} element={<InitState />} />
               </>
             )}
           </Routes>

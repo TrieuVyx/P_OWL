@@ -52,7 +52,7 @@ export default function TableUpdate() {
     return (
         <>
             <Layout>
-                <div className="container">
+                <div className="conainer">
                     <div className="row">
                         <div className="col">
                             <Form

@@ -34,7 +34,7 @@ export default function TableDetail() {
     return (
         <>
             <Layout>
-                <div className="container">
+                <div className="">
                     <div className="row">
                         <div className="col">
                             <Form

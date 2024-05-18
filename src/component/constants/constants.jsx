@@ -1,7 +1,10 @@
+import { InitState } from "../../shortPath/path";
+
 const LinkRouter = {
   HOME: "/",
   LOGIN: "login",
   COURSE: "course",
+    INITSTATE: "course/init",
   ADMIN:"admin",
   COURSEMANA: "admin/course",
   USERMANA: "admin/user",

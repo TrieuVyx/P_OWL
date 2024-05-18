@@ -15,6 +15,12 @@ import Menutab from "../component/header/navbar/menutab"
 import CourseAdmin from "../component/body/admin/course/course";
 import UserAdmin from "../component/body/admin/user/user"
 import LectureAdmin from "../component/body/admin/lecture/lecture"
+import InitState from "../component/body/Client/course/pages/initState";
+import InitStateF from "../component/body/Client/course/pages/initStateF";
+import InitStateFi from "../component/body/Client/course/pages/initStateFi";
+import InitStateThr from "../component/body/Client/course/pages/initStateThr";
+import InitStateTw from "../component/body/Client/course/pages/initStateTw";
+import EndState from "../component/body/Client/course/pages/endState";
 export {
     HomePage,
     Course,
@@ -38,5 +44,11 @@ export {
 
 
     IMAGE_USER_,
-    IMAGE_ADMIN_COURSE
+    IMAGE_ADMIN_COURSE,
+    InitState,
+    InitStateF,
+    InitStateThr, 
+    InitStateTw, 
+    InitStateFi,
+    EndState
 };

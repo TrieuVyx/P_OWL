@@ -11,7 +11,8 @@ export default function TableCreate() {
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
-    const [Image, setImage] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Video, setVideo] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
 
     const Data = {
         CourseName:CourseName,
@@ -19,7 +20,7 @@ export default function TableCreate() {
         Description:Description,
         Content:Content,
         Tittle:Tittle,
-        Picture:Image
+        Picture:Picture
 
     }
     const handleImageChange = (event) => {
@@ -27,7 +28,17 @@ export default function TableCreate() {
         const reader = new FileReader();
         reader.onload = (e) => {
             const newSrc = e.target.result;
-            setImage(newSrc);
+            setPicture(newSrc);
+        };
+        reader.readAsDataURL(file);
+
+    };
+    const handleVideohange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newSrc = e.target.result;
+            setPicture(newSrc);
         };
         reader.readAsDataURL(file);
 
@@ -35,7 +46,7 @@ export default function TableCreate() {
     return (
         <>
             <Layout>
-                <div className="container">
+                <div className="">
                     <div className="row">
                         <div className="col">
                             <Form
@@ -151,7 +162,7 @@ export default function TableCreate() {
                             }}>
                                 <label htmlFor="pictureInput" >
 
-                                    <img src={Image} alt="Err"
+                                    <img src={Picture} alt="Err"
                                         style={{
                                             width: "100%",
                                             height: "100%",
@@ -162,6 +173,34 @@ export default function TableCreate() {
                                 </label>
 
                                 <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+
+                            </div>
+                        </div>
+                    </div>
+                    <div className="row">
+                        <div className="col">
+                        <h1 style={{margin:"40px 0 0 0 "}}>Upload Video</h1>
+                            <div style={{
+                                width: "100%",
+                                // background: "gray",
+                                height: "100%",
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center"
+                            }}>
+                                <label htmlFor="pictureInput" >
+
+                                    <img src={Video} alt="Err"
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            background: "white",
+                                            border: "gray 2px solid",
+                                            display: "block"
+                                        }} />
+                                </label>
+
+                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleVideohange} />
 
                             </div>
                         </div>

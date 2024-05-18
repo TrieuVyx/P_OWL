@@ -159,7 +159,6 @@ export default function TableUpdate() {
                                         </div>
                                     </Form.Item>
                                 </div>
-
                                 <div className="col" style={{
                                     // background: "white",
                                     // border: "gray 2px solid",
@@ -227,10 +226,7 @@ export default function TableUpdate() {
                             <LectureInCourseTable />
                         </div>
                     </div>
-
                 </div >
-               
-
             </Layout >
         </>
     )

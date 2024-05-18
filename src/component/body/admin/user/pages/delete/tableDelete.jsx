@@ -34,7 +34,7 @@ export default function TableUpdate() {
     return (
         <>
             <Layout>
-                <div className="container">
+                <div className="">
                     <div className="row">
 
                         <div className="col">
@@ -182,7 +182,7 @@ export default function TableUpdate() {
                                             }} />
                                     </label>
 
-                                    <input type="text" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+                                    <input type="text" id="pictureInput" style={{ display: "none" }}  />
 
                                 </div>
                             </div>

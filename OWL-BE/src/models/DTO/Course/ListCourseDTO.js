@@ -5,13 +5,14 @@ class ListCourseDTO {
     Description;
     Content;
     Tittle;
-   
-    constructor(Id, CourseName, Tittle, Description, Content) {
+   Picture;
+    constructor(Id, CourseName, Tittle, Description, Content,Picture) {
         this.Id = Id;
         this.CourseName = CourseName
         this.Tittle = Tittle
         this.Description = Description
         this.Content = Content
+        this.Picture = Picture
     }
 }
 

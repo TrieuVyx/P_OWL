@@ -85,7 +85,7 @@ export default function TableUpdate() {
                             }}
                         // onFinishFailed={onFinishFailed}
                         >
-                            <h1>Detail Course</h1>
+                            <h1>Delete Course</h1>
                             <Toaster position='top-right' reverseOrder={false}></Toaster>
                             <div className="row">
                                 <div className="col">

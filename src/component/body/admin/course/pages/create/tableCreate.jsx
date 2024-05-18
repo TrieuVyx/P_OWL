@@ -35,7 +35,7 @@ export default function TableCreate() {
     return (
         <>
             <Layout>
-                <div className="container">
+                <div className="">
                     <div className="row">
                         <div className="col">
                             <Form

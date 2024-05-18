@@ -52,18 +52,22 @@ export default function Navbar() {
               router(LinkRouter.USERMANA);
             } else if (e.key === "4") {
               router(LinkRouter.LECMANA);
-            } else if (e.key === "5") {
+            } 
+            else if (e.key === "5") {
               localStorage.clear();
               router(LinkRouter.LOGIN);
             }
+            else if (e.key === "10") {
+                router(LinkRouter.COURSE);
+              }
           }
     };
     return (
-        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}   >
+        <Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{height:"100%", position:"fixed"}}  >
             <div className="demo-logo-vertical p-4">
                 <Link to={"/"} style={{color:"white", fontWeight:"bold",  textDecorationLine: 'unset',textUnderlineOffset:"unset"}}>Online Website Learning</Link>
             </div>
-            <Menu theme='dark' defaultSelectedKeys={[1]} mode="inline" style={{ textAlign: "left", height: "100vh", width: "100%" }} items={[
+            <Menu theme='dark' defaultSelectedKeys={[1]} mode="inline" style={{ textAlign: "left", width: "100%" , height:"200vh"}} items={[
                 // getItem("Online Website Learning", "0"),
                 permission === "ADMIN" ? (
                     getItem("AdminBoard", "1", <TeamOutlined />,
@@ -74,7 +78,7 @@ export default function Navbar() {
                         ]
                     )
                 ) : (
-                    getItem("Lessons", "10", <BookOutlined />)
+                    getItem("Course", "10", <BookOutlined />)
                 ),
                 getItem("Dashboard", "6", <PieChartOutlined />),
                 getItem("Setting", "7", <SettingOutlined />),

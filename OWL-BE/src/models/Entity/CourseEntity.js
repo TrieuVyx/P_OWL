@@ -5,13 +5,11 @@ const CourseSchema = new mongoose.Schema({
     CourseName:{
         type:String,
         default:"",
-        unique:""
 
     },
     Description:{
         type:String,
         default:"",
-        unique:""
 
     },
     Picture:{
@@ -22,14 +20,20 @@ const CourseSchema = new mongoose.Schema({
     Tittle:{
         type:String,
         default:"",
-        unique:""
 
     },
     Content:{
         type:String,
         default:"",
-        unique:""
-
+    },
+    DateCreate:{
+        type:Date,
+    },
+    Pee:{
+        type:Number,
+    },
+    EndDate:{
+        type:Date
     },
     Lectures:[
         {
