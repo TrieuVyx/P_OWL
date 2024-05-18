@@ -27,6 +27,7 @@ function routers(app) {
 //su dung router 
 function router(app) {
     app.use(Authenticate)
+
     app.use(express.urlencoded({ extended: false }));
     app.use(express.json());
     app.use(cors({ origin: "*" }));
@@ -38,6 +39,7 @@ function router(app) {
     app.use(process.env.AV1, AuthorRouter)
     app.use(process.env.UV1, UserRouter)
     app.use(process.env.V1, HomeRouter)
+
 }
 
 module.exports = routers
