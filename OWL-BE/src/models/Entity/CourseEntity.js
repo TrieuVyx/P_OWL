@@ -32,6 +32,9 @@ const CourseSchema = new mongoose.Schema({
     Pee:{
         type:Number,
     },
+    TypeCourse:{
+        type:String
+    },
     EndDate:{
         type:Date
     },
