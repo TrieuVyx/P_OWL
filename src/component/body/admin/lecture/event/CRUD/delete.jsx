@@ -16,10 +16,11 @@ export default async function DeleteLecture(){
             // #region XEM CHỖ NÀY CHUYỂN KHÔNG LOAD
         })
         .catch(err => {
-            console.log("Error")
+            toast.error("Delete failure")
         })
     }
     catch (err) {
-        console.log("ERR")
+        toast.error("Delete failure")
+
     }
 }

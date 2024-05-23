@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
 import TextArea from "antd/es/input/TextArea";
-import CreateCourse from "../../event/CRUD/create";
+import CreateLecture from "../../event/CRUD/create";
 
 export default function TableCreate() {
     const [LectureName, setLectureName] = useState("")
@@ -15,12 +15,13 @@ export default function TableCreate() {
     const [Video, setVideo] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
 
     const Data = {
-        CourseName:CourseName,
-        LectureName:LectureName,
-        Description:Description,
-        Content:Content,
-        Tittle:Tittle,
-        Picture:Picture
+        CourseName: CourseName,
+        LectureName: LectureName,
+        Description: Description,
+        Content: Content,
+        Tittle: Tittle,
+        Picture: Picture,
+        Video: Video
 
     }
     const handleImageChange = (event) => {
@@ -33,12 +34,12 @@ export default function TableCreate() {
         reader.readAsDataURL(file);
 
     };
-    const handleVideohange = (event) => {
+    const handleVideoChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
             const newSrc = e.target.result;
-            setPicture(newSrc);
+            setVideo(newSrc);
         };
         reader.readAsDataURL(file);
 
@@ -48,7 +49,7 @@ export default function TableCreate() {
             <Layout>
                 <div className="">
                     <div className="row">
-                        <div className="col">
+                        <div className="col" style={{background:"gray"}}>
                             <Form
                                 name="basic"
                                 labelCol={{
@@ -141,8 +142,8 @@ export default function TableCreate() {
                                 <Form.Item
                                 >
                                     <div style={formCenterStyle}>
-                                        <Popconfirm title="Sure to create?"   onConfirm={() => CreateCourse(Data)}>
-                                            <Button danger = "true">Create </Button>
+                                        <Popconfirm title="Sure to create?" onConfirm={() => CreateLecture(Data)}>
+                                            <Button danger="true">Create </Button>
                                         </Popconfirm>
 
                                     </div>
@@ -150,58 +151,81 @@ export default function TableCreate() {
                                 </Form.Item>
                             </Form>
                         </div>
-                        <div className="col">
-                            <h1 style={{margin:"40px 0 0 0 "}}>Upload Image</h1>
-                            <div style={{
-                                width: "100%",
-                                // background: "gray",
-                                height: "100%",
+                        <div className="col" style={{background:"gray"}}>
+                            <h1 style={{ margin: "40px 0 20px 0 " }}>Upload Image</h1>
+                            <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center"
                             }}>
-                                <label htmlFor="pictureInput" >
+                                <div style={{
+                                    width: "200px",
+                                    // background: "gray",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>
+                                    <label htmlFor="pictureInput" >
 
-                                    <img src={Picture} alt="Err"
-                                        style={{
-                                            width: "100%",
-                                            height: "100%",
-                                            background: "white",
-                                            border: "gray 2px solid",
-                                            display: "block"
-                                        }} />
-                                </label>
+                                        <img src={Picture} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }} />
+                                    </label>
 
-                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+                                    <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
 
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="row">
-                        <div className="col">
-                        <h1 style={{margin:"40px 0 0 0 "}}>Upload Video</h1>
-                            <div style={{
-                                width: "100%",
-                                // background: "gray",
-                                height: "100%",
+                        <div className="col" style={{background:"gray"}}>
+                            <h1 style={{ margin: "40px 0 20px 0 " }}>Select Video</h1>
+                            <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
-                                justifyContent: "center"
+                                justifyContent: "center",
+                                flexWrap:"wrap"
                             }}>
-                                <label htmlFor="pictureInput" >
+                                <div
+                                    style={{
+                                        width: "100%",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center"
+                                    }}
+                                >
+                                    <label htmlFor="videoInput">
+                                        <video
+                                            src={Video}
+                                            alt="Err"
+                                            style={{
+                                                width: "350px",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }}
+                                            controls
+                                        />
+                                    </label>
 
-                                    <img src={Video} alt="Err"
-                                        style={{
-                                            width: "100%",
-                                            height: "100%",
-                                            background: "white",
-                                            border: "gray 2px solid",
-                                            display: "block"
-                                        }} />
-                                </label>
-
-                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleVideohange} />
-
+                                    <div class="form-group ">
+                                        <div class="custom-file">
+                                            <input
+                                                type="file"
+                                                class="custom-file-input"
+                                                id="videoInput"
+                                                name="Video"
+                                                style={{display:"none"}}
+                                                onChange={handleVideoChange}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="videoInput" class="border rounded p-2" >Choose Video</label>
                             </div>
                         </div>
                     </div>

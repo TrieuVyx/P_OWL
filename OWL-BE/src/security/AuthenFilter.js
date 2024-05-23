@@ -3,6 +3,7 @@ const message = require('../constants/constansHttpStatus')
 async function Authenticate(err,req, res, next) {
     try {
         const secretKey = process.env.SECRECKEY
+        // if (req.path != '/api/author/login' || req.path != '/api/author/register') {
         if (req.path === '/api/author/login' || req.path === '/api/author/register') {
             return next();
         }

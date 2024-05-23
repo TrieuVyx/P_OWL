@@ -16,6 +16,9 @@ export default function TableUpdate() {
     const [Tittle, setTittle] = useState("")
     const [Picture1, setPicture1] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
     const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Video, setVideo] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Video1, setVideo1] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+
     useEffect(() => {
         GetLecture()
             .then((data) => {
@@ -25,7 +28,7 @@ export default function TableUpdate() {
                 setContent(data.data.Content)
                 setTittle(data.data.Tittle)
                 setPicture(data.data.Picture)
-
+                setVideo(data.data.Video)
             })
             .catch((error) => console.error(error));
     }, [])
@@ -36,8 +39,8 @@ export default function TableUpdate() {
         Description: Description,
         Content: Content,
         Tittle: Tittle,
-        Picture: Picture1
-
+        Picture: Picture1,
+        Video: Video1
     }
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -49,12 +52,22 @@ export default function TableUpdate() {
         reader.readAsDataURL(file);
 
     };
+    const handleVideoChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const newSrc = e.target.result;
+            setVideo1(newSrc);
+        };
+        reader.readAsDataURL(file);
+
+    };
     return (
         <>
             <Layout>
                 <div className="conainer">
                     <div className="row">
-                        <div className="col">
+                        <div className="col" style={{ background: "gray" }}>
                             <Form
                                 name="basic"
                                 labelCol={{
@@ -167,16 +180,20 @@ export default function TableUpdate() {
                                 </Form.Item>
                             </Form>
                         </div>
-                        <div className="col ">
-                            <div className="row " >
+                        <div className="col" style={{ background: "gray" }}>
+                        <h1 style={{ margin: "40px 0 20px 0 " }}>Select Image</h1>
+                            <div className="w-100 " style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexWrap: "wrap"
+                            }}>
+
                                 <div style={{
                                     width: "200px",
-                                    // background: "gray",
-                                    height: "200px",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    margin: "120px 0 0 0"
                                 }}>
                                     <label htmlFor="pictureInput" >
 
@@ -194,19 +211,17 @@ export default function TableUpdate() {
 
                                 </div>
                             </div>
-                            <div className="row mt-4 mb-4 ">
-                                {/* <ArrowDownOutlined className="arrow-icon"
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }} /> */}
-                            </div>
-                            <div className="row">
+
+                            <div className="w-100 " style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexWrap: "wrap"
+                            }}>
+
                                 <div style={{
                                     width: "200px",
                                     // background: "gray",
-                                    height: "200px",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center"
@@ -221,6 +236,82 @@ export default function TableUpdate() {
                                                 border: "gray 2px solid",
                                                 display: "block"
                                             }} />
+                                    </label>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <div className="col" style={{ background: "gray" }}>
+                        <h1 style={{ margin: "40px 0 20px 0 " }}>Select Video</h1>
+                            <div className="w-100 " style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexWrap: "wrap"
+                            }}>
+                                <div style={{
+                                    width: "350px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    flexWrap:"wrap",
+                                    justifyContent: "center",
+                                }}>
+                                    <label htmlFor="videoInput" >
+
+                                        <video src={Video} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }}
+                                        />
+                                    </label>
+
+                                    <div class="form-group ">
+                                        <div class="custom-file">
+                                            <input
+                                                type="file"
+                                                class="custom-file-input"
+                                                id="videoInput"
+                                                name="Video"
+                                                style={{display:"none"}}
+                                                onChange={handleVideoChange}
+                                            />
+                                        </div>
+                                    </div>
+                                    <label for="videoInput" class="border rounded p-2" >Choose Video</label>
+
+                                </div>
+                            </div>
+                       
+                            <div className="w-100 " style={{
+                                display: "flex",
+                                alignItems: "center",
+                                justifyContent: "center",
+                                flexWrap: "wrap"
+                            }}>
+                                <div style={{
+                                    width: "350px",
+                                    // background: "gray",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>
+                                    <label htmlFor="videoInput1" >
+
+                                        <video src={Video1} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }}
+                                            controls
+                                        />
                                     </label>
 
                                 </div>

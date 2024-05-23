@@ -15,10 +15,11 @@ export default async function CreateCourse(CourseData){
             toast.success("Create Success")
         })
         .catch(err => {
-            console.log("Error")
+            toast.error("Create Failure")
+
         })
     }
     catch (err) {
-        console.log("ERR")
+        toast.error("Create Failure")
     }
 }

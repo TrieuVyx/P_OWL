@@ -15,10 +15,10 @@ export default async function UpdateLecture(LectureData){
             toast.success("Update Success")
         })
         .catch(err => {
-            console.log("Error")
+            toast.error("Update Failure, Size Limited < 12MB")
         })
     }
     catch (err) {
-        console.log("ERR")
+        toast.error("Update Failure, Size Limited < 12MB")
     }
 }

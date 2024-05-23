@@ -20,7 +20,7 @@ export default function TableCreate() {
         Description: Description,
         Content: Content,
         Tittle: Tittle,
-        Picture:Picture
+        Picture: Picture
     }
     const handleImageChange = (event) => {
         const file = event.target.files[0];
@@ -127,30 +127,35 @@ export default function TableCreate() {
                             </Form>
                         </div>
                         <div className="col">
-                            <h1 style={{ margin: "40px 0 0 0 " }}>Upload Image</h1>
-                            <div style={{
-                                width: "100%",
-                                // background: "gray",
-                                height: "100%",
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "center"
+                            <h1 style={{ margin: "40px 0px 20px 0 " }}>Upload Image</h1>
+                            <div className="w-100 " style={{
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"center"
                             }}>
-                                <label htmlFor="pictureInput" >
+                                <div style={{
+                                    width: "200px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>
+                                    <label htmlFor="pictureInput" >
 
-                                    <img src={Picture} alt="Err"
-                                        style={{
-                                            width: "100%",
-                                            height: "100%",
-                                            background: "white",
-                                            border: "gray 2px solid",
-                                            display: "block"
-                                        }} />
-                                </label>
+                                        <img src={Picture} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }} />
+                                    </label>
 
-                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+                                    <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
 
+                                </div>
                             </div>
+
                         </div>
                     </div>
 

@@ -23,7 +23,7 @@ export default function TableCreate() {
         Address: Address,
         Phone: Phone,
         Hierachy: Hierachy,
-        Image:Image
+        Image: Image
 
     }
     const handleImageChange = (event) => {
@@ -180,29 +180,33 @@ export default function TableCreate() {
 
                         </div>
                         <div className="col">
-                            <h1 style={{ margin: "40px 0 0 0 " }}>Upload Image</h1>
-                            <div style={{
-                                width: "100%",
-                                // background: "gray",
-                                height: "100%",
+                            <h1 style={{ margin: "40px 0px 20px 0 " }}>Upload Image</h1>
+                            <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center"
                             }}>
-                                <label htmlFor="pictureInput" >
+                                <div style={{
+                                       width: "200px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}>
+                                    <label htmlFor="pictureInput" >
 
-                                    <img src={Image} alt="Err"
-                                        style={{
-                                            width: "100%",
-                                            height: "100%",
-                                            background: "white",
-                                            border: "gray 2px solid",
-                                            display: "block"
-                                        }} />
-                                </label>
+                                        <img src={Image} alt="Err"
+                                            style={{
+                                                width: "100%",
+                                                height: "100%",
+                                                background: "white",
+                                                border: "gray 2px solid",
+                                                display: "block"
+                                            }} />
+                                    </label>
 
-                                <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
+                                    <input type="file" id="pictureInput" style={{ display: "none" }} onChange={handleImageChange} />
 
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -159,15 +159,18 @@ export default function TableUpdate() {
                             </Form>
                         </div>
                         <div className="col ">
-                            <div className="row " >
+                        <h1 style={{ margin: "40px 0px 20px 0 " }}>Avatar</h1>
+                            <div className="w-100 " style={{
+                                display:"flex",
+                                alignItems:"center",
+                                justifyContent:"center"
+                            }}>
                                 <div style={{
                                     width: "200px",
-                                    // background: "gray",
                                     height: "200px",
                                     display: "flex",
                                     alignItems: "center",
                                     justifyContent: "center",
-                                    margin: "120px 0 0 0"
                                 }}>
                                     <label htmlFor="pictureInput" >
 
@@ -185,38 +188,7 @@ export default function TableUpdate() {
 
                                 </div>
                             </div>
-                            {/* <div className="row mt-4 mb-4 ">
-                                <ArrowDownOutlined className="arrow-icon"
-                                    style={{
-                                        display: "flex",
-                                        alignItems: "center",
-                                        justifyContent: "center",
-                                    }} />
-                            </div>
-                            <div className="row">
-                                <div style={{
-                                    width: "200px",
-                                    // background: "gray",
-                                    height: "200px",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    justifyContent: "center"
-                                }}>
-                                    <label htmlFor="pictureInput" >
-
-                                        <img src={Picture1} alt="Err"
-                                            style={{
-                                                width: "100%",
-                                                height: "100%",
-                                                background: "white",
-                                                border: "gray 2px solid",
-                                                display: "block"
-                                            }} />
-                                    </label>
-
-                                </div>
-                            </div> */}
-
+                        
                         </div>
                     </div>
                     <div className="row">

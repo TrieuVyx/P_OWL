@@ -20,7 +20,8 @@ class LectureControllers {
                     Tittle: data.Tittle,
                     Content: data.Content,
                     Ex: data.Ex,
-                    Picture: data.Picture
+                    Picture: data.Picture,
+                    Video:data.Video
                 });
                 const result = new LectureDTO(lecture);
                 return res.status(message.OK.CODE).json(result);

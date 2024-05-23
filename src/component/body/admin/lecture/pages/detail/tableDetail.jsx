@@ -15,22 +15,23 @@ export default function TableDetail() {
     const [Description, setDescription] = useState("")
     const [Content, setContent] = useState("")
     const [Tittle, setTittle] = useState("")
-    const [Picture1, setPicture1] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+    const [Video, setVideo] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
+
     const [Picture, setPicture] = useState("https://ik.imagekit.io/alejk5lwty/P_OWL/uploda.jpg?updatedAt=1715747698979");
     useEffect(() => {
         GetCourse()
             .then((data) => {
-                // setCourseName(data.data.LectureName)
+                console.log(data)
                 setLectureName(data.data.LectureName)
                 setDescription(data.data.Description)
                 setContent(data.data.Content)
                 setTittle(data.data.Tittle)
                 setPicture(data.data.Picture)
-
+                setVideo(data.data.Video)
             })
             .catch((error) => console.error(error));
     }, [])
-    
+
     return (
         <>
             <Layout>
@@ -172,6 +173,34 @@ export default function TableDetail() {
                                     <input type="text" id="pictureInput" style={{ display: "none" }} />
 
                                 </div>
+                            </div>
+                        </div>
+                        <div className="col">
+                            <h1 style={{ margin: "40px 0 0 0 " }}>Select Video</h1>
+                            <div
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "center"
+                                }}
+                            >
+                                <label htmlFor="videoInput">
+                                    <video
+                                        src={Video}
+                                        alt="Err"
+                                        style={{
+                                            width: "100%",
+                                            height: "100%",
+                                            background: "white",
+                                            border: "gray 2px solid",
+                                            display: "block"
+                                        }}
+                                        controls
+                                    />
+                                </label>
+
                             </div>
                         </div>
                     </div>
