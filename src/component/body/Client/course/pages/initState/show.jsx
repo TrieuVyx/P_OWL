@@ -1,7 +1,15 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { Collapse } from 'antd';
-export default function showCourseUser() {
+import TextArea from 'antd/es/input/TextArea';
+import getCourse from '../../event/getCourse';
 
+export default function showCourseUser() {
+    useEffect(()=>{
+        getCourse()
+        .then((data)=>{
+            console.log(data)
+        })
+    },[])
     const onChange = (key) => {
         console.log(key);
     };
@@ -29,20 +37,35 @@ export default function showCourseUser() {
     ];
     return (
         <>
-            <div className="">
+            <div className='m-3'>
                 <div className="row">
                     <div className="col">
+                        <div className="container-video m-2" style={{
+                            background: "gray",
+                            height: "250px",
 
+                        }}>
 
+                        </div>
+                        <div className="row">
+                            <div className="col m-2" style={{textAlign:"left"}}>
+                                <div className='m-2'>Title: </div>
+                                <div className='m-2'>Description: </div>
+                                <div className='m-2'>Content: </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="col">
                         <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />;
                     </div>
                 </div>
                 <div className="row">
-
+                    <div className='m-2'>
+                        <TextArea   />
+                    </div>
                 </div>
             </div>
+
         </>
     )
 }

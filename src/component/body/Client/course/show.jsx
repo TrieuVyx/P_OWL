@@ -1,11 +1,14 @@
 import { EditOutlined, EllipsisOutlined, SettingOutlined, EyeOutlined } from '@ant-design/icons';
-import { Avatar, Card, Popconfirm, Carousel,Badge } from 'antd';
+import { Avatar, Card, Popconfirm, Carousel, Badge } from 'antd';
 import getListCourse from './event/getListCourse';
 import React, { useEffect, useState } from 'react'
-
+import GetCourseRender from './event/getCourse'
+import { useNavigate } from 'react-router-dom';
+import LinkRouter from '../../../constants/constants';
 const { Meta } = Card;
 export default function ShowContent() {
     const [Data, setData] = useState([])
+    const router = useNavigate();
     useEffect(() => {
         getListCourse()
             .then(data => {
@@ -13,7 +16,9 @@ export default function ShowContent() {
             })
     }, [])
     const handleRegisterCourse = (e) => {
-        console.log(e)
+        GetCourseRender()
+        localStorage.setItem("CourseID", e)
+        router("/course/init")
     }
     return (
         <>
@@ -25,11 +30,11 @@ export default function ShowContent() {
                         {
                             Data.map(each => {
                                 return (
-                                    <Popconfirm title="Sure to Register?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id}>
+                                    <Popconfirm title="Sure to Register?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
 
                                         <Card
-                                            className='m-2'
-                                            style={{ padding: "0" ,width:"24%"}}
+                                            className='m-2' 
+                                            style={{ padding: "0", width: "24%" }}
                                             cover={
                                                 <img
                                                     alt="example"
@@ -38,12 +43,11 @@ export default function ShowContent() {
                                                 />
                                             }
                                             actions={[
-                                                <EyeOutlined key="eyes" style={{margin :"0"}}/>,
-                                                
+                                                <EyeOutlined key="eyes" style={{ margin: "0" }} />,
                                                 // <EllipsisOutlined key="ellipsis" />,
                                             ]}
                                         >
-                                            <div style={{ textAlign: "left"}}>
+                                            <div style={{ textAlign: "left" }}>
                                                 <h6>CourseName : {each.CourseName}</h6>
                                                 <h6>Pee : Free</h6>
                                             </div>
@@ -53,8 +57,6 @@ export default function ShowContent() {
                                 )
                             })
                         }
-
-
                     </div>
 
                 </div>
