@@ -4,7 +4,6 @@ import getListCourse from './event/getListCourse';
 import React, { useEffect, useState } from 'react'
 import GetCourseRender from './event/getCourse'
 import { useNavigate } from 'react-router-dom';
-import LinkRouter from '../../../constants/constants';
 const { Meta } = Card;
 export default function ShowContent() {
     const [Data, setData] = useState([])
@@ -24,13 +23,13 @@ export default function ShowContent() {
         <>
             <div className="">
                 <div className="row ">
-                    <h2 style={{ textAlign: "left" }}>Common Course</h2>
+                    <h2 style={{ textAlign: "left" , paddingLeft:"10px" }}>Common Course</h2>
 
                     <div className="col d-flex flex-wrap w-100">
                         {
                             Data.map(each => {
                                 return (
-                                    <Popconfirm title="Sure to Register?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
+                                    <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
 
                                         <Card
                                             className='m-2' 
@@ -43,7 +42,7 @@ export default function ShowContent() {
                                                 />
                                             }
                                             actions={[
-                                                <EyeOutlined key="eyes" style={{ margin: "0" }} />,
+                                                <EyeOutlined key="eyes" style={{  textAlign:"left", padding:"0 10px 0 10px" }} />,
                                                 // <EllipsisOutlined key="ellipsis" />,
                                             ]}
                                         >

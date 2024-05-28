@@ -23,6 +23,7 @@ import {
   InitStateFi,
   InitStateTw,
   InitStateThr,
+  ProfileUser,
   EndState
 }
   from './shortPath/path';
@@ -91,6 +92,7 @@ function App() {
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                   <Route path={LinkRouter.COURSE} element={<Course />} />
                   <Route path={LinkRouter.INITSTATE} element={<InitState />} />
+                  <Route path={LinkRouter.PROFILE} element={<ProfileUser />} />
 
                 </>
               )
@@ -100,6 +102,7 @@ function App() {
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
                 <Route path={LinkRouter.COURSE} element={<Course />} />
                 <Route path={LinkRouter.INITSTATE} element={<InitState />} />
+                <Route path={LinkRouter.PROFILE} element={<ProfileUser />} />
               </>
             )}
           </Routes>

@@ -14,7 +14,8 @@ export default function InitState(){
             <Layout >
                 {/* <Header style={headerStyle}><Setting /></Header> */}
                 <Content>
-                    <ShowCourseUser/>
+                    
+                    {/* <ShowCourseUser/> */}
                 </Content>
                 <Footer></Footer>
             </Layout>

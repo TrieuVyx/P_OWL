@@ -1,13 +1,16 @@
-import { Input, Space, Avatar, Badge } from 'antd';
+import { Input, Space, Avatar, Badge, Popconfirm } from 'antd';
 import {
 
     BellOutlined,
     UserOutlined,
 } from '@ant-design/icons';
-import { centerStyle, betweenStyle ,margin,gap} from "../../../shortPath/styleComponent"
+import { centerStyle, betweenStyle, margin, gap } from "../../../shortPath/styleComponent"
+import GetUser from '../../body/Client/user/event/getUser';
 const { Search } = Input;
 
 export default function Setting() {
+
+
     return (
         <div >
 
@@ -24,9 +27,12 @@ export default function Setting() {
                     <Badge count={0} >
                         <Avatar shape="square" icon={<BellOutlined />} style={margin} />
                     </Badge>
-                    <Badge >
-                        <Avatar shape="square" icon={<UserOutlined />} />
+
+                    <Badge onClick={GetUser()} >
+                            <Avatar shape="square" icon={<UserOutlined />} />
+
                     </Badge>
+
                 </div>
 
             </Space>
@@ -35,31 +41,3 @@ export default function Setting() {
     )
 }
 
-{/* 
-<Search 
-    placeholder="input search text" 
-    onSearch={onSearch} 
-    style={{ width: 200 }} />
-<Search 
-    placeholder="input search text" 
-    allowClear 
-    onSearch={onSearch} 
-    style={{ width: 200 }} />
-<Search
-    addonBefore="https://"
-    placeholder="input search text"
-    allowClear
-    onSearch={onSearch}
-    style={{ width: 304 }}
-/>
-<Search 
-    placeholder="input search text" 
-    onSearch={onSearch} 
-    enterButton />
-<Search
-    placeholder="input search text"
-    enterButton="Search"
-    size="large"
-    suffix={suffix}
-    onSearch={onSearch}
-/> */}
