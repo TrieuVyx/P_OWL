@@ -20,7 +20,7 @@ export const deleteCourseUrl = `http://localhost:3002/api/course/deleteCourse/` 
 export const updateCourseUrl = `http://localhost:3002/api/course/updateCourse/` // có ID
 export const updateCourseImageUrl = `http://localhost:3002/api/course/UpdateCourseImage` 
 export const getListLectureInCourseUrl = `http://localhost:3002/api/course/GetListLectureInCourse`
-
+export const searchCourseUrl = `http://localhost:3002/api/course/searchcourse`
 //endregion
 
 //#region LECTURE PATH
@@ -29,5 +29,7 @@ export const createLectureUrl = `http://localhost:3002/api/lecture/createLecture
 export const detailLectureUrl = `http://localhost:3002/api/lecture/getDetailLecture/` // có ID
 export const deleteLectureUrl = `http://localhost:3002/api/lecture/deleteLecture/` // có ID
 export const updateLectureUrl = `http://localhost:3002/api/lecture/updateLecture/` // có ID
+
+
 
 //endregion

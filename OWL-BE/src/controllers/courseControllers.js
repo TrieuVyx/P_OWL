@@ -23,7 +23,7 @@ class CourseController {
                     Tittle: data.Tittle,
                     Content: data.Content,
                     Description: data.Description,
-                    Picture:data.Picture
+                    Picture: data.Picture
                 });
                 const result = new CourseDTO(course);
                 return res.status(message.OK.CODE).json(result);
@@ -155,7 +155,7 @@ class CourseController {
     async GenerateList(req, res) {
         try {
             // const CourseID = req.body.CourseID;
-            const {id} = req.params;
+            const { id } = req.params;
             if (id != null || id != "") {
                 try {
                     const page = parseInt(req.query.page);
@@ -166,7 +166,7 @@ class CourseController {
                         const lectureIDs = ListCourse.Lectures;
                         const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } }).skip(page * size).limit(size);
                         const ListLectureInCourse = lectures.map(lecture => {
-                            return new LectureInCourseDTO(lecture.id,lecture.LectureName,lecture.Tittle)
+                            return new LectureInCourseDTO(lecture.id, lecture.LectureName, lecture.Tittle)
                         });
                         return res.status(message.OK.CODE).json(ListLectureInCourse);
                     }
@@ -190,7 +190,7 @@ class CourseController {
             if (!isNaN(page) && !isNaN(size)) {
                 const ListCourse = await CourseEntity.find().skip(page * size).limit(size);
                 const courseListDTO = ListCourse.map((each) => {
-                    return new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content,each.Picture);
+                    return new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content, each.Picture);
                 });
                 return res.status(message.OK.CODE).json(courseListDTO);
             } else {
@@ -228,9 +228,35 @@ class CourseController {
             return res.status(500).json({ message: 'Lỗi máy chủ.' });
         }
     }
-    
+    //#region TÌM KIẾM KHÓA HỌC
 
-   
+    async SearchCourses(req, res) {
+        try {
+            const { CourseName, Description, TypeCourse } = req.body; // Get search parameters
+
+            let query = {};
+            if (CourseName) {
+                query.CourseName = { $regex: CourseName, $options: 'i' }; 
+            }
+            if (Description) {
+                query.Description = { $regex: Description, $options: 'i' };
+            }
+            if (TypeCourse) {
+                query.TypeCourse = TypeCourse;
+            }
+
+            const courses = await CourseEntity.find(query); // Find courses matching criteria
+
+            if (courses.length > 0) {
+                const results = courses.map(course => new CourseDTO(course)); // Convert to DTOs
+                return res.status(message.OK.CODE).json(results);
+            } else {
+                return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE);
+            }
+        } catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+        }
+    }
 
 }
 

@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const CourseController = require('../controllers/courseControllers')
 
+router.post('/searchcourse', CourseController.SearchCourses)
 router.post('/UpdateCourseImage', CourseController.UpdateCourseImage)
 router.get('/getListCourse', CourseController.GetListCourse)
 router.get('/GetListLectureInCourse/:id', CourseController.GenerateList)

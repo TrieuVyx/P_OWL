@@ -20,7 +20,7 @@ export default function Author() {
                         <span>very good!</span>
                     </div>
                     <div className="user_child">
-                        <img className="user_image" src={IMAGE_USER_}></img>
+                        <img className="user_image" src={IMAGE_USER_} alt=""/>
                     </div>
 
                 </div>

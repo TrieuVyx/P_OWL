@@ -4,15 +4,28 @@ import getListCourse from './event/getListCourse';
 import React, { useEffect, useState } from 'react'
 import GetCourseRender from './event/getCourse'
 import { useNavigate } from 'react-router-dom';
-const { Meta } = Card;
+import SearchCourse from '../../../header/navbar/event/search.course';
+import toast from 'react-hot-toast';
+
 export default function ShowContent() {
     const [Data, setData] = useState([])
+    const [ResultSearch, setResultSearch] = useState([])
+    const SearchReq = localStorage.getItem("SearchReq")
     const router = useNavigate();
     useEffect(() => {
-        getListCourse()
-            .then(data => {
-                setData(data)
-            })
+        try {
+            getListCourse()
+                .then(data => {
+                    setData(data)
+                })
+            SearchCourse()
+                .then(data => {
+                    setResultSearch(data.data)
+                })
+        }
+        catch (err) {
+            toast.err("Please Token is Exprienced,  login again")
+        }
     }, [])
     const handleRegisterCourse = (e) => {
         GetCourseRender()
@@ -23,80 +36,73 @@ export default function ShowContent() {
         <>
             <div className="">
                 <div className="row ">
-                    <h2 style={{ textAlign: "left" , paddingLeft:"10px" }}>Common Course</h2>
-
+                    <h2 style={{ textAlign: "left", paddingLeft: "10px" }}>Common Course</h2>
                     <div className="col d-flex flex-wrap w-100">
                         {
-                            Data.map(each => {
-                                return (
-                                    <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
+                            SearchReq == null ?
+                                Data.map(each => {
+                                    return (
+                                        <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
 
-                                        <Card
-                                            className='m-2' 
-                                            style={{ padding: "0", width: "24%" }}
-                                            cover={
-                                                <img
-                                                    alt="example"
-                                                    style={{ width: "100%", height: "100px" }}
-                                                    src={each.Picture}
-                                                />
-                                            }
-                                            actions={[
-                                                <EyeOutlined key="eyes" style={{  textAlign:"left", padding:"0 10px 0 10px" }} />,
-                                                // <EllipsisOutlined key="ellipsis" />,
-                                            ]}
-                                        >
-                                            <div style={{ textAlign: "left" }}>
-                                                <h6>CourseName : {each.CourseName}</h6>
-                                                <h6>Pee : Free</h6>
-                                            </div>
+                                            <Card
+                                                className='m-2'
+                                                style={{ padding: "0", width: "24%" }}
+                                                cover={
+                                                    <img
+                                                        alt="example"
+                                                        style={{ width: "100%", height: "100px" }}
+                                                        src={each.Picture}
+                                                    />
+                                                }
+                                                actions={[
+                                                    <EyeOutlined key="eyes" style={{ textAlign: "left", padding: "0 10px 0 10px" }} />,
+                                                    // <EllipsisOutlined key="ellipsis" />,
+                                                ]}
+                                            >
+                                                <div style={{ textAlign: "left" }}>
+                                                    <h6>CourseName : {each.CourseName}</h6>
+                                                    <h6>Pee : Free</h6>
+                                                </div>
 
-                                        </Card>
-                                    </Popconfirm>
-                                )
-                            })
+                                            </Card>
+                                        </Popconfirm>
+                                    )
+                                })
+                                :
+                                ResultSearch.map(each => {
+                                    return (
+                                        <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
+
+                                            <Card
+                                                className='m-2'
+                                                style={{ padding: "0", width: "24%" }}
+                                                cover={
+                                                    <img
+                                                        alt="example"
+                                                        style={{ width: "100%", height: "100px" }}
+                                                        src={each.Picture}
+                                                    />
+                                                }
+                                                actions={[
+                                                    <EyeOutlined key="eyes" style={{ textAlign: "left", padding: "0 10px 0 10px" }} />,
+                                                    // <EllipsisOutlined key="ellipsis" />,
+                                                ]}
+                                            >
+                                                <div style={{ textAlign: "left" }}>
+                                                    <h6>CourseName : {each.CourseName}</h6>
+                                                    <h6>Pee : Free</h6>
+                                                </div>
+
+                                            </Card>
+                                        </Popconfirm>
+                                    )
+                                })
                         }
                     </div>
 
                 </div>
                 <div className="row ">
                     <h2 style={{ textAlign: "left" }}>Paid Course</h2>
-
-                    {/* <div className="col d-flex flex-wrap w-100">
-                        {
-                            Data.map(each => {
-                                return (
-                                    <Popconfirm title="Sure to Register?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id}>
-
-                                        <Card
-                                            className='m-2'
-                                            style={{ padding: "0" ,width:"24%"}}
-                                            cover={
-                                                <img
-                                                    alt="example"
-                                                    style={{ width: "100%", height: "100px" }}
-                                                    src={each.Picture}
-                                                />
-                                            }
-                                            actions={[
-                                                <EyeOutlined key="eyes" style={{margin :"0"}}/>,
-                                                
-                                                // <EllipsisOutlined key="ellipsis" />,
-                                            ]}
-                                        >
-                                            <div style={{ textAlign: "left"}}>
-                                                <h6>CourseName : {each.CourseName}</h6>
-                                                <h6>Pee : Free</h6>
-                                            </div>
-
-                                        </Card>
-                                    </Popconfirm>
-                                )
-                            })
-                        }
-
-
-                    </div> */}
 
                 </div>
             </div>

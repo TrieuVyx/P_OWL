@@ -44,7 +44,7 @@ const CourseSchema = new mongoose.Schema({
             ref:"LectureEntity"
         }
     ]
-
+    
 })
 
 
