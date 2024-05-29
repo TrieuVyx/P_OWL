@@ -6,7 +6,7 @@ const LinkRouter = {
   COURSE: "course",
   INITSTATE: "course/init",
   ADMIN:"admin",
-  PROFILE:"user/:id",
+  PROFILE:"user",
   COURSEMANA: "admin/course",
   USERMANA: "admin/user",
   LECMANA: "admin/lecture",
@@ -22,6 +22,7 @@ const LinkRouter = {
   UPDATELECTURE:"admin/lecture/update/:id",
   DELETELECTURE:"admin/lecture/delete/:id",
   CREATELECTURE:"admin/lecture/create",
+  COURSETOLECTURE:"course/init/lecture"
 };
 
 export default LinkRouter;

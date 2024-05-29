@@ -16,7 +16,7 @@ export default function ShowContent() {
         try {
             getListCourse()
                 .then(data => {
-                    setData(data)
+                     setData(data)
                 })
             SearchCourse()
                 .then(data => {
@@ -27,9 +27,10 @@ export default function ShowContent() {
             toast.err("Please Token is Exprienced,  login again")
         }
     }, [])
-    const handleRegisterCourse = (e) => {
-        GetCourseRender()
-        localStorage.setItem("CourseID", e)
+
+    //#region chuyển hướng khóa học
+    const handleRegisterCourse = (each) => {
+        localStorage.setItem("CourseID", each)
         router("/course/init")
     }
     return (
@@ -42,9 +43,10 @@ export default function ShowContent() {
                             SearchReq == null ?
                                 Data.map(each => {
                                     return (
-                                        <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
-
+                                        <Popconfirm title="Sure to Watch?"
+                                            onConfirm={() => handleRegisterCourse(each.Id)}   key={each.Id || index} >
                                             <Card
+                                                key={each.Id || index}
                                                 className='m-2'
                                                 style={{ padding: "0", width: "24%" }}
                                                 cover={
@@ -69,11 +71,11 @@ export default function ShowContent() {
                                     )
                                 })
                                 :
-                                ResultSearch.map(each => {
+                                ResultSearch.map((each, index) => {
                                     return (
-                                        <Popconfirm title="Sure to Watch?" onConfirm={(e) => handleRegisterCourse(each.Id)} key={each.Id} >
-
+                                        <Popconfirm title="Sure to Watch?" onConfirm={() => handleRegisterCourse(each.Id)}   key={each.Id || index}>
                                             <Card
+                                             key={each.Id || index} 
                                                 className='m-2'
                                                 style={{ padding: "0", width: "24%" }}
                                                 cover={
@@ -85,14 +87,12 @@ export default function ShowContent() {
                                                 }
                                                 actions={[
                                                     <EyeOutlined key="eyes" style={{ textAlign: "left", padding: "0 10px 0 10px" }} />,
-                                                    // <EllipsisOutlined key="ellipsis" />,
                                                 ]}
                                             >
                                                 <div style={{ textAlign: "left" }}>
                                                     <h6>CourseName : {each.CourseName}</h6>
                                                     <h6>Pee : Free</h6>
                                                 </div>
-
                                             </Card>
                                         </Popconfirm>
                                     )
@@ -102,7 +102,7 @@ export default function ShowContent() {
 
                 </div>
                 <div className="row ">
-                    <h2 style={{ textAlign: "left" }}>Paid Course</h2>
+                    {/* <h2 style={{ textAlign: "left" }}>Paid Course</h2> */}
 
                 </div>
             </div>

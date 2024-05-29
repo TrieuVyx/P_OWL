@@ -8,7 +8,8 @@ class ListLectureDTO {
     Content;
     Ex;
     Picture;
-    constructor(Id, LectureName, Tittle, Description, Content,Ex,Industry,Picture) {
+    Video;
+    constructor(Id, LectureName, Tittle, Description, Content,Ex,Industry,Picture,Video) {
         this.Id = Id;
         this.LectureName = LectureName;
         this.Description = Description;
@@ -17,6 +18,7 @@ class ListLectureDTO {
         this.Picture = Picture;
         this.Ex = Ex;
         this.Industry = Industry;
+        this.Video = Video
     }
 }
 

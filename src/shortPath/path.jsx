@@ -21,7 +21,9 @@ import InitStateFi from "../component/body/Client/course/pages/initStateFi";
 import InitStateThr from "../component/body/Client/course/pages/initStateThr";
 import InitStateTw from "../component/body/Client/course/pages/initStateTw";
 import EndState from "../component/body/Client/course/pages/endState";
-import ProfileUser from "../component/body/Client/user/profile";
+import ProfilePages from "../PageComponents/profilePage";
+
+
 export {
     HomePage,
     Course,
@@ -36,7 +38,7 @@ export {
     Settingbar,
     Menutab,
     CourseBody,
-    ProfileUser,
+    ProfilePages,
     checkTokenExist,
     checkPermission,
 

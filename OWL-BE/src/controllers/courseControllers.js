@@ -107,6 +107,37 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region XÓA  BÀI HỌC RA KHỎI KHOÁ HỌC
+
+    async RemoveLectureFromCourse(req, res) {
+        try {
+            const { IDCourse, IDLecture } = req.query;
+
+            if (!IDCourse || !IDLecture) {
+                return res
+                    .status(message.NOT_FOUND.CODE)
+                    .json({ message: "IDCourse and IDLecture are required" });
+            }
+
+            const course = await CourseEntity.findById(IDCourse);
+            if (!course) {
+                return res
+                    .status(message.NOT_FOUND.CODE)
+                    .json({ message: "Course not found" });
+            }
+
+            course.Lectures = course.Lectures.filter((lectureId) => lectureId !== IDLecture);
+            course.Lectures.pull(IDLecture);
+            await course.save();
+
+            const result = new CourseAndLetureDTO(course);
+            return res.status(message.OK.CODE).json(result);
+        } catch (err) {
+            return res
+                .status(message.INTERNAL_SERVER_ERROR.CODE)
+                .json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+        }
+    }
     // #region TẠO KHOÁ HỌC KHI CHƯA CÓ BÀI HỌC
     async GenerateNonLecture(req, res) {
         try {
@@ -150,7 +181,7 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
-    //#region LẤY DANH SÁCH BÀI HỌC NẰM TRONG KHOÁ HỌC
+    //#region LẤY DANH SÁCH BÀI HỌC NẰM TRONG KHOÁ HỌC CÓ PAGINATION
 
     async GenerateList(req, res) {
         try {
@@ -181,6 +212,30 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //#region LẤY DANH SÁCH BÀI HỌC NẰM TRONG KHOÁ HỌC KO CÓ PAGINATION
+    async GetLectureInCourse(req, res) {
+        try {
+            const { id } = req.params;
+            if (id != null && id !== "") {
+                try {
+                    const Course = await CourseEntity.findById(id);
+                    const ListCourse = new ListLectureInCourseDTO(Course);
+                    const lectureIDs = ListCourse.Lectures;
+                    const lectures = await LectureEntity.find({ _id: { $in: lectureIDs } });
+                    const ListLectureInCourse = lectures.map((lecture) => {
+                        return new LectureInCourseDTO(lecture.id, lecture.LectureName, lecture.Tittle);
+                    });
+                    return res.status(message.OK.CODE).json(ListLectureInCourse);
+                } catch (err) {
+                    return res.status(message.BAD_REQUEST.CODE).json({ message: message.BAD_REQUEST.MESSAGE });
+                }
+            }
+            return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+        } catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+        }
+    }
+
     //#region LẤY DANH SÁCH KHOÁ HỌC
 
     async GetListCourse(req, res) {
@@ -236,7 +291,7 @@ class CourseController {
 
             let query = {};
             if (CourseName) {
-                query.CourseName = { $regex: CourseName, $options: 'i' }; 
+                query.CourseName = { $regex: CourseName, $options: 'i' };
             }
             if (Description) {
                 query.Description = { $regex: Description, $options: 'i' };
@@ -245,10 +300,9 @@ class CourseController {
                 query.TypeCourse = TypeCourse;
             }
 
-            const courses = await CourseEntity.find(query); // Find courses matching criteria
-
+            const courses = await CourseEntity.find(query);
             if (courses.length > 0) {
-                const results = courses.map(course => new CourseDTO(course)); // Convert to DTOs
+                const results = courses.map(each => new ListCourseDTO(each.id, each.CourseName, each.Tittle, each.Description, each.Content, each.Picture));
                 return res.status(message.OK.CODE).json(results);
             } else {
                 return res.status(message.NOT_FOUND.CODE).json(message.NOT_FOUND.MESSAGE);

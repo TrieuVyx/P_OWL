@@ -29,7 +29,7 @@ export const createLectureUrl = `http://localhost:3002/api/lecture/createLecture
 export const detailLectureUrl = `http://localhost:3002/api/lecture/getDetailLecture/` // có ID
 export const deleteLectureUrl = `http://localhost:3002/api/lecture/deleteLecture/` // có ID
 export const updateLectureUrl = `http://localhost:3002/api/lecture/updateLecture/` // có ID
-
-
-
+export const getListLectureInCourseNoPageSizeUrl = `http://localhost:3002/api/course/GetLectureInCourse/`
+export const deleteLectureFromCourseUrl = `http://localhost:3002/api/course/deleteLectureFromCourse`
+export const addLectureToCouseUrl = `http://localhost:3002/api/course/addLecture`
 //endregion

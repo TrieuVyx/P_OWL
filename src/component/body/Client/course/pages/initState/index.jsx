@@ -12,10 +12,9 @@ export default function InitState(){
         <Layout >
             <SiderNavbar/>
             <Layout >
-                {/* <Header style={headerStyle}><Setting /></Header> */}
+                <Header style={headerStyle}></Header>
                 <Content>
-                    
-                    {/* <ShowCourseUser/> */}
+                    <ShowCourseUser/>
                 </Content>
                 <Footer></Footer>
             </Layout>

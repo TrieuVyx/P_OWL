@@ -1,11 +1,10 @@
 import { Space, Table, Tag, Button,Popconfirm } from 'antd';
-import deleteLectureFromCourse from '../../../event/CRUD/deleteLectureFromCourse';
+import addLectureToCourse from '../../../event/CRUD/addLectureToCouse';
 const handleClick = (recordKey) => {
-    console.log(recordKey)
     localStorage.setItem("LectureID" , recordKey)
-    deleteLectureFromCourse()
+    addLectureToCourse();
   };
-export const columns = [
+export const columnsAdd = [
     {
         title: 'LectureName',
         dataIndex: 'LectureName',
@@ -25,7 +24,7 @@ export const columns = [
                 <Popconfirm title="Sure to delete?"   
                 onConfirm={() => handleClick(record.key) }
                 >
-                    <Button danger="true">Delete </Button>
+                    <Button danger="true">Add </Button>
                 </Popconfirm>
             </Space>
         ),

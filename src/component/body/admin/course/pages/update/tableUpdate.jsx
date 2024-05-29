@@ -1,7 +1,7 @@
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
+import { toast, Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle, MoveUp } from "../../../../../../shortPath/styleComponent";
 import GetCourse from "../../event/CRUD/get";
 import UpdateCourse from "../../event/CRUD/update";
@@ -10,6 +10,7 @@ import TextArea from "antd/es/input/TextArea";
 import { ArrowDownOutlined } from '@ant-design/icons';
 import '../../../../../../shortPath/scss/action.scss'
 import LectureInCourseTable from "./table/lectures";
+import AddLectureToCourseTable from "./table/addLectureTable";
 
 export default function TableUpdate() {
     const CourseID = localStorage.getItem("CourseID")
@@ -28,8 +29,8 @@ export default function TableUpdate() {
                 setTittle(data.data.Tittle)
                 setPicture(data.data.Picture)
             })
-            .catch((error) => console.error(error));
-        
+            .catch((error) => toast.error(error));
+
 
     }, [])
     // #region REQUEST CẬP NHẬT KHOÁ HỌC
@@ -56,6 +57,7 @@ export default function TableUpdate() {
         reader.readAsDataURL(file);
 
     };
+    //#region thực hiện update
     const handleOnUpdate = () => {
         UpdateCourse(Data)
         UploadImage(ImageUpdate);
@@ -65,7 +67,7 @@ export default function TableUpdate() {
     return (
         <>
             <Layout>
-                <div className="row">
+                <div className="row ">
 
                     <div className="col">
                         <Form
@@ -224,6 +226,13 @@ export default function TableUpdate() {
                         <div style={{ margin: "40px 0 0 0" }}>
                             <h1>Lectures</h1>
                             <LectureInCourseTable />
+                        </div>
+                    </div>
+                    <div className="row w-75 m-5" >
+                   
+                        <div  className="d-flex justify-content-between align-items-center flex-wrap">
+                            <h1 className="w-100">Add Lectures</h1>
+                            <AddLectureToCourseTable />
                         </div>
                     </div>
                 </div >

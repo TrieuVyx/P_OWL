@@ -58,7 +58,7 @@ export default function Navbar() {
               router(LinkRouter.LOGIN);
             }
             else if (e.key === "10") {
-                router(LinkRouter.COURSE);
+                router(LinkRouter.HOME);
               }
           }
     };

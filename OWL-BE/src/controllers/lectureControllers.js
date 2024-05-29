@@ -96,7 +96,7 @@ class LectureControllers {
             if (!isNaN(page) && !isNaN(size)) {
                 const ListLecture = await LectureEntity.find().skip(page * size).limit(size);
                 const lectureListDTO = ListLecture.map((each) => {
-                    return new ListLectureDTO(each.id, each.LectureName, each.Tittle, each.Description, each.Content,each.Ex,each.Industry,each.Picture);
+                    return new ListLectureDTO(each.id, each.LectureName, each.Tittle, each.Description, each.Content,each.Ex,each.Industry,each.Picture,each.Video);
                 });
                 return res.status(message.OK.CODE).json(lectureListDTO);
             } else {

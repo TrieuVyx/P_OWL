@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Collapse } from 'antd';
-import TextArea from 'antd/es/input/TextArea';
-import getCourse from '../../event/getCourse';
-import getLecture from './event/getLecture';
+// import getCourse from '../../event/getCourse';
+import getLecture from '../initState/event/getLecture';
+import getLectures from './event/getLecture';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-export default function showCourseUser() {
+export default function showLectureCourse() {
     const router = useNavigate();
     const [Data, setData] = useState([])
     const [Lecture, setLecture] = useState([])
     useEffect(() => {
         try {
             //#region lấy danh sách khóa học
-            getCourse()
+            getLectures()
                 .then((data) => {
+                    console.log(data)
                     setData(data.data)
                 })
             //#region lấy danh sách bài học
@@ -38,7 +39,7 @@ export default function showCourseUser() {
         }
     }, [])
     const handleLectureClick = (lectureId) => {
-        localStorage.setItem("LectureID",lectureId )
+        localStorage.setItem("LectureID", lectureId)
         router("lecture")
     };
     const onChange = (key) => {
@@ -60,12 +61,14 @@ export default function showCourseUser() {
                             height: "250px",
 
                         }}>
-                            <img src={Data.Picture} alt="" className='w-100 h-100' />
+                            <video src={Data.Video} controls className="w-100 h-100" autoPlay>
+                                Your browser does not support the video tag.
+                            </video>
                         </div>
 
                         <div className="row m-2">
                             <div className="col m-2" style={{ textAlign: "left" }}>
-                                <div className='m-2'>Title: {Data.CourseName}</div>
+                                <div className='m-2'>Title: {Data.LectureName}</div>
                                 <div className='m-2'>Description: {Data.Description}</div>
                                 <div className='m-2'>Content: {Data.Content}</div>
                             </div>
@@ -73,7 +76,7 @@ export default function showCourseUser() {
                     </div>
                     <div className="col m-2">
                         <Collapse items={Lecture} defaultActiveKey={['1']} onChange={onChange} disabled />
-                        <input type='button' warn="true" value={"Register"} className='m-2 btn btn-outline-warning' onClick={handleRegisterCourse} />
+                        {/* <input type='button' warn="true" value={"Register"} className='m-2 btn btn-outline-warning' onClick={handleRegisterCourse} /> */}
                     </div>
                 </div>
 
