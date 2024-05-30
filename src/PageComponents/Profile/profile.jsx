@@ -44,7 +44,7 @@ export default function profileAccount() {
                                 data-mdb-ripple-init
                                 className="btn btn-outline-primary ms-1"
                             >
-                                Message
+                                Update
                             </button>
                         </div>
                     </div>

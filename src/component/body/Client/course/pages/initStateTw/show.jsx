@@ -5,16 +5,23 @@ import getLecture from '../initState/event/getLecture';
 import getLectures from './event/getLecture';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import getCommentLecture from '../initState/event/commmentLecture';
+import createCommentLecture from '../initState/event/createCommentLecture';
 export default function showLectureCourse() {
     const router = useNavigate();
     const [Data, setData] = useState([])
     const [Lecture, setLecture] = useState([])
+    const [showCommentBox, setShowCommentBox] = useState(false);
+    const [commentText, setCommentText] = useState('');
+    const [Comment, setComment] = useState([])
+    const toggleCommentBox = () => {
+        setShowCommentBox(!showCommentBox);
+    };
     useEffect(() => {
         try {
             //#region lấy danh sách khóa học
             getLectures()
                 .then((data) => {
-                    console.log(data)
                     setData(data.data)
                 })
             //#region lấy danh sách bài học
@@ -47,8 +54,16 @@ export default function showLectureCourse() {
     };
 
     //#region đăng kí khóa học
-    const handleRegisterCourse = () => {
-
+    useEffect(()=>{
+        getCommentLecture().then((data) => {
+            setComment(data.data)
+          });
+    },[])
+    const handleCommentChange = (event) => {
+        setCommentText(event.target.value);
+    };
+    const HanleComment = () => {
+        createCommentLecture(commentText)
     }
     return (
         <>
@@ -77,6 +92,74 @@ export default function showLectureCourse() {
                     <div className="col m-2">
                         <Collapse items={Lecture} defaultActiveKey={['1']} onChange={onChange} disabled />
                         {/* <input type='button' warn="true" value={"Register"} className='m-2 btn btn-outline-warning' onClick={handleRegisterCourse} /> */}
+                    </div>
+                    <div className="row">
+                        {/* <div className="col">ok</div> */}
+                        <div className="col p-5" >
+                            {showCommentBox && (
+                                <div className="card-footer py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
+                                    <div className="d-flex flex-start w-100">
+
+                                        <div data-mdb-input-init className="form-outline w-100">
+                                            <textarea className="form-control" id="textAreaExample" rows="4" style={{ background: '#fff' }}
+                                                value={commentText}
+                                                onChange={handleCommentChange}
+                                            ></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div className="float-end mt-2 pt-1">
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-sm" onClick={HanleComment}>
+                                            Post comment
+                                        </button>
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-primary btn-sm" onClick={toggleCommentBox}>
+                                            Cancel
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+
+                        </div>
+
+                        <div className="col" >
+                            <div className="row d-flex justify-content-center">
+                                <div className="col-md-11 col-lg-9 col-xl-7 comments-container" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                                    {
+                                        Comment.map(comment => (
+                                            <div className="d-flex flex-start mb-4" key={comment.id}>
+                                                <img
+                                                    className="rounded-circle shadow-1-strong me-3"
+                                                    src={comment.user.image || "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"}
+                                                    alt="avatar"
+                                                    width="65"
+                                                    height="65"
+                                                />
+                                                <div className="card w-100">
+                                                    <div className="card-body p-4">
+                                                        <div>
+                                                            <h5 className="text-left">{comment.user.username}</h5>
+                                                            <p className="small text-left">{new Date(comment.createdAt).toLocaleString()}</p>
+                                                            <p className="text-justify" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+                                                                {comment.content}
+                                                            </p>
+                                                            <div className="d-flex justify-content-between align-items-center">
+                                                                <div className="d-flex align-items-center">
+
+                                                                </div>
+                                                                <a href="#!" className="link-muted" onClick={toggleCommentBox}>
+                                                                    <i className="fas fa-reply me-1"></i> Reply
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
