@@ -6,6 +6,7 @@ const bcrypt = require("bcrypt")
 const UserCreateDTO = require("../models/DTO/User/UserCreateDTO");
 const CourseAndUserDTO = require("../models/DTO/And/CourseAndUserDTO");
 const UserDTO =require("../models/DTO/User/UserDTO")
+const UserCourseSchema = require("../models/contactEntity/UserCourseRegisterEntity")
 class UserController {
     index(req, res) {
         res.send('THIS IS PAGE USER')
@@ -148,7 +149,20 @@ class UserController {
         catch (err) {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
-
     }
+
+    //#region KIỂM TRA NGƯỜI DÙNG ĐÃ ĐĂNG KÍ KHOÁ HỌC HAY CHƯA
+    async GetCourseStatus(IDUser, CourseID) {
+        try {
+          // Tìm trạng thái của người dùng với khóa học cụ thể
+          const userCourse = await UserCourseSchema.findOne({ User: IDUser, Course: CourseID });
+      
+            if (userCourse.status === 'IsStudying') {
+              return { status: 200, message: userCourse.status };
+            }
+        } catch (error) {
+          return { status: 500, message: 'Error getting course status' };
+        }
+      }
 }
 module.exports = new UserController()

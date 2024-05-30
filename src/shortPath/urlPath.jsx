@@ -8,9 +8,8 @@ export const detailUserUrl = `http://localhost:3002/api/users/getDetailUser/` //
 export const deleteUserUrl = `http://localhost:3002/api/users/deleteUser/` // có ID
 export const updateUserUrl = `http://localhost:3002/api/users/updateUser/` // có ID
 export const getUserUrl = `http://localhost:3002/api/users/getUser/` // có UserName
-
+export const checkTracks = `http://localhost:3002/api/track/checkCourse`
 //endregion
-
 
 //#region COURSE PATH
 
@@ -22,7 +21,7 @@ export const updateCourseUrl = `http://localhost:3002/api/course/updateCourse/` 
 export const updateCourseImageUrl = `http://localhost:3002/api/course/UpdateCourseImage` 
 export const getListLectureInCourseUrl = `http://localhost:3002/api/course/GetListLectureInCourse`
 export const searchCourseUrl = `http://localhost:3002/api/course/searchcourse`
-export const registerCourseUrl = `http://localhost:3002/api/course/registercourse`
+export const registerCourseUrl = `http://localhost:3002/api/track/registerCourse`
 
 //endregion
 

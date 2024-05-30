@@ -1,7 +1,7 @@
 import styleComponent from '../../shortPath/styleComponent';
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input } from "antd";
-import { Toaster } from 'react-hot-toast'
+import toast, { Toaster } from 'react-hot-toast'
 import Authenticate from './Authenticate/authenticate';
 import { useNavigate } from 'react-router-dom';
 const {
@@ -9,13 +9,23 @@ const {
     formCenterStyle
 } = styleComponent;
 
-export default function LoginPage() {
+export default  function LoginPage() {
     const router = useNavigate();
     const [Email, setEmail] = useState("")
     const [PassWord, setPassword] = useState("")
 
     const handleDirect = () => {
         router('/register')
+    }
+    const loginHanle = async () => {
+        const bool = await Authenticate(Email, PassWord);
+        if (bool) {
+            router('/');
+            toast.success("Login successfully");
+        } else {
+            router('/login');
+            toast.error("Email or Password Incorrectly");
+        }
     }
     return (
         <>
@@ -32,9 +42,7 @@ export default function LoginPage() {
                     remember: true,
                 }}
                 method='POST'
-                onFinish={() => {
-                    Authenticate(Email, PassWord)
-                }}
+                onFinish={() => loginHanle()}
             // onFinishFailed={onFinishFailed}
             >
                 <Toaster position='top-right' reverseOrder={false}></Toaster>
@@ -77,7 +85,7 @@ export default function LoginPage() {
                     }}
                 >
                     <Checkbox>Remember me</Checkbox>
-                    <Button  onClick={handleDirect}>Register</Button>
+                    <Button onClick={handleDirect}>Register</Button>
                 </Form.Item>
 
                 <Form.Item

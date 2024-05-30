@@ -3,6 +3,8 @@ const router = express.Router()
 const TrackControllers = require('../controllers/trackControllers')
 
 
+router.post('/checkCourse', TrackControllers.checkStatus)
+router.post('/registerCourse', TrackControllers.RegisterCourse)
 router.post('/delete/:id', TrackControllers.DeleteTrack)
 router.post('/update/:id', TrackControllers.UpdateTrack)
 router.get('/get/:id', TrackControllers.GetTrack)

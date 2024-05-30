@@ -31,7 +31,7 @@ const gap = {
 }
 const formStyle = {
     maxWidth: 500,
-    background:"#f5f5f5",
+    background:"rgba(245, 245, 245, 0.5)",
     borderRadius:"10px",
     padding :"20px"
 }

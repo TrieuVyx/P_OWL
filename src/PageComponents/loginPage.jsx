@@ -6,9 +6,9 @@ const { LoginPage } = styleComponent
 
 export default function loginPages() {
     return (
-        <div className="w-100"  >
+        <div className="w-100" >
             <Layout >
-                <Content><LoginPage /></Content>
+                <Content ><LoginPage /></Content>
             </Layout>
         </div>
     )

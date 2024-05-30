@@ -10,7 +10,6 @@ export default async function registerCourse() {
         IDCourse: CourseID,
         IDUser: IDUser
     }
-
     try {
 
         const response = await Axios({
@@ -21,7 +20,8 @@ export default async function registerCourse() {
             },
             data: data
         });
-        toast.success("register succesfull")
+        
+        toast.success("register succesfull 🙋")
 
         return true;
     } catch (error) {

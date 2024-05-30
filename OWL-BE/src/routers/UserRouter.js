@@ -3,9 +3,8 @@ const router = express.Router()
 const UserController = require('../controllers/userControllers')
 
 
+router.post('/registerCourse', UserController.GetCourseStatus)
 router.post('/add/:id', UserController.RegisterCoureUser)
-
-
 router.post('/createUser', UserController.CreateUser)
 router.post('/updateUser/:id', UserController.UpdateUser)
 router.post('/deleteUser/:id', UserController.DeleteUser)
