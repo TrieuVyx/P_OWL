@@ -30,8 +30,6 @@ export default function TableUpdate() {
                 setPicture(data.data.Picture)
             })
             .catch((error) => toast.error(error));
-
-
     }, [])
     // #region REQUEST CẬP NHẬT KHOÁ HỌC
     const Data = {
@@ -61,7 +59,6 @@ export default function TableUpdate() {
     const handleOnUpdate = () => {
         UpdateCourse(Data)
         UploadImage(ImageUpdate);
-
     }
     //#region GIAO DIỆN
     return (
