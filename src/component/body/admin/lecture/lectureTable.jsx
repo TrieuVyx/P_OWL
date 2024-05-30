@@ -1,17 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import { Space, Table, Tag, Button, Popconfirm } from 'antd';
-import { columns } from './lectureColumn';
 import { floatLeft } from '../../../../shortPath/styleComponent';
-import { handleCreate } from './event/handleEvent'
 import getListLecture from './event/CRUD/getListLecture';
+import { useNavigate } from 'react-router-dom';
 
 export default function LectureTable() {
-
-
+    const router = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
     const [lecture, setLecture] = useState([])
     const pageSize = 3;
+    const handleCreate = ()=>{
+        router( `/admin/lecture/create`)
+    }
+    const handleDelete = (key)=>{
+        localStorage.setItem('LectureID', key)
+        router( `/admin/lecture/delete/${key}`)
+    }
+    
+    const handleUpdate = (key)=>{
+        localStorage.setItem('LectureID', key)
+        router( `/admin/lecture/update/${key}`)
+    }
+    
+    const handleDetail = (key)=>{
+        localStorage.setItem('LectureID', key)
+        router( `/admin/lecture/detail/${key}`)
+    }
     useEffect(() => {
         getListLecture(currentPage, sizePage)
             .then((data) => {
@@ -37,6 +52,48 @@ export default function LectureTable() {
         })
         return list
     }
+    const columns = [
+        {
+            title: 'LectureName',
+            dataIndex: 'LectureName',
+            key: 'LectureName',
+        },
+    
+        {
+            title: 'Description',
+            dataIndex: 'Description',
+            key: 'Description',
+        },
+        {
+            title: 'Content',
+            dataIndex: 'Content',
+            key: 'Content',
+        },
+        // {
+        //     title: 'CourseName',
+        //     dataIndex: 'CourseName',
+        //     key: 'CourseName',
+        // },
+    
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+    
+                    <Popconfirm title="Sure to update?" onConfirm={() => handleUpdate(record.key)}>
+                        <Button  primary="true">Update </Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                        <Button danger="true" >Delete </Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to watch?" onConfirm={() => handleDetail(record.key)}>
+                        <Button primary="true">Detail </Button>
+                    </Popconfirm>
+                </Space>
+            ),
+        },
+    ];
     return (
         <>
             <Popconfirm title="Sure to create?" onConfirm={() => handleCreate()}>

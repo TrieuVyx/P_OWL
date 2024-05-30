@@ -5,6 +5,7 @@ import getCourse from '../../event/getCourse';
 import getLecture from './event/getLecture';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import registerCourse from './event/registerCourse';
 export default function showCourseUser() {
     const router = useNavigate();
     const [Data, setData] = useState([])
@@ -38,7 +39,7 @@ export default function showCourseUser() {
         }
     }, [])
     const handleLectureClick = (lectureId) => {
-        localStorage.setItem("LectureID",lectureId )
+        localStorage.setItem("LectureID", lectureId)
         router("lecture")
     };
     const onChange = (key) => {
@@ -47,7 +48,13 @@ export default function showCourseUser() {
 
     //#region đăng kí khóa học
     const handleRegisterCourse = () => {
-
+        try {
+            const check = registerCourse();
+          
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
     return (
         <>

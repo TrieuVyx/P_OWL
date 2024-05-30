@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Checkbox, Form, Input, Popconfirm, Space, Table, Tag } from "antd";
-import { style ,floatLeft} from "../../../../shortPath/styleComponent"
-import { columns } from './userColumn';
+import { Button, Popconfirm, Space, Table } from "antd";
+import { floatLeft } from "../../../../shortPath/styleComponent"
 import getListUser from './event/CRUD/getListUser';
-import { handleCreate } from './event/handleEvent';
 import { Toaster } from 'react-hot-toast';
-import { Value } from 'sass';
+import { useNavigate } from 'react-router-dom';
+
 export default function UserTable() {
+    const router = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
     const [sizePage, setSizePage] = useState(10);
     const [user, setUser] = useState([])
@@ -35,10 +35,66 @@ export default function UserTable() {
         })
         return list
     }
+    const handleCreate = () => {
+        router(`/admin/user/create`
+        )
+    }
+    const handleDelete = (key) => {
+        localStorage.setItem('AccountId', key)
+        router(`/admin/user/delete/${key}`)
+    }
+
+    const handleUpdate = (key) => {
+        localStorage.setItem('AccountId', key)
+        router(`/admin/user/update/${key}`)
+    }
+
+    const handleDetail = (key) => {
+        localStorage.setItem('AccountId', key)
+        router(`/admin/user/detail/${key}`)
+    }
+    const columns = [
+        {
+            title: 'UserName',
+            dataIndex: 'UserName',
+            key: 'UserName',
+        },
+
+        {
+            title: 'Address',
+            dataIndex: 'Address',
+            key: 'Address',
+        },
+        {
+            title: 'FullName',
+            dataIndex: 'FullName',
+            key: 'FullName',
+        },
+
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, record) => (
+                <Space size="middle">
+
+                    <Popconfirm title="Sure to update?" onConfirm={() => handleUpdate(record.key)}>
+                        <Button primary="true">Update </Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to delete?" onConfirm={() => handleDelete(record.key)}>
+                        <Button danger="true">Delete </Button>
+                    </Popconfirm>
+                    <Popconfirm title="Sure to watch?" onConfirm={() => handleDetail(record.key)}>
+                        <Button primary="true">Detail </Button>
+                    </Popconfirm>
+                </Space>
+            ),
+        },
+    ];
+
     return (
         <>
             <Popconfirm title="Sure to create?"
-            onConfirm={() => handleCreate()}
+                onConfirm={() => handleCreate()}
             >
                 <Button primary="true" style={floatLeft} >Create </Button>
             </Popconfirm>

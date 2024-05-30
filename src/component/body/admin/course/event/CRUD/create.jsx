@@ -16,7 +16,6 @@ export default async function CreateCourse(CourseData){
         })
         .catch(err => {
             toast.error("Create Failure")
-
         })
     }
     catch (err) {

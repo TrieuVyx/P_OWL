@@ -17,7 +17,6 @@ export default async function DeleteCourse(){
         })
         .catch(err => {
             toast.error("Delete Failure")
-
         })
     }
     catch (err) {

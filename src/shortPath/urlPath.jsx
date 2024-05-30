@@ -1,5 +1,6 @@
 
 export const loginUrl = `http://localhost:3002/api/author/login`
+export const registerUrl = `http://localhost:3002/api/author/register`
 //#region USER PATH
 export const getListUserUrl = `http://localhost:3002/api/users/getListUser`
 export const createUserUrl = `http://localhost:3002/api/users/createUser`
@@ -21,6 +22,8 @@ export const updateCourseUrl = `http://localhost:3002/api/course/updateCourse/` 
 export const updateCourseImageUrl = `http://localhost:3002/api/course/UpdateCourseImage` 
 export const getListLectureInCourseUrl = `http://localhost:3002/api/course/GetListLectureInCourse`
 export const searchCourseUrl = `http://localhost:3002/api/course/searchcourse`
+export const registerCourseUrl = `http://localhost:3002/api/course/registercourse`
+
 //endregion
 
 //#region LECTURE PATH
@@ -31,5 +34,6 @@ export const deleteLectureUrl = `http://localhost:3002/api/lecture/deleteLecture
 export const updateLectureUrl = `http://localhost:3002/api/lecture/updateLecture/` // có ID
 export const getListLectureInCourseNoPageSizeUrl = `http://localhost:3002/api/course/GetLectureInCourse/`
 export const deleteLectureFromCourseUrl = `http://localhost:3002/api/course/deleteLectureFromCourse`
-export const addLectureToCouseUrl = `http://localhost:3002/api/course/addLecture`
+// export const addLectureToCouseUrl = `http://localhost:3002/api/course/addLecture`
+export const addLectureToCourseUrl =   `http://localhost:3002/api/course/addLectureToCourseWithConditional`
 //endregion

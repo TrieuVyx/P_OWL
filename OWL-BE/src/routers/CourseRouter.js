@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const CourseController = require('../controllers/courseControllers')
 
+router.post('/addLectureToCourseWithConditional', CourseController.AddLectureToCourse)
+router.post('/registercourse', CourseController.RegisterCourse)
 router.post('/deleteLectureFromCourse', CourseController.RemoveLectureFromCourse)
 router.post('/searchcourse', CourseController.SearchCourses)
 router.post('/UpdateCourseImage', CourseController.UpdateCourseImage)

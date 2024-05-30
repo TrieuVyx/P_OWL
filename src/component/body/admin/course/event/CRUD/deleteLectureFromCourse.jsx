@@ -7,7 +7,6 @@ export default async function deleteLectureFromCourse() {
     const LectureID = localStorage.getItem('LectureID');
     const URL_LECTUREFROMCOURSE = `${deleteLectureFromCourseUrl}?IDCourse=${CourseID}&IDLecture=${LectureID}`;
     try {
-
         const response = await Axios({
             method: "POST",
             url: `${URL_LECTUREFROMCOURSE}`,
@@ -15,10 +14,11 @@ export default async function deleteLectureFromCourse() {
                 tokenAccess
             }
         });
-
-        return response.data;
+        if (response.status == 200 ) {
+            toast.success("Delete lecture successfully!");
+            return response.data;
+        }
     } catch (error) {
         toast.error(error.message);
-        throw error;
     }
 }

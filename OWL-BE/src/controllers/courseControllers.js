@@ -6,7 +6,8 @@ const CourseEntity = require("../models/Entity/CourseEntity")
 const LectureEntity = require("../models/Entity/LectureEntity")
 const ListLectureInCourseDTO = require("../models/DTO/Course/ListLectureInCourse");
 const LectureInCourseDTO = require("../models/DTO/Course/LectureInCourseDTO")
-
+const UserEntity = require("../models/Entity/UserEntity")
+const UserCourseEntity = require("../models/contactEntity/UserCourseRegisterEntity")
 class CourseController {
     //#region TẠO KHOÁ HỌC
     async CreateCourse(req, res) {
@@ -107,6 +108,41 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE })
         }
     }
+    //# THÊM MỚI BÀI GIẢNG VÀO KHÓA HỌC NÊU TỒN TẠI RỒI THÌ KHÔNG CHO ADD
+    async AddLectureToCourse(req,res){
+        try {
+            const IDCourse = req.body.IDCourse;
+            const IDLecture = req.body.IDLecture;
+          
+            // Kiểm tra nếu IDCourse hoặc IDLecture không hợp lệ
+            if (IDCourse == null || IDCourse == "" || IDLecture == null || IDLecture == "") {
+              return res.status(message.NOT_FOUND.CODE).json({ message: "ID Not Exists!" });
+            }
+          
+            // Tìm course tương ứng
+            const Course = await CourseEntity.findById(IDCourse);
+          
+            // Kiểm tra nếu không tìm thấy course
+            if (!Course) {
+              return res.status(message.NOT_FOUND.CODE).json({ message: message.NOT_FOUND.MESSAGE });
+            }
+          
+            // Kiểm tra nếu lecture đã có trong course
+            if (Course.Lectures.includes(IDLecture)) {
+              return res.status(message.BAD_REQUEST.CODE).json({ message: "Lecture already exists in other course." });
+            }
+          
+            // Thêm lecture vào course
+            Course.Lectures.push(IDLecture);
+            await Course.save();
+          
+            const result = new CourseAndLetureDTO(Course);
+            return res.status(message.OK.CODE).json(result);
+          } catch (err) {
+            return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+          }
+    }
+
     //#region XÓA  BÀI HỌC RA KHỎI KHOÁ HỌC
 
     async RemoveLectureFromCourse(req, res) {
@@ -311,7 +347,50 @@ class CourseController {
             return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
         }
     }
-
+    //#region ĐĂNG KÝ KHÓA HỌC
+    async RegisterCourse(req, res) {
+        try {
+          const { IDUser, IDCourse } = req.body;
+      
+          const existingEnrollment = await UserCourseEntity.findOne({
+            User: IDUser,
+            Course: IDCourse
+          });
+      
+          if (existingEnrollment) {
+            return res
+              .status(message.BAD_REQUEST.CODE)
+              .json({ message: 'User is already enrolled in the course.' });
+          }
+      
+          const user = await UserEntity.findById(IDUser);
+          if (user) {
+            user.Course.push(IDCourse);
+            await user.save();
+          } else {
+            return res
+              .status(message.NOT_FOUND.CODE)
+              .json({ message: 'User not found.' });
+          }
+      
+          const newEnrollment = new UserCourseEntity({
+            User: IDUser,
+            Course: IDCourse,
+            status: 'IsStuding'
+          });
+      
+          await newEnrollment.save();
+      
+          return res
+            .status(message.OK.CODE)
+            .json({ message: 'Course registration successful.' });
+        } catch (error) {
+          console.error(error);
+          return res
+            .status(message.INTERNAL_SERVER_ERROR.CODE)
+            .json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
+        }
+      }
 }
 
 module.exports = new CourseController()

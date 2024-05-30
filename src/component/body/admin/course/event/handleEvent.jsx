@@ -1,4 +1,4 @@
-// import GetUser from "../../user/event/CRUD/get"
+import GetUser from "../../user/event/CRUD/get"
 
 const handleCreate = ()=>{
     window.location.href = `course/create`

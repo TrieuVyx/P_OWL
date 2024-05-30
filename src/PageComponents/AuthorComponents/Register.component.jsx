@@ -2,7 +2,7 @@ import styleComponent from '../../shortPath/styleComponent';
 import React, { useState } from 'react';
 import { Button, Checkbox, Form, Input } from "antd";
 import { Toaster } from 'react-hot-toast'
-import Authenticate from './Authenticate/authenticate';
+import RegisterAccount from './Authenticate/register';
 import { useNavigate } from 'react-router-dom';
 const {
     formStyle,
@@ -11,11 +11,13 @@ const {
 
 export default function LoginPage() {
     const router = useNavigate();
+    const [UserName, setUserName] = useState("")
     const [Email, setEmail] = useState("")
     const [PassWord, setPassword] = useState("")
 
+    
     const handleDirect = () => {
-        router('/register')
+        router('/login')
     }
     return (
         <>
@@ -33,12 +35,26 @@ export default function LoginPage() {
                 }}
                 method='POST'
                 onFinish={() => {
-                    Authenticate(Email, PassWord)
+                    RegisterAccount(UserName,Email, PassWord)
                 }}
             // onFinishFailed={onFinishFailed}
             >
                 <Toaster position='top-right' reverseOrder={false}></Toaster>
-                <h1>Login</h1>
+                <h1>Register</h1>
+                <Form.Item
+                    label="UserName"
+                    name="UserName"
+                    rules={[
+                        {
+                            required: true,
+                            message: 'Please input your UserName!',
+                        },
+                    ]}
+                >
+                    <Input value={UserName} onChange={(e) => {
+                        setUserName(e.target.value)
+                    }} />
+                </Form.Item>
                 <Form.Item
                     label="Email"
                     name="Email"
@@ -77,7 +93,7 @@ export default function LoginPage() {
                     }}
                 >
                     <Checkbox>Remember me</Checkbox>
-                    <Button  onClick={handleDirect}>Register</Button>
+                    <Button  onClick={handleDirect}>Login</Button>
                 </Form.Item>
 
                 <Form.Item

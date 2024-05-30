@@ -13,6 +13,7 @@ import {
   Course,
   LinkRouter,
   LoginPage,
+  RegisterPage,
   checkTokenExist,
   checkPermission,
   CourseManagementPage,
@@ -90,6 +91,7 @@ function App() {
                 <>
                   {/* <Route path={LinkRouter.HOME} element={<HomePage />} /> */}
                   <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+                  <Route path={LinkRouter.REGISTER} element={<RegisterPage />} />
                   <Route path={LinkRouter.HOME} element={<Course />} />
                   <Route path={LinkRouter.INITSTATE} element={<InitState />} />
                   <Route path={LinkRouter.PROFILE} element={<ProfilePages />} />
@@ -101,6 +103,7 @@ function App() {
               <>
                 <Route path={LinkRouter.HOME} element={<HomePage />} />
                 <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
+                <Route path={LinkRouter.REGISTER} element={<RegisterPage />} />
                 <Route path={LinkRouter.COURSE} element={<Course />} />
                 <Route path={LinkRouter.INITSTATE} element={<InitState />} />
                 <Route path={LinkRouter.PROFILE} element={<ProfilePages />} />

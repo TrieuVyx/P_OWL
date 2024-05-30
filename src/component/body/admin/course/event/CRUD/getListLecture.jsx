@@ -12,7 +12,6 @@ export default async function getListLecture(currentPage, pageSize) {
         return response.data;
     } catch (error) {
         toast.error(error.message);
-        throw error;
     }
    
 }

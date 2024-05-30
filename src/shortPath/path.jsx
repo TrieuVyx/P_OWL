@@ -5,6 +5,7 @@ import Settingbar from "../component/header/navbar/setting";
 import CourseBody from "../component/body/Client/Author";
 import LinkRouter from "../component/constants/constants";
 import LoginPage from "../PageComponents/AuthorComponents/Login.component";
+import RegisterPage from "../PageComponents/AuthorComponents/Register.component"
 import CourseManagementPage from "../AdminComponents/CourseManagementPage";
 import UserManagementPage from "../AdminComponents/UserManagement";
 import LectureManagementPage from "../AdminComponents/LectureManagement"
@@ -23,11 +24,11 @@ import InitStateTw from "../component/body/Client/course/pages/initStateTw";
 import EndState from "../component/body/Client/course/pages/endState";
 import ProfilePages from "../PageComponents/profilePage";
 
-
 export {
     HomePage,
     Course,
     LoginPage,
+    RegisterPage,
     CourseManagementPage,
     UserManagementPage,
     LectureManagementPage,

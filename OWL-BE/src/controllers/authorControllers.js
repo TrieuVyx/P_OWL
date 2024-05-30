@@ -39,7 +39,8 @@ class LoginController {
                     const RefeshToken = await GetRefeshToken(Token);
                     const Hierachy = await VerifyTokenPermision(Token);
                     const UserName = payload.UserName;
-                    const result = new LoginDTO(Token, RefeshToken, Hierachy,UserName);
+                    const IDUser = payload.id;
+                    const result = new LoginDTO(Token, RefeshToken, Hierachy,UserName,IDUser);
                     return res.status(message.OK.CODE).json(result);
                 }
                 return res.status(message.BAD_REQUEST.CODE).json(message.BAD_REQUEST.MESSAGE)
