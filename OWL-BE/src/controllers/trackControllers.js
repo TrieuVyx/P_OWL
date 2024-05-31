@@ -152,17 +152,21 @@ class TrackController {
         User: IDUser,
         Course: IDCourse
       });
-      const IdUpdate = existingEnrollment.Course
-      const user = await UserEntity.findById(IDUser)
-        .populate({
-          path: 'Tracks'
-        })
 
-      const IDTrack = user.Tracks.map(track => ({
-        id: track.id
-      }));
-      const ID = IDTrack[0].id
-      const track = await TrackEntity.findByIdAndUpdate(ID, req.body)
+        const track = await TrackEntity.findByIdAndUpdate(
+          existingEnrollment.id,
+          req.body
+        );
+
+      // const IdUpdate = existingEnrollment.Course
+      // const user = await UserEntity.findById(IDUser)
+      //   .populate({
+      //     path: 'Tracks'
+      //   })
+
+      // const IDTrack = user.Tracks.find((track)=> track.Course.toString());
+      // const ID = IDTrack[0].id
+      // const track = await TrackEntity.findByIdAndUpdate(ID, req.body)
 
       return res.status(message.OK.CODE).json(track);
     } catch (err) {
