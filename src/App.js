@@ -65,8 +65,7 @@ function App() {
       <header className="App-header">
         <Router>
           <Routes>
-            {isLoggedIn ? (
-              permission === "ADMIN" ? (
+            {  permission === "ADMIN" ? (
                 <>
                   <Route path={LinkRouter.HOME} element={<HomePage />} />
                   <Route path={LinkRouter.COURSE} element={<Course />} />
@@ -99,17 +98,7 @@ function App() {
 
                 </>
               )
-            ) : (
-              <>
-                <Route path={LinkRouter.HOME} element={<HomePage />} />
-                <Route path={LinkRouter.LOGIN} element={<LoginPage />} />
-                <Route path={LinkRouter.REGISTER} element={<RegisterPage />} />
-                <Route path={LinkRouter.COURSE} element={<Course />} />
-                <Route path={LinkRouter.INITSTATE} element={<InitState />} />
-                <Route path={LinkRouter.PROFILE} element={<ProfilePages />} />
-                <Route path={LinkRouter.COURSETOLECTURE} element={<InitStateTw />} />
-              </>
-            )}
+            }
           </Routes>
         </Router>
       </header>

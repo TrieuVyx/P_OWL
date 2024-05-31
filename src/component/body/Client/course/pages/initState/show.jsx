@@ -12,7 +12,7 @@ export default function showCourseUser() {
   const [Data, setData] = useState([]);
   const [Lecture, setLecture] = useState([]);
   const [isCoursRegistered, setIsCoursRegistered] = useState(false);
-  const [isUserRegistered, setisUserRegistered] = useState("Register")
+  const [isUserRegistered, setisUserRegistered] = useState("IsStudying")
   
   console.log(isUserRegistered)
   useEffect(() => {
