@@ -8,7 +8,7 @@ export default function CourseTable() {
 
     const router = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
-    const [sizePage, setSizePage] = useState(10);
+    const [sizePage, setSizePage] = useState(30);
     const [course, setCourse] = useState([])
     const pageSize = 3;
     useEffect(() => {

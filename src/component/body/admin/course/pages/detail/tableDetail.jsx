@@ -1,7 +1,7 @@
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
+import { toast,Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle, MoveUp } from "../../../../../../shortPath/styleComponent";
 import GetCourse from "../../event/CRUD/get";
 import TextArea from "antd/es/input/TextArea";
@@ -45,13 +45,18 @@ export default function TableUpdate() {
     }
     //#region THAY ĐỔI HÌNH ẢNH
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setPicture1(newSrc);
-        };
-        reader.readAsDataURL(file);
+        try{
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setPicture(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch(err){
+            toast.error("please choose image ")
+        }
 
     };
  

@@ -56,6 +56,7 @@ export default function Setting() {
                                 onSearch={HandleSearch}
                                 onChange={(e) => setCourseName(e.target.value)}
                             />
+                            
                             <div>
                                 <Badge count={0} >
                                     <Avatar shape="square" icon={<BellOutlined />} style={margin} />

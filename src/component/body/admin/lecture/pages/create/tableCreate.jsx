@@ -4,7 +4,7 @@ import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
 import TextArea from "antd/es/input/TextArea";
 import CreateLecture from "../../event/CRUD/create";
-
+import { toast, Toaster } from 'react-hot-toast'
 export default function TableCreate() {
     const [LectureName, setLectureName] = useState("")
     const [CourseName, setCourseName] = useState("")
@@ -25,31 +25,40 @@ export default function TableCreate() {
 
     }
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setPicture(newSrc);
-        };
-        reader.readAsDataURL(file);
+        try {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setPicture(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch (err) {
+            toast.error("please choose image ")
+        }
 
     };
     const handleVideoChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setVideo(newSrc);
-        };
-        reader.readAsDataURL(file);
-
+        try {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setVideo(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch (err) {
+            toast.error("please choose video ")
+        }
     };
     return (
         <>
             <Layout>
                 <div className="">
                     <div className="row">
-                        <div className="col" style={{background:"gray"}}>
+                        <div className="col" style={{ background: "gray" }}>
                             <Form
                                 name="basic"
                                 labelCol={{
@@ -151,7 +160,7 @@ export default function TableCreate() {
                                 </Form.Item>
                             </Form>
                         </div>
-                        <div className="col" style={{background:"gray"}}>
+                        <div className="col" style={{ background: "gray" }}>
                             <h1 style={{ margin: "40px 0 20px 0 " }}>Upload Image</h1>
                             <div className="w-100 " style={{
                                 display: "flex",
@@ -182,13 +191,13 @@ export default function TableCreate() {
                                 </div>
                             </div>
                         </div>
-                        <div className="col" style={{background:"gray"}}>
+                        <div className="col" style={{ background: "gray" }}>
                             <h1 style={{ margin: "40px 0 20px 0 " }}>Select Video</h1>
                             <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
                                 justifyContent: "center",
-                                flexWrap:"wrap"
+                                flexWrap: "wrap"
                             }}>
                                 <div
                                     style={{
@@ -219,7 +228,7 @@ export default function TableCreate() {
                                                 class="custom-file-input"
                                                 id="videoInput"
                                                 name="Video"
-                                                style={{display:"none"}}
+                                                style={{ display: "none" }}
                                                 onChange={handleVideoChange}
                                             />
                                         </div>

@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function UserTable() {
     const router = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
-    const [sizePage, setSizePage] = useState(10);
+    const [sizePage, setSizePage] = useState(30);
     const [user, setUser] = useState([])
     const pageSize = 3;
     useEffect(() => {

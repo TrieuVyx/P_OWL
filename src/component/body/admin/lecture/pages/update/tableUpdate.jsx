@@ -1,7 +1,7 @@
 import { Layout } from "antd"
 import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
-import { Toaster } from 'react-hot-toast'
+import { toast,Toaster } from 'react-hot-toast'
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
 import GetLecture from "../../event/CRUD/get";
 import UpdateLecture from "../../event/CRUD/update";
@@ -43,24 +43,33 @@ export default function TableUpdate() {
         Video: Video1
     }
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setPicture1(newSrc);
-        };
-        reader.readAsDataURL(file);
+        try {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setPicture(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch (err) {
+            toast.error("please choose image ")
+        }
 
     };
     const handleVideoChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setVideo1(newSrc);
-        };
-        reader.readAsDataURL(file);
-
+        try {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setVideo1(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch (err) {
+            toast.error("please choose image ")
+        }
     };
     return (
         <>
@@ -181,7 +190,7 @@ export default function TableUpdate() {
                             </Form>
                         </div>
                         <div className="col" style={{ background: "gray" }}>
-                        <h1 style={{ margin: "40px 0 20px 0 " }}>Select Image</h1>
+                            <h1 style={{ margin: "40px 0 20px 0 " }}>Select Image</h1>
                             <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -243,7 +252,7 @@ export default function TableUpdate() {
 
                         </div>
                         <div className="col" style={{ background: "gray" }}>
-                        <h1 style={{ margin: "40px 0 20px 0 " }}>Select Video</h1>
+                            <h1 style={{ margin: "40px 0 20px 0 " }}>Select Video</h1>
                             <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",
@@ -254,7 +263,7 @@ export default function TableUpdate() {
                                     width: "350px",
                                     display: "flex",
                                     alignItems: "center",
-                                    flexWrap:"wrap",
+                                    flexWrap: "wrap",
                                     justifyContent: "center",
                                 }}>
                                     <label htmlFor="videoInput" >
@@ -277,7 +286,7 @@ export default function TableUpdate() {
                                                 class="custom-file-input"
                                                 id="videoInput"
                                                 name="Video"
-                                                style={{display:"none"}}
+                                                style={{ display: "none" }}
                                                 onChange={handleVideoChange}
                                             />
                                         </div>
@@ -286,7 +295,7 @@ export default function TableUpdate() {
 
                                 </div>
                             </div>
-                       
+
                             <div className="w-100 " style={{
                                 display: "flex",
                                 alignItems: "center",

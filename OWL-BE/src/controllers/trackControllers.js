@@ -132,7 +132,7 @@ class TrackController {
         id: track.id,
         enrolledAt: track.enrolledAt,
         progress: track.progress,
-        Course:{
+        Course: {
           CourseName: track.Course?.CourseName,
         }
       }));
@@ -143,6 +143,33 @@ class TrackController {
       });
     }
   }
+  async pushProcessing(req, res) {
+    try {
+      const { IDUser, IDCourse } = req.body;
 
+      // Kiểm tra xem người dùng đã đăng ký khóa học này chưa
+      const existingEnrollment = await TrackEntity.findOne({
+        User: IDUser,
+        Course: IDCourse
+      });
+      const IdUpdate = existingEnrollment.Course
+      const user = await UserEntity.findById(IDUser)
+        .populate({
+          path: 'Tracks'
+        })
+
+      const IDTrack = user.Tracks.map(track => ({
+        id: track.id
+      }));
+      const ID = IDTrack[0].id
+      const track = await TrackEntity.findByIdAndUpdate(ID, req.body)
+
+      return res.status(message.OK.CODE).json(track);
+    } catch (err) {
+      return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({
+        message: message.INTERNAL_SERVER_ERROR.MESSAGE
+      });
+    }
+  }
 }
 module.exports = new TrackController();

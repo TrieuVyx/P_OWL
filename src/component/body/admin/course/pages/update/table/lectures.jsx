@@ -8,7 +8,7 @@ import { columns } from './columns';
 
 export default function LectureInCourseTable() {
     const [currentPage, setCurrentPage] = useState(0);
-    const [sizePage, setSizePage] = useState(10);
+    const [sizePage, setSizePage] = useState(30);
     const [Lecture, setLecture] = useState([])
     const navigate = useNavigate();
     const IDCourse = localStorage.getItem("CourseID")

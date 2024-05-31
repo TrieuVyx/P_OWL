@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react"
 import { Button, Checkbox, Form, Input, Popconfirm } from "antd";
 import { formStyle, formCenterStyle } from "../../../../../../shortPath/styleComponent";
 import CreateUser from "../../event/CRUD/create";
-import { Toaster } from "react-hot-toast"
+import { toast,Toaster } from "react-hot-toast"
 export default function TableCreate() {
 
     const [UserName, setUserName] = useState("")
@@ -27,13 +27,18 @@ export default function TableCreate() {
 
     }
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setImage(newSrc);
-        };
-        reader.readAsDataURL(file);
+        try{
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setImage(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch(err){
+            toast.error("please choose image")
+        }
 
     };
     return (

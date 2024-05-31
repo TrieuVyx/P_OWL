@@ -3,6 +3,7 @@ const router = express.Router()
 const TrackControllers = require('../controllers/trackControllers')
 
 
+router.post('/pushprocessing', TrackControllers.pushProcessing)
 router.post('/checkprocessing/:id', TrackControllers.checkProcessing)
 router.post('/checkCourse', TrackControllers.checkStatus)
 router.post('/registerCourse', TrackControllers.RegisterCourse)

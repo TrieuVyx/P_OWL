@@ -5,7 +5,7 @@ import getListLecture from '../../../event/CRUD/getListLecture';
 import { Table } from 'antd';
 export default function AddLectureToCourseTable() {
     const [currentPage, setCurrentPage] = useState(0);
-    const [sizePage, setSizePage] = useState(10);
+    const [sizePage, setSizePage] = useState(30);
     const [Lecture, setLecture] = useState([])
     const pageSize = 3;
     useEffect(() => {

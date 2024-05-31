@@ -46,13 +46,18 @@ export default function TableUpdate() {
     }
     //#region THAY ĐỔI HÌNH ẢNH
     const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            const newSrc = e.target.result;
-            setPicture1(newSrc);
-        };
-        reader.readAsDataURL(file);
+        try{
+            const file = event.target.files[0];
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const newSrc = e.target.result;
+                setPicture(newSrc);
+            };
+            reader.readAsDataURL(file);
+        }
+        catch(err){
+            toast.error("please choose image ")
+        }
 
     };
     //#region thực hiện update

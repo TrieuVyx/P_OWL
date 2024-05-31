@@ -181,15 +181,14 @@ export default function profileAccount({ ...props }) {
                     </div> */}
                 </div>
             </div>
-            <div className="row">
-                <div className="col m-2">
+            <div className="row ">
+                <div className="col m-2 d-flex flex-wrap align-items-center">
                     {
-
                         processing.map(each => (
-                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                <Progress type="dashboard" steps={8} percent={each.progress} trailColor="rgba(0, 0, 0, 0.06)"
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }} className='m-5'>
+                                <Progress type="dashboard" steps={10} percent={each.progress} trailColor="rgba(0, 0, 0, 0.06)"
                                     strokeWidth={20} />
-                                <div>Name Course</div>
+                                <div>{each.Course.CourseName}</div>
                             </div>
                         ))
                     }

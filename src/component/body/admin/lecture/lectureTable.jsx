@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function LectureTable() {
     const router = useNavigate();
     const [currentPage, setCurrentPage] = useState(0);
-    const [sizePage, setSizePage] = useState(10);
+    const [sizePage, setSizePage] = useState(30);
     const [lecture, setLecture] = useState([])
     const pageSize = 3;
     const handleCreate = ()=>{

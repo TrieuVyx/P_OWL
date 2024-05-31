@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import getCommentLecture from '../initState/event/commmentLecture';
 import createCommentLecture from '../initState/event/createCommentLecture';
 import checkLectureShow from './event/checkLectureShow';
+import pushProcess from './event/pushProcess'
 export default function showLectureCourse() {
     const router = useNavigate();
     const [Data, setData] = useState([])
@@ -49,7 +50,7 @@ export default function showLectureCourse() {
     }, [])
     const handleLectureClick = (lectureId) => {
         localStorage.setItem("LectureID", lectureId)
-        router("lecture")
+        router("/course/init/lecture")
     };
     const onChange = (key) => {
         // console.log(key);
@@ -111,13 +112,16 @@ export default function showLectureCourse() {
             const duration = videoRef.current.duration;
             const progress = (currentTime / duration) * 100;
             
-            if (progress >= 90) {
-                // Mở khóa bài học tiếp theo
-                // unlockNextLesson();
-            
-                // // Cập nhật tiến độ thành 20%
-                // updateProgress(20);
+            if (progress >= 85) {
+                pushProcess()
             }
+            else{
+
+            }
+
+        }
+        else{
+
         }
     };
     return (
@@ -146,6 +150,26 @@ export default function showLectureCourse() {
                     </div>
                     <div className="col m-2">
                         <Collapse items={Lecture} defaultActiveKey={['1']} onChange={onChange} disabled />
+                        <div className="card-footer py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
+                                    <div className="d-flex flex-start w-100">
+
+                                        <div data-mdb-input-init className="form-outline w-100">
+                                            <textarea className="form-control" id="textAreaExample" rows="4" style={{ background: '#fff' }}
+                                                value={commentText}
+                                                onChange={handleCommentChange}
+                                            ></textarea>
+
+                                        </div>
+                                    </div>
+                                    <div className="float-end mt-2 pt-1">
+                                        <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-sm" onClick={HanleComment}>
+                                            Post comment
+                                        </button>
+                                        {/* <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-primary btn-sm" onClick={toggleCommentBox}>
+                                            Cancel
+                                        </button> */}
+                                    </div>
+                                </div>
                     </div>
                     <div className="row">
                         <div className="col p-5" >
@@ -170,7 +194,8 @@ export default function showLectureCourse() {
                                         </button>
                                     </div>
                                 </div>
-                            )}
+                            ) }
+                         
 
                         </div>
 

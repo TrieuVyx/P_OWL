@@ -47,3 +47,4 @@ export const getListCommentLectureUrl = `http://localhost:3002/api/comment/getLe
 
 //#region Track PATH
 export const checkProcessingUrl = `http://localhost:3002/api/track/checkprocessing/`//có ID
+export const pushProcessingUrl  = `http://localhost:3002/api/track/pushprocessing/` // có ID
