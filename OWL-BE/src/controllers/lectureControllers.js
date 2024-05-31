@@ -109,6 +109,7 @@ class LectureControllers {
         }
     }
 
-
+    //#region show bài giảng hoặc ẩn bài giảng
+    async GetListShow(req,res){}
 }
 module.exports = new LectureControllers();

@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react'
 import getUser from './event/getUser'
 import toast from "react-hot-toast"
-export default function profileAccount() {
-
+import { Progress } from 'antd';
+import getProcesing from './event/getProcessing';
+export default function profileAccount({ ...props }) {
+    const { percent, status, strokeWidth, strokeColor, trailColor } = props;
+    // const segmentWidth = 100 / segments.length; 
     const [Data, setData] = useState([])
+    const [processing, setProccesing] = useState([])
     useEffect(() => {
-        try {
-            getUser()
-                .then((data) => {
-                    setData(data.data)
-                })
-        }
-        catch (err) {
-            toast.error("do not find data!, please try again")
-        }
+        getUser()
+            .then((data) => {
+                setData(data.data)
+            })
+        getProcesing().then((data) => {
+            setProccesing(data.data)
+        })
     }, [])
+
     return (
         <div className="row m-5">
             <div className="col-lg-4">
@@ -124,7 +127,7 @@ export default function profileAccount() {
                 <div className="row">
                     <div className="col-md-6">
                         <div className="card mb-4 mb-md-0">
-                            <div className="card-body">
+                            {/* <div className="card-body">
                                 <p className="mb-4"><span className="text-primary font-italic me-1">assignment</span> Project Status</p>
                                 <p className="mb-1" style={{ fontSize: '.77rem' }}>React</p>
                                 <div className="progress rounded" style={{ height: '5px' }}>
@@ -146,7 +149,7 @@ export default function profileAccount() {
                                 <div className="progress rounded mb-2" style={{ height: '5px' }}>
                                     <div className="progress-bar" role="progressbar" style={{ width: '66%' }} aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                                 </div>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     {/* <div className="col-md-6">
@@ -176,6 +179,21 @@ export default function profileAccount() {
                             </div>
                         </div>
                     </div> */}
+                </div>
+            </div>
+            <div className="row">
+                <div className="col m-2">
+                    {
+
+                        processing.map(each => (
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                                <Progress type="dashboard" steps={8} percent={each.progress} trailColor="rgba(0, 0, 0, 0.06)"
+                                    strokeWidth={20} />
+                                <div>Name Course</div>
+                            </div>
+                        ))
+                    }
+
                 </div>
             </div>
         </div>

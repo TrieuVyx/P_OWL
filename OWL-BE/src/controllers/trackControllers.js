@@ -115,5 +115,34 @@ class TrackController {
         .json({ message: message.INTERNAL_SERVER_ERROR.MESSAGE });
     }
   }
+
+  async checkProcessing(req, res) {
+    try {
+      const { id } = req.params;
+      const user = await UserEntity.findById(id)
+        .populate({
+          path: 'Tracks',
+          populate: {
+            path: 'Course',
+            model: 'CourseEntity',
+          },
+        });
+
+      const tracks = user.Tracks.map(track => ({
+        id: track.id,
+        enrolledAt: track.enrolledAt,
+        progress: track.progress,
+        Course:{
+          CourseName: track.Course?.CourseName,
+        }
+      }));
+      return res.status(message.OK.CODE).json(tracks);
+    } catch (err) {
+      return res.status(message.INTERNAL_SERVER_ERROR.CODE).json({
+        message: message.INTERNAL_SERVER_ERROR.MESSAGE
+      });
+    }
+  }
+
 }
 module.exports = new TrackController();

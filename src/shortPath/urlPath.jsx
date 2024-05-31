@@ -42,3 +42,8 @@ export const createCommentUrl = `http://localhost:3002/api/comment/create`
 export const getListCommentUrl = `http://localhost:3002/api/comment/get/` // có ID
 export const createCommentLectureUrl = `http://localhost:3002/api/comment/createComment`
 export const getListCommentLectureUrl = `http://localhost:3002/api/comment/getLectureComment/` // có ID
+
+
+
+//#region Track PATH
+export const checkProcessingUrl = `http://localhost:3002/api/track/checkprocessing/`//có ID

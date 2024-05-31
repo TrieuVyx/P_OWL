@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { Collapse } from 'antd';
 // import getCourse from '../../event/getCourse';
 import getLecture from '../initState/event/getLecture';
@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import getCommentLecture from '../initState/event/commmentLecture';
 import createCommentLecture from '../initState/event/createCommentLecture';
+import checkLectureShow from './event/checkLectureShow';
 export default function showLectureCourse() {
     const router = useNavigate();
     const [Data, setData] = useState([])
@@ -40,6 +41,7 @@ export default function showLectureCourse() {
                     }));
                     setLecture(initialLectureData);
                 })
+            
         }
         catch (err) {
             toast.error("do not find data!, please try again")
@@ -54,17 +56,70 @@ export default function showLectureCourse() {
     };
 
     //#region đăng kí khóa học
-    useEffect(()=>{
+    useEffect(() => {
         getCommentLecture().then((data) => {
             setComment(data.data)
-          });
-    },[])
+        });
+        checkLectureShow()
+
+    }, [])
+
     const handleCommentChange = (event) => {
         setCommentText(event.target.value);
     };
+    //#region XỬ LÝ COMMENT
     const HanleComment = () => {
         createCommentLecture(commentText)
     }
+    //#region XỬ LÝ VIDEO
+    const [isPlaying, setIsPlaying] = useState(false);
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        if (videoRef.current) {
+            videoRef.current.addEventListener('play', handlePlay);
+            videoRef.current.addEventListener('pause', handlePause);
+            videoRef.current.addEventListener('ended', handleEnded);
+            videoRef.current.addEventListener('timeupdate', handleTimeUpdate);
+        }
+
+        return () => {
+            if (videoRef.current) {
+                videoRef.current.removeEventListener('play', handlePlay);
+                videoRef.current.removeEventListener('pause', handlePause);
+                videoRef.current.removeEventListener('ended', handleEnded);
+                videoRef.current.removeEventListener('timeupdate', handleTimeUpdate);
+            }
+        };
+    }, [videoRef]);
+
+    const handlePlay = () => {
+        setIsPlaying(true);
+    };
+
+    const handlePause = () => {
+        setIsPlaying(false);
+    };
+
+    const handleEnded = () => {
+        setIsPlaying(false);
+    };
+
+    const handleTimeUpdate = () => {
+        if (videoRef.current) {
+            const currentTime = videoRef.current.currentTime;
+            const duration = videoRef.current.duration;
+            const progress = (currentTime / duration) * 100;
+            
+            if (progress >= 90) {
+                // Mở khóa bài học tiếp theo
+                // unlockNextLesson();
+            
+                // // Cập nhật tiến độ thành 20%
+                // updateProgress(20);
+            }
+        }
+    };
     return (
         <>
             <div className='m-3'>
@@ -76,7 +131,7 @@ export default function showLectureCourse() {
                             height: "250px",
 
                         }}>
-                            <video src={Data.Video} controls className="w-100 h-100" autoPlay>
+                            <video src={Data.Video} controls className="w-100 h-100" autoPlay ref={videoRef}>
                                 Your browser does not support the video tag.
                             </video>
                         </div>
@@ -91,10 +146,8 @@ export default function showLectureCourse() {
                     </div>
                     <div className="col m-2">
                         <Collapse items={Lecture} defaultActiveKey={['1']} onChange={onChange} disabled />
-                        {/* <input type='button' warn="true" value={"Register"} className='m-2 btn btn-outline-warning' onClick={handleRegisterCourse} /> */}
                     </div>
                     <div className="row">
-                        {/* <div className="col">ok</div> */}
                         <div className="col p-5" >
                             {showCommentBox && (
                                 <div className="card-footer py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
