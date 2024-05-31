@@ -1,5 +1,5 @@
 import styleComponent from '../../shortPath/styleComponent';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Checkbox, Form, Input } from "antd";
 import toast, { Toaster } from 'react-hot-toast'
 import Authenticate from './Authenticate/authenticate';
@@ -9,23 +9,45 @@ const {
     formCenterStyle
 } = styleComponent;
 
-export default  function LoginPage() {
-    const router = useNavigate();
+export default function LoginPage() {
+    const navigate = useNavigate();
+
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [Email, setEmail] = useState("")
     const [PassWord, setPassword] = useState("")
-
+    const Hierachy = localStorage.getItem("Hierachy")
     const handleDirect = () => {
         router('/register')
     }
+    useEffect(() => {
+        if (isLoggedIn) {
+
+        }
+      }, [isLoggedIn]);
+
     const loginHanle = async () => {
         const bool = await Authenticate(Email, PassWord);
         if (bool) {
-            router('/');
-            toast.success("Login successfully");
-        } else {
-            router('/login');
+            // setIsLoggedIn(true);
+            if (Hierachy === "STUDENT") {
+              navigate('/');
+            // window.location.pathname = '/'
+
+
+              toast.success("Login successfully");
+            
+            } else if (Hierachy === "ADMIN") {
+
+              navigate('/admin/course');
+              toast.success("Login successfully");
+             
+            } else {
+              navigate('/login');
+            }
+          } else {
+            navigate('/login');
             toast.error("Email or Password Incorrectly");
-        }
+          }
     }
     return (
         <>

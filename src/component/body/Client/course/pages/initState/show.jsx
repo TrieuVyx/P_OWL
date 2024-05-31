@@ -7,75 +7,81 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import registerCourse from './event/registerCourse';
 import CheckUserRegisterCourse from './event/checkUserRegisterCourse';
+import getComment from './event/comment';
+import createComment from './event/creaetComment';
 export default function showCourseUser() {
   const router = useNavigate();
   const [Data, setData] = useState([]);
   const [Lecture, setLecture] = useState([]);
+  const [Comment, setComment] = useState([])
   const [isCoursRegistered, setIsCoursRegistered] = useState(false);
-  const [isUserRegistered, setisUserRegistered] = useState("IsStudying")
-  
-  console.log(isUserRegistered)
+  const [isUserRegistered, setisUserRegistered] = useState(() => {
+    const userRegistered = CheckUserRegisterCourse();
+    return userRegistered ? userRegistered : "Register";
+  });
+  const [showCommentBox, setShowCommentBox] = useState(false);
+  const [commentText, setCommentText] = useState('');
+  const toggleCommentBox = () => {
+    setShowCommentBox(!showCommentBox);
+  };
+
   useEffect(() => {
     try {
       //#region lấy danh sách khóa học
       getCourse().then((data) => {
         setData(data.data);
       });
-
       //#region lấy danh sách bài học
       getLecture().then((data) => {
-        console.log(isUserRegistered);
         const initialLectureData = data.data.map((lecture) => ({
           key: lecture.id,
           label: lecture.LectureName,
           children: (
             <div className="d-flex justify-content-between align-items-center">
               <p>{lecture.Tittle}</p>
-              {(function () {
-                switch (isUserRegistered) {
-                  case 'IsStudying':
-                    return (
-                      <button
-                        onClick={() => handleLectureClick(lecture.Id)}
-                        className="btn btn-outline-warning"
-                      >
-                        View Lecture
-                      </button>
-                    );
-                  case 'Register':
-                    return (
-                      <button className="btn btn-outline-primary" onClick={handleRegisterCourse}>Register</button>
-                    );
-                  default:
-                    return null;
-                }
-              })()}
+              {isUserRegistered === "IsStudying" && (
+                <button
+                  onClick={() => handleLectureClick(lecture.Id)}
+                  className="btn btn-outline-warning"
+                >
+                  View Lecture
+                </button>
+              )}
             </div>
           ),
         }));
         setLecture(initialLectureData);
       });
-      //#region kiểm tra người dùng đã đăng kí chưa
-
     } catch (err) {
       toast.error("do not find data!, please try again");
     }
+  }, [isUserRegistered]);
+
+  useEffect(() => {
     CheckUserRegisterCourse().then((data) => {
       setisUserRegistered(data.data);
     });
+    getComment().then((data) => {
+      setComment(data.data)
+    });
+
   }, []);
   const handleLectureClick = (lectureId) => {
     localStorage.setItem("LectureID", lectureId);
     router("lecture");
   };
 
-
   //#region đăng kí khóa học
   const handleRegisterCourse = async () => {
     await registerCourse();
     setIsCoursRegistered(true);
   };
-
+  const handleCommentChange = (event) => {
+    setCommentText(event.target.value); 
+  };
+  const HanleComment = ()=>{
+    createComment(commentText)
+  }
   return (
     <>
       <div className="m-3">
@@ -107,14 +113,92 @@ export default function showCourseUser() {
               defaultActiveKey={['1']}
               disabled={isCoursRegistered}
             />
+            {
+              isUserRegistered == "IsStudying" ? null : (<>
 
-            {/* <input
-              type="button"
-              warn="true"
-              value={"Register"}
-              className="m-2 btn btn-outline-warning"
-              
-            /> */}
+                <input
+                  type="button"
+                  warn="true"
+                  value={"Register"}
+                  className="m-2 btn btn-outline-warning"
+                  onClick={handleRegisterCourse}
+                />
+              </>)
+            }
+
+          </div>
+          <div className="row">
+            {/* <div className="col">ok</div> */}
+            <div className="col p-5" >
+              {showCommentBox && (
+                <div className="card-footer py-3 border-0" style={{ backgroundColor: '#f8f9fa' }}>
+                  <div className="d-flex flex-start w-100">
+                  
+                    <div data-mdb-input-init className="form-outline w-100">
+                      <textarea className="form-control" id="textAreaExample" rows="4" style={{ background: '#fff' }}
+                       value={commentText} 
+                       onChange={handleCommentChange} 
+                      ></textarea>
+                      
+                    </div>
+                  </div>
+                  <div className="float-end mt-2 pt-1">
+                    <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-primary btn-sm" onClick={HanleComment}>
+                      Post comment
+                    </button>
+                    <button type="button" data-mdb-button-init data-mdb-ripple-init className="btn btn-outline-primary btn-sm" onClick={toggleCommentBox}>
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+
+            </div>
+
+            <div className="col" >
+              <div className="row d-flex justify-content-center">
+                <div className="col-md-11 col-lg-9 col-xl-7 comments-container" style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                  {
+                    Comment.map(comment => (
+                      <div className="d-flex flex-start mb-4" key={comment.id}>
+                        <img
+                          className="rounded-circle shadow-1-strong me-3"
+                          src={comment.user.image || "https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp"}
+                          alt="avatar"
+                          width="65"
+                          height="65"
+                        />
+                        <div className="card w-100">
+                          <div className="card-body p-4">
+                            <div>
+                              <h5 className="text-left">{comment.user.username}</h5>
+                              <p className="small text-left">{new Date(comment.createdAt).toLocaleString()}</p>
+                              <p className="text-justify" style={{ fontSize: '16px', lineHeight: '1.5' }}>
+                                {comment.content}
+                              </p>
+                              <div className="d-flex justify-content-between align-items-center">
+                                <div className="d-flex align-items-center">
+                                  {/* <a href="#!" className="link-muted me-2">
+                                    <i className="fas fa-thumbs-up me-1"></i>132
+                                  </a>
+                                  <a href="#!" className="link-muted">
+                                    <i className="fas fa-thumbs-down me-1"></i>15
+                                  </a> */}
+                                </div>
+                                <a href="#!" className="link-muted" onClick={toggleCommentBox}>
+                                  <i className="fas fa-reply me-1"></i> Reply
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  }
+
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

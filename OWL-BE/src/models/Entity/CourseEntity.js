@@ -43,6 +43,12 @@ const CourseSchema = new mongoose.Schema({
             type:mongoose.Schema.Types.ObjectId,
             ref:"LectureEntity"
         }
+    ],
+    Comments:[
+        {
+            type:mongoose.Schema.Types.ObjectId,
+            ref:"CommentEntity"
+        }
     ]
     
 })

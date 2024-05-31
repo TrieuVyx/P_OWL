@@ -28,6 +28,7 @@ export default async function Authenticate(Email, PassWord) {
         if (
           response.status == 200
         ) {
+
           return true; // Trả về true nếu tất cả giá trị đều được lưu thành công
         } else {
           return false; // Trả về false nếu có một hoặc nhiều giá trị không được lưu thành công
