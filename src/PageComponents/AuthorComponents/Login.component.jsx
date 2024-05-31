@@ -17,7 +17,7 @@ export default function LoginPage() {
     const [PassWord, setPassword] = useState("")
     const Hierachy = localStorage.getItem("Hierachy")
     const handleDirect = () => {
-        router('/register')
+        navigate('/register')
     }
     useEffect(() => {
         if (isLoggedIn) {
@@ -30,7 +30,7 @@ export default function LoginPage() {
         if (bool) {
             // setIsLoggedIn(true);
             if (Hierachy === "STUDENT") {
-              navigate('/');
+             window.location.href = '/'
             // window.location.pathname = '/'
 
 
@@ -38,7 +38,9 @@ export default function LoginPage() {
             
             } else if (Hierachy === "ADMIN") {
 
-              navigate('/admin/course');
+             window.location.href = '/admin/course'
+
+            //   navigate('/admin/course');
               toast.success("Login successfully");
              
             } else {
